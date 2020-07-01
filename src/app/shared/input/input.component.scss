@@ -1,0 +1,65 @@
+input::placeholder{
+    color: #d0d0d0;
+}
+
+input[type="text"], 
+input[type="password"]  {
+    text-align: center;
+    font-family: inherit;
+    border: 1.5px solid #e6e6e6;
+    padding: 13px 13px;
+    outline: none;
+    color: #979797;
+    border-radius: 30px;
+    transition: 0.25s;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+input[type="submit"] {
+  margin: 10px auto;
+  text-align: center;
+  border: 2px solid;
+  background-color: #612F74;
+  border-color: #612F74;
+  padding:13px 13px;
+  outline: none;
+  color: #ffffff;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: 0.25s;
+  cursor: pointer;
+  width: 53%;
+  
+  &:hover {
+    background-color: #4f305b;
+  }
+
+  &:disabled{
+    background-color: #dddddd;
+    border-color: #dddddd;
+    color: grey;
+    cursor: default;
+  }
+}
+
+.icon__email {
+  background: url(https://img.icons8.com/ios/20/000000/user.png) no-repeat scroll 15px 14px;
+}
+
+.icon__password {
+  background: url(https://img.icons8.com/ios/20/000000/lock-2.png) no-repeat scroll 15px 14px;
+}
+
+h4{
+  padding: 60px;
+  color: #ebebeb;
+  z-index: 1;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.input-error{
+  border-color: #ec6e6e !important;
+}
