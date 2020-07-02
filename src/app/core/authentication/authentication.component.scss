@@ -1,0 +1,12 @@
+.social-buttons{
+    margin-left: 30px;
+}
+
+a{
+    color: blue;
+    cursor: pointer;
+
+    &:hover{
+        color: rgb(18, 18, 145);
+    }
+}

@@ -1,0 +1,7 @@
+<ng-template [ngIf]="buttonType === 'default'">
+    <input type="submit" [value]="buttonName" [ngStyle]="btnOptions">
+</ng-template>
+
+<ng-template [ngIf]="buttonType === 'icon'">
+    <img [src]="buttonSocial" style="cursor: pointer">
+</ng-template>
