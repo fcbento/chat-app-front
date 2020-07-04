@@ -24,7 +24,6 @@ export class InputComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form.reset();
     this.onCheckContentName();
     this.onConverInputSize();
   }

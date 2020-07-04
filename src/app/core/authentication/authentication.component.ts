@@ -30,13 +30,7 @@ export class AuthenticationComponent implements OnInit {
     password: String
   };
 
-  constructor(private formBuilder: FormBuilder) {
-    this.form = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.pattern(/\S+@\S+\.\S+/)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      retype: ['', [Validators.required, Validators.minLength(6)]]
-    });
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.titleType = 'Sign In';
@@ -52,10 +46,12 @@ export class AuthenticationComponent implements OnInit {
   }
 
   onSign(): void {
+    console.log(this.loginRequest)
     //this.showSignType ? this.onSignIn() : this.onSignUp();
   }
 
   onSignIn(): void {
+    
     //this.service.signinUser(this.form.value.email, this.form.value.password)
   }
 
@@ -70,12 +66,7 @@ export class AuthenticationComponent implements OnInit {
 
     if (value.password) {
       this.loginRequest.password = value.password
-    }
-
-    if(this.loginRequest.email !== null && this.loginRequest.password !== null){
-      this.disable = false;
-    }
-    
+    }   
   }
 
 }
