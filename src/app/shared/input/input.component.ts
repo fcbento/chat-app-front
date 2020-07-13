@@ -17,9 +17,9 @@ export class InputComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
+      name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern(/\S+@\S+\.\S+/)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      retype: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
