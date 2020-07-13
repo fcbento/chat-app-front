@@ -31,13 +31,11 @@ export class ButtonComponent implements OnInit {
   }
 
   setBtnStyle() {
-
     this.btnOptions = {
       width: this.buttonSize,
       backgroundColor: this.buttonColor,
       borderColor: this.buttonColor
     }
-
   }
 
   setSocialIcon() {
