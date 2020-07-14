@@ -15,21 +15,22 @@ export class GenericHttpService<T> {
             .pipe(map(data => data));
     }
 
-    public update(item: T): Observable<T> {
+    public update(item: T, id: any): Observable<T> {
         return this.httpClient
-            .put<T>(`${this.url}/${this.endpoint}/${item.id}`, item)
+            .put<T>(`${this.url}/${this.endpoint}/${id}`, item)
             .pipe(map(data => data));
     }
 
     public getById(id: number): Observable<T> {
         return this.httpClient
-            .pipe(map(data => data));
+            .get(`${this.url}/${this.endpoint}/${id}`)
+            .pipe(map((data: any) => data));
     }
 
     public getAll(): Observable<T[]> {
         return this.httpClient
             .get(`${this.url}/${this.endpoint}`)
-            .pipe(map(data => data));
+            .pipe(map((data: any) => data));
     }
 
     public deleteById(id: number) {

@@ -4,12 +4,12 @@ import { Observable } from "rxjs";
 import { AuthenticationService } from "../services/authentication.service";
 import { environment } from "../../../environments/environment";
 
-@Injectable
+@Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
     constructor(private authenticationService: AuthenticationService) { }
 
-    intercept(private request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
         const currentUser = this.authenticationService.currentUserValue
         const isLogged = currentUser && currentUser.token
@@ -25,6 +25,4 @@ export class JwtInterceptor implements HttpInterceptor {
 
         return next.handle(request)
     }
-
-
 }

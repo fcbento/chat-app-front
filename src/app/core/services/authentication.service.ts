@@ -4,6 +4,8 @@ import { User } from '../../shared/models/user.model';
 import { GenericHttpService } from '../generic-http/generic-http.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +32,7 @@ export class AuthenticationService {
   login(email: string, password: string) {
     return this.http
       .post(`${environment.API_URL}/user/login`, { email, password })
-      .pipe(map(user => {
+      .pipe(map((user: any) => {
         if (user && user.token) {
           localStorage.setItem('currentUser', JSON.stringify(user))
           this.currentUserSubject.next(user)
