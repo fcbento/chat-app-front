@@ -25,11 +25,11 @@ export class AuthenticationService {
     }
   }
 
-  public get currentUserValue(): User {
+  public get currentUserValue() {
     return this.currentUserSubject.value
   }
 
-  public setCurrentUserValue(token: any): User {
+  public setCurrentUserValue(token: any) {
     if (token) {
       localStorage.setItem('currentUser', JSON.stringify(token))
     }
