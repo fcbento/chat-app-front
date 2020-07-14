@@ -16,7 +16,7 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {
 
-    const localStorageUser = localStorage.get('currentUser')
+    const localStorageUser = localStorage.getItem('currentUser')
 
     if (localStorageUser) {
       this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorageUser))
@@ -29,14 +29,14 @@ export class AuthenticationService {
     return this.currentUserSubject.value
   }
 
+  public setCurrentUserValue(token: any): User {
+    if (token) {
+      localStorage.setItem('currentUser', JSON.stringify(token))
+    }
+  }
+
   login(email: string, password: string) {
     return this.http
-      .post(`${environment.API_URL}/user/login`, { email, password })
-      .pipe(map((user: any) => {
-        if (user && user.token) {
-          localStorage.setItem('currentUser', JSON.stringify(user))
-          this.currentUserSubject.next(user)
-        }
-      }))
+      .post(`${environment.API_URL_LOCAL}/user/login`, { email, password })
   }
 }
