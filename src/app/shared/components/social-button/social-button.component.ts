@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-social-button',
+  selector: 'chat-social-button',
   templateUrl: './social-button.component.html',
   styleUrls: ['./social-button.component.scss']
 })
 export class SocialButtonComponent implements OnInit {
 
+  @Input() socialName: any;
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.socialName)
   }
 
 }

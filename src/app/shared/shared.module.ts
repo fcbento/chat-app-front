@@ -16,7 +16,8 @@ import { SocialButtonComponent } from './components/social-button/social-button.
   exports: [
     InputComponent, 
     ButtonComponent,
-    LoaderComponent
+    LoaderComponent,
+    SocialButtonComponent
   ]
 })
 export class SharedModule { }

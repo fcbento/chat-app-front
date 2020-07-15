@@ -13,12 +13,14 @@ export class AuthenticationComponent implements OnInit {
   authentication = new Authentication()
   formType: boolean = true
   titleType: any
+  socialButtons: any[] = []
   @ViewChild('input') input: InputComponent
 
   constructor(private service: AuthenticationService, private el: ElementRef) { }
 
   ngOnInit(): void {
     this.titleType = 'Sign In'
+    this.socialButtons = ['facebook', 'twitter', 'google']
   }
 
   changeFormType() {
