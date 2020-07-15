@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { InputComponent } from '../../shared/input/input.component';
 import { Authentication } from './authentication.model';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-authentication',
@@ -16,7 +17,7 @@ export class AuthenticationComponent implements OnInit {
   iconButtons: any[] = [];
   @ViewChild('input') input: InputComponent;
 
-  constructor() { }
+  constructor(private service: AuthenticationService) { }
 
   ngOnInit(): void {
     this.titleType = 'Sign In';
@@ -47,49 +48,47 @@ export class AuthenticationComponent implements OnInit {
     this.formType ? this.titleType = 'Sign In' : this.titleType = 'Sign Up';
   }
 
-  onSignIn(): void {
-    console.log(this.authentication)
-    //this.service.signinUser(this.form.value.email, this.form.value.password)
-  }
-
-  onSignUp(): void {
-    console.log(this.authentication)
-    //this.service.signupUser(this.form.value.email, this.form.value.password);
+  onAuth(): void {
+    this.service.authentication(this.authentication.name, this.authentication.email, this.authentication.password, this.formType)
+      .subscribe(data => {
+        this.service.setCurrentUserValue(data);
+      })
   }
 
   getFormValues(value) {
-    
-    if(this.formType) {
+
+    if (this.formType) {
       return this.loginValues(value);
 
-    }else{
+    } else {
       return this.registerValues(value);
     }
   }
 
-  private loginValues(value){
-      if (value.email) {
-        this.authentication.email = value.email
-      }
+  private loginValues(value) {
+    if (value.email) {
+      this.authentication.email = value.email
+    }
 
-      if (value.password) {
-        this.authentication.password = value.password
-      }
+    if (value.password) {
+      this.authentication.password = value.password
+    }
 
   }
 
-  private registerValues(value){
-      if (value.email) {
-        this.authentication.email = value.email
-      }
+  private registerValues(value) {
+    if (value.email) {
+      this.authentication.email = value.email
+    }
 
-      if (value.password) {
-        this.authentication.password = value.password
-      }
+    if (value.password) {
+      this.authentication.password = value.password
+    }
 
-      if(value.name){
-        this.authentication.name = value.name
-      }
+    if (value.name) {
+      this.authentication.name = value.name
+    }
   }
+
 
 }

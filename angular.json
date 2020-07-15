@@ -61,6 +61,38 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "local": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.local.ts"
+                }
+              ]
+            },
+            "dev": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ]
             }
           }
         },
@@ -72,6 +104,12 @@
           "configurations": {
             "production": {
               "browserTarget": "test:build:production"
+            },
+            "local": {
+              "browserTarget": "test:build:local"
+            },
+            "dev": {
+              "browserTarget": "test:build:dev"
             }
           }
         },

@@ -1,20 +1,23 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
+    "module": "esnext",
     "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "es2020",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
-  }
+    "target": "es5",
+    "lib": ["dom", "es2015", "es2016"],
+    "sourceMap": false,
+    "declaration": true,
+    "experimentalDecorators": true,
+    "jsx": "react",
+    "outDir": "lib",
+    "noUnusedLocals": false 
+  },
+  "exclude": [
+    "node_modules",
+    "static",
+    "lib"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ]
 }
