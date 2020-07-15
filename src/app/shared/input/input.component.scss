@@ -1,43 +1,38 @@
-input::placeholder{
-    color: #d0d0d0;
-}
+.input-field {
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  height: 55px;
+  border-radius: 55px;
+  padding: 0 2.4rem;
+  position: relative;
+  max-width: 480px;
+  width: 100%;
 
-input[type="text"], 
-input[type="password"]  {
-    text-align: center;
-    font-family: inherit;
-    border: 1.5px solid #e6e6e6;
-    padding: 13px 13px;
+  input {
+    background: none;
     outline: none;
-    color: #979797;
-    border-radius: 30px;
-    transition: 0.25s;
-    font-size: 15px;
-    margin-bottom: 15px;
-}
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    width: 300px;
+    text-align: left;
+  }
 
-.icon__email {
-  background: url(https://img.icons8.com/ios/20/000000/user.png) no-repeat scroll 15px 14px;
-}
+  i {
+    text-align: center;
+    line-height: 55px;
+    color: #acacac;
+    transition: 0.5s;
+    font-size: 1.1rem;
+  }
 
-.icon__password {
-  background: url(https://img.icons8.com/ios/20/000000/lock-2.png) no-repeat scroll 15px 14px;
-}
+  &::placeholder {
+    color: #aaa;
+    font-weight: 500;
+  }
 
-.icon__retype {
-  background: url(https://img.icons8.com/ios/20/000000/lock-2.png) no-repeat scroll 15px 14px;
-}
-
-.icon__name {
-   background: url(https://img.icons8.com/ios/20/000000/identification-documents.png) no-repeat scroll 15px 14px;
-}
-
-h4{
-  padding: 60px;
-  color: #ebebeb;
-  z-index: 1;
-  font-weight: bold;
-  letter-spacing: 1px;
 }
 
 .input-error{
