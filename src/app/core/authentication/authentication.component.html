@@ -7,16 +7,16 @@
 
             <chat-input 
                 [inputType]="'text'" 
-                [contentName]="'Email'" 
-                (formValues)="getFormValues($event)" 
-                #input>
+                [inputName]="'email'" 
+                [inputIcon]="'fas fa-at'"
+                (formValues)="getFormValues($event)" >
             </chat-input>
 
             <chat-input 
                 [inputType]="'password'" 
-                [contentName]="'Password'" 
-                (formValues)="getFormValues($event)" 
-                #input>
+                [inputName]="'password'"
+                [inputIcon]="'fas fa-lock'"
+                (formValues)="getFormValues($event)" >
             </chat-input>
 
             <chat-button 
@@ -45,23 +45,23 @@
 
             <chat-input 
                 [inputType]="'text'" 
-                [contentName]="'Name'" 
-                (formValues)="getFormValues($event)" 
-                #input>
+                [inputName]="'name'" 
+                [inputIcon]="'far fa-id-card'"
+                (formValues)="getFormValues($event)" >
             </chat-input>
 
             <chat-input 
                 [inputType]="'text'" 
-                [contentName]="'Email'" 
-                (formValues)="getFormValues($event)" 
-                #input>
+                [inputName]="'email'"
+                [inputIcon]="'fas fa-at'" 
+                (formValues)="getFormValues($event)" >
             </chat-input>
 
             <chat-input 
                 [inputType]="'password'" 
-                [contentName]="'Password'" 
-                (formValues)="getFormValues($event)" 
-                #input>
+                [inputName]="'password'"
+                [inputIcon]="'fas fa-lock'" 
+                (formValues)="getFormValues($event)" >
             </chat-input>
 
             <chat-button 

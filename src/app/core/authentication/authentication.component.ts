@@ -14,7 +14,6 @@ export class AuthenticationComponent implements OnInit {
   formType: boolean = true
   titleType: any
   socialButtons: any[] = []
-  @ViewChild('input') input: InputComponent
 
   constructor(private service: AuthenticationService, private el: ElementRef) { }
 
@@ -25,7 +24,6 @@ export class AuthenticationComponent implements OnInit {
 
   changeFormType() {
     this.changeForm(this.formType)
-    this.input.form.reset()
     this.authentication.name = ''
     this.authentication.password = ''
     this.authentication.email = ''
@@ -83,6 +81,4 @@ export class AuthenticationComponent implements OnInit {
       this.authentication.name = value.name
     }
   }
-
-
 }
