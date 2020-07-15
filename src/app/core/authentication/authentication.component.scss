@@ -28,7 +28,7 @@
   z-index: 5;
 }
 
-form {
+section {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,12 +40,12 @@ form {
   grid-row: 1 / 2;
 }
 
-form.sign-up-form {
+section.sign-up-form {
   opacity: 0;
   z-index: 1;
 }
 
-form.sign-in-form {
+section.sign-in-form {
   z-index: 2;
 }
 
@@ -85,24 +85,6 @@ form.sign-in-form {
   border-color: #4481eb;
 }
 
-.btn {
-  width: 150px;
-  background-color: #5995fd;
-  border: none;
-  outline: none;
-  height: 49px;
-  border-radius: 49px;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin: 10px 0;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.btn:hover {
-  background-color: #4d84e2;
-}
 .panels-container {
   position: absolute;
   height: 100%;
@@ -169,16 +151,6 @@ form.sign-in-form {
   padding: 0.7rem 0;
 }
 
-.btn.transparent {
-  margin: 0;
-  background: none;
-  border: 2px solid #fff;
-  width: 130px;
-  height: 41px;
-  font-weight: 600;
-  font-size: 0.8rem;
-}
-
 .right-panel .image,
 .right-panel .content {
   transform: translateX(800px);
@@ -200,12 +172,12 @@ form.sign-in-form {
   left: 25%;
 }
 
-.container-auth.sign-up-mode form.sign-up-form {
+.container-auth.sign-up-mode section.sign-up-form {
   opacity: 1;
   z-index: 2;
 }
 
-.container-auth.sign-up-mode form.sign-in-form {
+.container-auth.sign-up-mode section.sign-in-form {
   opacity: 0;
   z-index: 1;
 }
@@ -335,7 +307,7 @@ form.sign-in-form {
 }
 
 @media (max-width: 570px) {
-  form {
+  section {
     padding: 0 1.5rem;
   }
 

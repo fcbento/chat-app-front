@@ -1,21 +1,30 @@
 <div class="container-auth">
     <div class="signin-signup">
 
-        <form class="sign-in-form">
+        <section class="sign-in-form">
 
             <h2 class="title">Sign in</h2>
 
-
-            <chat-input [inputType]="'text'" [contentName]="'Email'" [inputSize]="'100'"
-                (formValues)="getFormValues($event)" #input>
+            <chat-input 
+                [inputType]="'text'" 
+                [contentName]="'Email'" 
+                (formValues)="getFormValues($event)" 
+                #input>
             </chat-input>
 
-            <chat-input [inputType]="'password'" [contentName]="'Password'" [inputSize]="'100'"
-                (formValues)="getFormValues($event)" #input>
+            <chat-input 
+                [inputType]="'password'" 
+                [contentName]="'Password'" 
+                (formValues)="getFormValues($event)" 
+                #input>
             </chat-input>
 
-            <chat-button class="d-flex" [buttonType]="'default'" [buttonSize]="'80'" [buttonColor]="'blue'"
-                [buttonName]="titleType" (click)="onAuth()">
+            <chat-button 
+                class="d-flex" 
+                [buttonType]="'default'" 
+                [buttonColor]="'blue'" 
+                [buttonName]="titleType"
+                (click)="onAuth()">
             </chat-button>
 
             <p class="social-text">Or Sign in with social platforms</p>
@@ -35,26 +44,40 @@
                 </a>
             </div>
 
-        </form>
+        </section>
 
-        <form class="sign-up-form">
+        <section class="sign-up-form">
 
             <h2 class="title">Sign up</h2>
 
-            <div class="input-field">
-                <i class="fas fa-user"></i>
-                <input type="text" placeholder="Username" />
-            </div>
-            <div class="input-field">
-                <i class="fas fa-envelope"></i>
-                <input type="email" placeholder="Email" />
-            </div>
-            <div class="input-field">
-                <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Password" />
-            </div>
+            <chat-input 
+                [inputType]="'text'" 
+                [contentName]="'Name'" 
+                (formValues)="getFormValues($event)" 
+                #input>
+            </chat-input>
 
-            <input type="submit" class="btn" value="Sign up" />
+            <chat-input 
+                [inputType]="'text'" 
+                [contentName]="'Email'" 
+                (formValues)="getFormValues($event)" 
+                #input>
+            </chat-input>
+
+            <chat-input 
+                [inputType]="'password'" 
+                [contentName]="'Password'" 
+                (formValues)="getFormValues($event)" 
+                #input>
+            </chat-input>
+
+            <chat-button 
+                class="d-flex" 
+                [buttonType]="'default'" 
+                [buttonColor]="'blue'" 
+                [buttonName]="titleType"
+                (click)="onAuth()">
+            </chat-button>
 
             <p class="social-text">Or Sign up with social platforms</p>
 
@@ -73,34 +96,42 @@
                 </a>
             </div>
 
-        </form>
+        </section>
 
     </div>
 
     <div class="panels-container">
+
         <div class="panel left-panel">
             <div class="content">
                 <h3>New here ?</h3>
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-                    ex ratione. Aliquid!
-                </p>
-                <button class="btn transparent" id="sign-up-btn" (click)="changeFormType()">
-                    Sign up
-                </button>
+                <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!</p>
+
+                <chat-button 
+                    class="d-flex justify-content-center" 
+                    [buttonType]="'transparent'" 
+                    [buttonColor]="'blue'" 
+                    [buttonName]="'Sign Up'"
+                    (click)="changeFormType()">
+                </chat-button>
+
             </div>
             <img src="/assets/log.svg" class="image" alt="" />
         </div>
+
         <div class="panel right-panel">
             <div class="content">
                 <h3>One of us ?</h3>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-                    laboriosam ad deleniti.
-                </p>
-                <button class="btn transparent" id="sign-in-btn" (click)="changeFormType()">
-                    Sign in
-                </button>
+                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.</p>
+               
+                <chat-button 
+                    class="d-flex justify-content-center" 
+                    [buttonType]="'transparent'" 
+                    [buttonColor]="'blue'" 
+                    [buttonName]="'Sign In'"
+                    (click)="changeFormType()">
+                </chat-button>
+
             </div>
             <img src="/assets/register.svg" class="image" alt="" />
         </div>

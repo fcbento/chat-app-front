@@ -1,26 +1,29 @@
-input[type="submit"] {
-    margin: 10px auto;
-    text-align: center;
-    border: 2px solid;
-    padding:13px 13px;
-    outline: none;
-    color: #ffffff;
-    border-radius: 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    transition: 0.25s;
-    cursor: pointer;
-    
-    &:hover {
-      background-color: #4f305b;
-    }
+.btn {
+  width: 150px;
+  background-color: #5995fd;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btn:hover {
+  background-color: #4d84e2;
+}
+
+.btn.transparent {
+  margin: 0;
+  background: none;
+  border: 2px solid #fff;
+  width: 130px;
+  height: 41px;
+  font-weight: 600;
+  font-size: 0.8rem;
   
-    &:disabled{
-      background-color: #dddddd;
-      border-color: #dddddd;
-      color: grey;
-      cursor: default;
-    }
-  }
-  
-  img{ margin: auto; text-align: center; padding:13px 13px; display: inline;}
+}

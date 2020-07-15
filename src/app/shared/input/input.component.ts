@@ -9,7 +9,6 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class InputComponent implements OnInit {
 
   @Input() inputType: string;
-  @Input() inputSize: any;
   @Input() contentName: string;
   @Output() formValues = new EventEmitter();
 
