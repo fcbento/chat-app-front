@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { InputComponent } from '../../shared/input/input.component';
 import { Authentication } from './authentication.model';
 import { AuthenticationService } from '../services/authentication.service';
@@ -17,7 +17,7 @@ export class AuthenticationComponent implements OnInit {
   iconButtons: any[] = [];
   @ViewChild('input') input: InputComponent;
 
-  constructor(private service: AuthenticationService) { }
+  constructor(private service: AuthenticationService, private el: ElementRef) { }
 
   ngOnInit(): void {
     this.titleType = 'Sign In';
@@ -40,12 +40,25 @@ export class AuthenticationComponent implements OnInit {
   }
 
   changeFormType() {
-    this.input.form.reset();
-    this.authentication.name = '';
-    this.authentication.password = '';
-    this.authentication.email = '';
-    this.formType = !this.formType;
-    this.formType ? this.titleType = 'Sign In' : this.titleType = 'Sign Up';
+    this.changeForm(this.formType)
+    // this.input.form.reset();
+    // this.authentication.name = ''
+    // this.authentication.password = ''
+    // this.authentication.email = ''
+    this.formType = !this.formType
+    this.formType ? this.titleType = 'Sign In' : this.titleType = 'Sign Up'
+    
+  }
+
+  changeForm(formType) {
+    let item = this.el.nativeElement.querySelector('.container-auth')
+    if (formType) {
+      console.log('add')
+      item.classList.add('sign-up-mode')
+    } else {
+      console.log('remove')
+      item.classList.remove('sign-up-mode')
+    }
   }
 
   onAuth(): void {
@@ -58,10 +71,10 @@ export class AuthenticationComponent implements OnInit {
   getFormValues(value) {
 
     if (this.formType) {
-      return this.loginValues(value);
+      return this.loginValues(value)
 
     } else {
-      return this.registerValues(value);
+      return this.registerValues(value)
     }
   }
 
