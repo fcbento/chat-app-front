@@ -35,8 +35,13 @@ export class AuthenticationService {
     }
   }
 
-  login(email: string, password: string) {
-    return this.http
-      .post(`${environment.API_URL}/user/login`, { email, password })
+  authentication(name: string, email: string, password: string, authType: boolean) {
+    if (authType) {
+      return this.http
+        .post(`${environment.API_URL}/user/login`, { email, password })
+    } else {
+      return this.http
+        .post(`${environment.API_URL}/user`, { name, email, password })
+    }
   }
 }

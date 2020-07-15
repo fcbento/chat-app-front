@@ -48,15 +48,11 @@ export class AuthenticationComponent implements OnInit {
     this.formType ? this.titleType = 'Sign In' : this.titleType = 'Sign Up';
   }
 
-  onSignIn(): void {
-    this.service.login(this.authentication.email, this.authentication.password).subscribe(data => {
-      this.service.setCurrentUserValue(data);
-    })
-  }
-
-  onSignUp(): void {
-    console.log(this.authentication)
-    //this.service.signupUser(this.form.value.email, this.form.value.password);
+  onAuth(): void {
+    this.service.authentication(this.authentication.name, this.authentication.email, this.authentication.password, this.formType)
+      .subscribe(data => {
+        this.service.setCurrentUserValue(data);
+      })
   }
 
   getFormValues(value) {

@@ -15,7 +15,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
         const currentUser = this.authenticationService.currentUserValue
         const isLogged = currentUser && currentUser.token
-        const isApiUrl = request.url.startsWith(environment.API_URL) 
+        const isApiUrl =   request.url.startsWith(environment.API_URL) 
                         || request.url.startsWith(environmentLocal.API_URL) 
                         || request.url.startsWith(environmentDev.API_URL)
 
