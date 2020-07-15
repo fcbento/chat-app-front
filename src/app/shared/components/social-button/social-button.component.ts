@@ -12,7 +12,6 @@ export class SocialButtonComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.socialName)
   }
 
 }
