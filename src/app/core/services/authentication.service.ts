@@ -37,6 +37,6 @@ export class AuthenticationService {
 
   login(email: string, password: string) {
     return this.http
-      .post(`${environment.API_URL_LOCAL}/user/login`, { email, password })
+      .post(`${environment.API_URL}/user/login`, { email, password })
   }
 }

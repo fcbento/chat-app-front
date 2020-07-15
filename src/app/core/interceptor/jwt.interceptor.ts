@@ -3,6 +3,8 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from "@angular/c
 import { Observable } from "rxjs";
 import { AuthenticationService } from "../services/authentication.service";
 import { environment } from "../../../environments/environment";
+import { environment as environmentLocal} from "../../../environments/environment.local";
+import { environment as environmentDev} from "../../../environments/environment.dev";
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
@@ -13,7 +15,9 @@ export class JwtInterceptor implements HttpInterceptor {
 
         const currentUser = this.authenticationService.currentUserValue
         const isLogged = currentUser && currentUser.token
-        const isApiUrl = request.url.startsWith(environment.API_URL) || request.url.startsWith(environment.API_URL_LOCAL)
+        const isApiUrl = request.url.startsWith(environment.API_URL) 
+                        || request.url.startsWith(environmentLocal.API_URL) 
+                        || request.url.startsWith(environmentDev.API_URL)
 
         if (isLogged && isApiUrl) {
             request = request.clone({
