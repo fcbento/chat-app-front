@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { InputComponent } from '../../shared/input/input.component';
+import { InputComponent } from '../../shared/components/input/input.component';
 import { Authentication } from './authentication.model';
 import { AuthenticationService } from '../services/authentication.service';
 
