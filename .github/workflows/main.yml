@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@release/20200309
-    - uses: actions/setup-node@release/20200309
+    - uses: actions/checkout@release/*
+    - uses: actions/setup-node@release/*
       with:
         node-version: '10.x'
     - run: npm install
