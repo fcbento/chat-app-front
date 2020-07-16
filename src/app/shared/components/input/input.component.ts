@@ -9,7 +9,6 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class InputComponent implements OnInit {
 
   @Input() inputType: string;
-  @Input() inputSize: any;
   @Input() contentName: string;
   @Output() formValues = new EventEmitter();
 
@@ -25,14 +24,6 @@ export class InputComponent implements OnInit {
 
   ngOnInit(): void {
     this.onCheckContentName();
-    this.onConverInputSize();
-  }
-
-  getIcon(): string {
-    if (this.onCheckContentName()) {
-      let iconName = this.contentName.toLocaleLowerCase();
-      return `icon__${iconName}`
-    }
   }
 
   onCheckContentName(): string {
@@ -40,12 +31,6 @@ export class InputComponent implements OnInit {
       return this.contentName;
     }
     return this.contentName = '';
-  }
-
-  onConverInputSize() {
-    if (this.inputSize) {
-      return this.inputSize = `${parseInt(this.inputSize)}%`;
-    }
   }
 
   formName(): string {

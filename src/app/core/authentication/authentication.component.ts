@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { InputComponent } from '../../shared/input/input.component';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { InputComponent } from '../../shared/components/input/input.component';
 import { Authentication } from './authentication.model';
 import { AuthenticationService } from '../services/authentication.service';
 
@@ -10,58 +10,52 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class AuthenticationComponent implements OnInit {
 
-  authentication = new Authentication();
-  formType: boolean = true;
-  titleType: any;
-  disable: boolean = true;
-  iconButtons: any[] = [];
-  @ViewChild('input') input: InputComponent;
+  authentication = new Authentication()
+  formType: boolean = true
+  titleType: any
+  socialButtons: any[] = []
+  @ViewChild('input') input: InputComponent
 
-  constructor(private service: AuthenticationService) { }
+  constructor(private service: AuthenticationService, private el: ElementRef) { }
 
   ngOnInit(): void {
-    this.titleType = 'Sign In';
-
-    this.iconButtons = [
-      {
-        buttonSocial: 'facebook-new'
-      },
-      {
-        buttonSocial: 'google-logo'
-      },
-      {
-        buttonSocial: 'twitter'
-      }
-    ];
-  }
-
-  authSocial() {
-
+    this.titleType = 'Sign In'
+    this.socialButtons = ['facebook', 'twitter', 'google']
   }
 
   changeFormType() {
-    this.input.form.reset();
-    this.authentication.name = '';
-    this.authentication.password = '';
-    this.authentication.email = '';
-    this.formType = !this.formType;
-    this.formType ? this.titleType = 'Sign In' : this.titleType = 'Sign Up';
+    this.changeForm(this.formType)
+    this.input.form.reset()
+    this.authentication.name = ''
+    this.authentication.password = ''
+    this.authentication.email = ''
+    this.formType = !this.formType
+    this.formType ? this.titleType = 'Sign In' : this.titleType = 'Sign Up'
+   }
+
+  changeForm(formType) {
+    let item = this.el.nativeElement.querySelector('.container-auth')
+    if (formType) {
+      item.classList.add('sign-up-mode')
+    } else {
+      item.classList.remove('sign-up-mode')
+    }
   }
 
   onAuth(): void {
     this.service.authentication(this.authentication.name, this.authentication.email, this.authentication.password, this.formType)
       .subscribe(data => {
-        this.service.setCurrentUserValue(data);
+        this.service.setCurrentUserValue(data)
       })
   }
 
   getFormValues(value) {
 
     if (this.formType) {
-      return this.loginValues(value);
+      return this.loginValues(value)
 
     } else {
-      return this.registerValues(value);
+      return this.registerValues(value)
     }
   }
 

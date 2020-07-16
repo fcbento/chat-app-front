@@ -1,0 +1,13 @@
+<form class="form" [formGroup]="form">
+    <div class="input-field">
+        <i class="fas fa-user"></i>
+        
+        <input 
+            [type]="inputType" 
+            [placeholder]="contentName" 
+            [formControlName]="formName()" 
+            [ngClass]="validateErrors() ? 'input-error' : ''" 
+            (change)="sendFormValue()">
+    </div>
+    <small *ngIf="validateErrors()" class="d-flex justify-content-center error-message m-2">{{errorMessage()}}</small>
+</form>

@@ -1,111 +1,125 @@
-<div class="d-flex justify-content-center align-items-center" style="height:100vh;">
+<div class="container-auth">
+    <div class="signin-signup">
 
-    <div class="col-6 card">
+        <section class="sign-in-form">
 
-        <div class="card-body ">
-            <div class="row justify-content-center p-4">
-                <h5 class="card-title">{{titleType}}</h5>
-            </div>
+            <h2 class="title">Sign in</h2>
 
-            <!-- start login form-->
-            <div *ngIf="formType">
-                <chat-input 
-                    [inputType]="'text'" 
-                    [contentName]="'Email'" 
-                    [inputSize]="'100'"
-                    (formValues)="getFormValues($event)" 
-                    #input>
-                </chat-input>
+            <chat-input 
+                [inputType]="'text'" 
+                [contentName]="'Email'" 
+                (formValues)="getFormValues($event)" 
+                #input>
+            </chat-input>
 
-                <chat-input 
-                    [inputType]="'password'" 
-                    [contentName]="'Password'" 
-                    [inputSize]="'100'"
-                    (formValues)="getFormValues($event)" 
-                    #input>
-                </chat-input>
+            <chat-input 
+                [inputType]="'password'" 
+                [contentName]="'Password'" 
+                (formValues)="getFormValues($event)" 
+                #input>
+            </chat-input>
 
-                <chat-button 
-                    class="d-flex" 
-                    [buttonType]="'default'" 
-                    [buttonSize]="'80'" 
-                    [buttonColor]="'blue'"
-                    [buttonName]="titleType" 
-                    (click)="onAuth()">
-                </chat-button>
+            <chat-button 
+                class="d-flex" 
+                [buttonType]="'default'" 
+                [buttonColor]="'blue'" 
+                [buttonName]="titleType"
+                (click)="onAuth()">
+            </chat-button>
 
-                <div class="row justify-content-center p-4">
-                    <p *ngIf="formType">Dont have an account?
-                        <a (click)="changeFormType()">Sign Up now</a>
-                    </p>
-    
-                    <p *ngIf="!formType">Already have an account?
-                        <a (click)="changeFormType()">Sign In</a>
-                    </p>
-                </div>
-            </div>
-            <!-- end login form-->
-
-            <!-- start register form-->
-            <div *ngIf="!formType">
-                <chat-input 
-                    [inputType]="'text'" 
-                    [contentName]="'Name'" 
-                    [inputSize]="'100'"
-                    (formValues)="getFormValues($event)" 
-                    #input>
-                </chat-input>
-
-                <chat-input 
-                    [inputType]="'text'" 
-                    [contentName]="'Email'" 
-                    [inputSize]="'100'"
-                    (formValues)="getFormValues($event)" 
-                    #input>
-                </chat-input>
-
-                <chat-input 
-                    [inputType]="'password'" 
-                    [contentName]="'Password'" 
-                    [inputSize]="'100'"
-                    (formValues)="getFormValues($event)" 
-                    #input>
-                </chat-input>
-
-                <chat-button 
-                    class="d-flex" 
-                    [buttonType]="'default'" 
-                    [buttonSize]="'80'" 
-                    [buttonColor]="'blue'"
-                    [buttonName]="titleType" 
-                    (click)="onAuth()">
-                </chat-button>
-
-                <div class="row justify-content-center p-4">
-                    <p *ngIf="formType">Dont have an account?
-                        <a (click)="changeFormType()">Sign Up now</a>
-                    </p>
-    
-                    <p *ngIf="!formType">Already have an account?
-                        <a (click)="changeFormType()">Sign In</a>
-                    </p>
-                </div>
-            </div>
-            <!-- end register form-->
-            <hr />
-
-            <div class="row justify-content-center">
-                Continue with social media
-            </div>
+            <p class="social-text">Or Sign in with social platforms</p>
 
             <div class="row justify-content-center p-1">
-
-                <chat-button *ngFor="let button of iconButtons" class="d-inline-flex m-4" [buttonType]="'icon'"
-                    [buttonSocial]="button.buttonSocial" [buttonIconSize]="'30'" (click)="authSocial()">
-                </chat-button>
+                <chat-social-button
+                    class="d-inline-flex m-1" 
+                    *ngFor="let social of socialButtons" 
+                    [socialName]="social">
+                </chat-social-button>
             </div>
-        </div>
+
+        </section>
+
+        <section class="sign-up-form">
+
+            <h2 class="title">Sign up</h2>
+
+            <chat-input 
+                [inputType]="'text'" 
+                [contentName]="'Name'" 
+                (formValues)="getFormValues($event)" 
+                #input>
+            </chat-input>
+
+            <chat-input 
+                [inputType]="'text'" 
+                [contentName]="'Email'" 
+                (formValues)="getFormValues($event)" 
+                #input>
+            </chat-input>
+
+            <chat-input 
+                [inputType]="'password'" 
+                [contentName]="'Password'" 
+                (formValues)="getFormValues($event)" 
+                #input>
+            </chat-input>
+
+            <chat-button 
+                class="d-flex" 
+                [buttonType]="'default'" 
+                [buttonColor]="'blue'" 
+                [buttonName]="titleType"
+                (click)="onAuth()">
+            </chat-button>
+
+            <p class="social-text">Or Sign up with social platforms</p>
+            
+            <div class="row justify-content-center p-1">
+                <chat-social-button
+                    class="d-inline-flex m-1" 
+                    *ngFor="let social of socialButtons" 
+                    [socialName]="social">
+                </chat-social-button>
+            </div>
+
+        </section>
 
     </div>
 
+    <div class="panels-container">
+
+        <div class="panel left-panel">
+            <div class="content">
+                <h3>New here ?</h3>
+                <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!</p>
+
+                <chat-button 
+                    class="d-flex justify-content-center" 
+                    [buttonType]="'transparent'" 
+                    [buttonColor]="'blue'" 
+                    [buttonName]="'Sign Up'"
+                    (click)="changeFormType()">
+                </chat-button>
+
+            </div>
+            <img src="/assets/log.svg" class="image" alt="" />
+        </div>
+
+        <div class="panel right-panel">
+            <div class="content">
+                <h3>One of us ?</h3>
+                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.</p>
+               
+                <chat-button 
+                    class="d-flex justify-content-center" 
+                    [buttonType]="'transparent'" 
+                    [buttonColor]="'blue'" 
+                    [buttonName]="'Sign In'"
+                    (click)="changeFormType()">
+                </chat-button>
+
+            </div>
+            <img src="/assets/register.svg" class="image" alt="" />
+        </div>
+    </div>
 </div>
