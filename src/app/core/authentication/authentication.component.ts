@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { InputComponent } from '../../shared/components/input/input.component';
 import { Authentication } from './authentication.model';
 import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-authentication',
@@ -15,7 +16,7 @@ export class AuthenticationComponent implements OnInit {
   titleType: any
   socialButtons: any[] = []
 
-  constructor(private service: AuthenticationService, private el: ElementRef) { }
+  constructor(private service: AuthenticationService, private el: ElementRef, private router: Router) { }
 
   ngOnInit(): void {
     this.titleType = 'Sign In'
@@ -29,7 +30,7 @@ export class AuthenticationComponent implements OnInit {
     this.authentication.email = ''
     this.formType = !this.formType
     this.formType ? this.titleType = 'Sign In' : this.titleType = 'Sign Up'
-   }
+  }
 
   changeForm(formType) {
     let item = this.el.nativeElement.querySelector('.container-auth')
@@ -44,6 +45,9 @@ export class AuthenticationComponent implements OnInit {
     this.service.authentication(this.authentication.name, this.authentication.email, this.authentication.password, this.formType)
       .subscribe(data => {
         this.service.setCurrentUserValue(data)
+        if (this.formType) {
+          this.router.navigateByUrl('/room')
+        }
       })
   }
 
