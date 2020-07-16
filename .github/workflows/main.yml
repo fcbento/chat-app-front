@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - release/*
+      - release/01
 
 jobs:
   firebase-deploy:
@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@release/*
-    - uses: actions/setup-node@release/*
+    - uses: actions/checkout@release/01
+    - uses: actions/setup-node@release/01
       with:
         node-version: '10.x'
     - run: npm install
