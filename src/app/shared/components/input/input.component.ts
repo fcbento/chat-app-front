@@ -9,7 +9,8 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 export class InputComponent implements OnInit {
 
   @Input() inputType: string;
-  @Input() contentName: string;
+  @Input() inputName: string;
+  @Input() inputIcon: string;
   @Output() formValues = new EventEmitter();
 
   form: FormGroup;
@@ -23,27 +24,32 @@ export class InputComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.onCheckContentName();
+    this.onCheckinputName();
   }
 
-  onCheckContentName(): string {
-    if (this.contentName) {
-      return this.contentName;
+  onCheckinputName(): string {
+    if (this.inputName) {
+      return this.inputName;
     }
-    return this.contentName = '';
+    return this.inputName = '';
   }
 
   formName(): string {
-    return this.contentName.toLocaleLowerCase();
+    return this.inputName.toLocaleLowerCase();
   }
 
   validateErrors(): boolean {
-    return (this.form.get(this.formName()).hasError('minlength') && this.form.get(this.formName()).touched) ||
-      (this.form.get(this.formName()).hasError('required') && this.form.get(this.formName()).touched) ||
-      (this.form.get(this.formName()).hasError('pattern') && this.form.get(this.formName()).touched)
+    return (this.form.get(this.formName()).hasError('minlength') && this.form.get(this.formName()).touched) 
+        || (this.form.get(this.formName()).hasError('required') && this.form.get(this.formName()).touched) 
+        || (this.form.get(this.formName()).hasError('pattern') && this.form.get(this.formName()).touched)
   }
 
   errorMessage(): string {
+    
+    if (this.form.get(this.formName()).hasError('required') && this.form.get(this.formName()).touched) {
+      return `${this.formName().charAt(0).toUpperCase() + this.formName().slice(1)} is required`
+    }
+
     if (this.form.get(this.formName()).hasError('minlength') && this.form.get(this.formName()).touched) {
       return 'Min is 6'
     }

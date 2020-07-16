@@ -26,11 +26,23 @@
     color: #acacac;
     transition: 0.5s;
     font-size: 1.1rem;
+    margin: 0 10px;
   }
 
-  &::placeholder {
-    color: #aaa;
-    font-weight: 500;
+  ::-webkit-input-placeholder {
+    text-transform: capitalize;
+  }
+  
+  :-moz-placeholder { 
+    text-transform: capitalize;
+  }
+  
+  ::-moz-placeholder {  
+    text-transform: capitalize;
+  }
+  
+  :-ms-input-placeholder { 
+    text-transform: capitalize;
   }
 
 }
