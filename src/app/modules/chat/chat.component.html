@@ -1,0 +1,50 @@
+<div class="chat">
+
+    <div class="chat__sidebar">
+      <h3>People</h3>
+      <div class="links">
+          <a (click)="onLeaveRoom()"><i class="fa fa-comment" aria-hidden="true"></i></a> 
+          <a (click)="logout()"><i class="fa fa-power-off" aria-hidden="true"></i></a> 
+       </div>
+      <div id="users" *ngFor="let user of users">
+        <ul>
+          <li>
+              <i class="fa fa-user-o"></i>
+            <span> {{user.name}}</span>
+          </li>
+        </ul>
+      </div>
+  
+    </div>
+  
+    <div class="chat__main">
+  
+      <ol id="messages" class="chat__messages">
+        <ng-container #vc></ng-container>
+      </ol>
+  
+      <div class="chat__footer">
+        <form (ngSubmit)="onSendMessage()">
+          <input name="message" type="text" placeholder="Message" [(ngModel)]="message" autofocus autocomplete="off" />
+          <button mat-raised-button>
+            <i class="fa fa-paper-plane"></i>Send </button>
+        </form>
+      </div>
+    </div>
+  
+  </div>
+  
+  <ng-template #template let-chatMessage='chatMessage'>
+  
+    <li class="message">
+      <div class="message__title">
+        <h4>{{chatMessage.from}}
+          <span>{{moment(chatMessage.createdAt).format('h:mm a')}}</span>
+        </h4>
+      </div>
+      <div class="message__body">
+        <p>{{chatMessage.text}}</p>
+      </div>
+    </li>
+  
+  </ng-template>
