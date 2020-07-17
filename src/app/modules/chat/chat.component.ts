@@ -43,7 +43,7 @@ export class ChatComponent implements OnInit {
   onConnect() {
 
     const params = {
-      user: this.user.user,
+      user: this.user['user'],
       room: this.room
     }
 
