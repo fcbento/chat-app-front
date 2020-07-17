@@ -86,9 +86,10 @@ export class ChatComponent implements OnInit {
 
   onLeaveRoom() {
     const user = this.user;
+    this.router.navigateByUrl('/room');
     this.socket.emit('leaveRoom', (err) => {
       if (err) {
-        this.router.navigateByUrl('/rooms');
+        this.router.navigateByUrl('/room');
       }
     });
   }

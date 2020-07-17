@@ -3,8 +3,7 @@
     <div class="chat__sidebar">
       <h3>People</h3>
       <div class="links">
-          <a (click)="onLeaveRoom()"><i class="fa fa-comment" aria-hidden="true"></i></a> 
-          <a (click)="logout()"><i class="fa fa-power-off" aria-hidden="true"></i></a> 
+          <a (click)="onLeaveRoom()">Leave room</a> 
        </div>
       <div id="users" *ngFor="let user of users">
         <ul>
