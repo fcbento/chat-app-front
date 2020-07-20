@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoomService } from './room.service';
 
 @Component({
   selector: 'app-room',
@@ -8,50 +9,70 @@ import { Router } from '@angular/router';
 })
 export class RoomComponent implements OnInit {
 
-  rooms = [
+  rooms:any = [
     {
       "id": "1",
-      "name": "English ESL"
+      "name": "English",
+      "country": "USA"
     },
     {
       "id": "2",
-      "name": "JavaScript"
+      "name": "Spanish",
+      "country": "Spain"
     },
     {
       "id": "3",
-      "name": "18-32"
+      "name": "French",
+      "country": "France"
     },
     {
       "id": "4",
-      "name": "Dating"
+      "name": "German",
+      "country": "Germany"
+    },
+    {
+      "id": "5",
+      "name": "Italian",
+      "country": "Italy"
     },
     {
       "id": "6",
-      "name": "Node"
+      "name": "Portuguese",
+      "country": "Portugal"
     },
     {
       "id": "7",
-      "name": "Sports"
+      "name": "Japanese",
+      "country": "Japan"
+    },
+    {
+      "id": "8",
+      "name": "Chinese",
+      "country": "China"
     },
     {
       "id": "9",
-      "name": "HTML/CSS/JS"
-    },
-    {
-      "id": "10",
-      "name": "UX"
-    },
-    {
-      "id": "11",
-      "name": "Chemistry"
+      "name": "Russian",
+      "country": "Russia"
     }
   ];
 
-  constructor(private router: Router) {
+  flag: any;
+
+  constructor(private router: Router, public roomService: RoomService) {
   }
 
   ngOnInit(): void {
+    this.getCountriesByName();
   }
+
+  getCountriesByName(){
+    for(let room of this.rooms) {
+      this.roomService.getByQuery(room.country).subscribe(data => {
+       room.flag = data.map(country => country.flag)[0]; 
+      })
+    }
+   }
 
   goChat(room) {
     localStorage.setItem('room', JSON.stringify(room));

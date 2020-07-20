@@ -7,26 +7,28 @@ import { environment as environmentLocal} from "../../../environments/environmen
 import { environment as environmentDev} from "../../../environments/environment.dev";
 
 @Injectable()
-export class JwtInterceptor implements HttpInterceptor {
+// export class JwtInterceptor implements HttpInterceptor 
+export class JwtInterceptor {
 
     constructor(private authenticationService: AuthenticationService) { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-        const currentUser = this.authenticationService.currentUserValue
-        const isLogged = currentUser && currentUser.token
-        const isApiUrl =   request.url.startsWith(environment.API_URL) 
-                        || request.url.startsWith(environmentLocal.API_URL) 
-                        || request.url.startsWith(environmentDev.API_URL)
+    //     const currentUser = this.authenticationService.currentUserValue
+    //     const isLogged = currentUser && currentUser.token
+    //     const isApiUrl =   request.url.startsWith(environment.API_URL) 
+    //                     || request.url.startsWith(environmentLocal.API_URL) 
+    //                     || request.url.startsWith(environmentDev.API_URL)
+    //                     || request.url.startsWith(environment.API_COUNTRIES)
 
-        if (isLogged && isApiUrl) {
-            request = request.clone({
-                setHeaders: {
-                    Authorization: `Bearer ${currentUser.token}`
-                }
-            })
-        }
+    //     if (isLogged && isApiUrl) {
+    //         request = request.clone({
+    //             setHeaders: {
+    //                 Authorization: `Bearer ${currentUser.token}`
+    //             }
+    //         })
+    //     }
 
-        return next.handle(request)
-    }
+    //     return next.handle(request)
+    // }
 }

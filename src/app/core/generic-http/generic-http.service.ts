@@ -27,6 +27,13 @@ export class GenericHttpService<T> {
             .pipe(map((data: any) => data));
     }
 
+    public getByQuery(name: any): Observable<T> {
+        return this.httpClient
+            .get(`${this.url}/${this.endpoint}/${name}`)
+            .pipe(map((data: any) => data));
+    }
+
+
     public getAll(): Observable<T[]> {
         return this.httpClient
             .get(`${this.url}/${this.endpoint}`)

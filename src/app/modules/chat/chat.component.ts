@@ -13,7 +13,7 @@ export class ChatComponent implements OnInit {
 
   socket;
   user = {};
-  room = {};
+  room: any;
   message: string;
   moment = moment;
   users = [];
@@ -45,6 +45,7 @@ export class ChatComponent implements OnInit {
     const params = {
       user: this.user['user'],
       room: this.room
+
     }
 
     const socket = this.socket;
@@ -53,7 +54,7 @@ export class ChatComponent implements OnInit {
       socket.emit('join', params, (err) => {
         if (err) {
           alert(err);
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/room');
         }
       });
     });
