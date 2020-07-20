@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  SERVER: 'http://localhost:8080',
-  API_URL: 'http://localhost:8080/api/v1',
+  SERVER: 'https://chat-001-dev.azurewebsites.net',
+  API_URL: 'https://chat-001-dev.azurewebsites.net/api/v1'
 };
