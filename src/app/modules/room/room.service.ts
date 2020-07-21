@@ -9,6 +9,6 @@ import { environment } from '../../../environments/environment';
 export class RoomService extends GenericHttpService<any> {
 
   constructor(public http: HttpClient) {
-    super(http, environment.API_COUNTRIES, 'rest/v2/name')
-   }
+    super(http, environment.API_URL, 'room/countries')
+  }
 }

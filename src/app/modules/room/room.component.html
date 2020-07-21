@@ -19,8 +19,8 @@
 
     <div class="col card p-3">
       <p class="d-flex justify-content-center">I would like to talk about</p>
-      <div class="room" *ngFor="let room of rooms" (click)="goChat(room)">
-        <a class="d-flex justify-content-center">{{room.name}}</a>
+      <div class="room" *ngFor="let topic of topics" (click)="goChat(topic)">
+        <a class="d-flex justify-content-center">{{topic.name}}</a>
       </div>
     </div>
 

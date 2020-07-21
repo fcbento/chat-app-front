@@ -45,4 +45,16 @@ export class GenericHttpService<T> {
             .delete(`${this.url}/${this.endpoint}/${id}`)
             .pipe(map(data => data));
     }
+
+    public getAllWithUrlParam(url: any, endpoint: any, value: any): Observable<T[]> {
+        if (value) {
+            return this.httpClient
+                .get(`${url}/${endpoint}/${value}`)
+                .pipe(map((data: any) => data));
+        } else {
+            return this.httpClient
+                .get(`${url}/${endpoint}`)
+                .pipe(map((data: any) => data));
+        }
+    }
 }

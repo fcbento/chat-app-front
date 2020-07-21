@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild, TemplateRef, ViewContainerRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import * as io from 'socket.io-client';
 import * as moment from 'moment';
@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
 
   socket;
   user = {};
@@ -86,7 +86,6 @@ export class ChatComponent implements OnInit {
   }
 
   onLeaveRoom() {
-    const user = this.user;
     this.router.navigateByUrl('/room');
     this.socket.emit('leaveRoom', (err) => {
       if (err) {
@@ -95,6 +94,10 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  logout(){}
+  logout() { }
+
+  ngOnDestroy() {
+    this.onLeaveRoom();
+  }
 
 }
