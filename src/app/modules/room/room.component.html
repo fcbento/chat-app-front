@@ -4,14 +4,18 @@
     <div class="col card p-3">
       <p class="d-flex justify-content-center">I would like to practice</p>
 
-      <div class="row room d-flex justify-content-center" *ngFor="let room of rooms" (click)="goChat(room)">
+      <div class="row room d-flex justify-content-center" *ngFor="let room of rooms">
         
         <div class="col-1">
           <img [src]="room.flag" width="30px">
         </div>
-
+       
         <div class="col-4">
-          <a class="country-name"> {{room.name}} </a>
+           <chat-modal 
+              class="country-name" 
+              [modalType]="'default'" 
+              [modalLinkName]="room.name">
+          </chat-modal>
         </div>
 
       </div>

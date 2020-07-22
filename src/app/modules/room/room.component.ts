@@ -13,8 +13,7 @@ export class RoomComponent implements OnInit {
   rooms: any[] = []
   topics: any[] = []
 
-  constructor(private router: Router, public roomService: RoomService) {
-  }
+  constructor(private router: Router, public roomService: RoomService) {}
 
   ngOnInit(): void {
     this.getLanguageRooms()
@@ -42,7 +41,7 @@ export class RoomComponent implements OnInit {
   getTopicRooms() {
     this.roomService.getAllWithUrlParam(environment.API_URL, 'room/topics', null)
       .subscribe(data => {
-        this.topics = data;
+        this.topics = data
       })
   }
 
