@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-modal-content-nickname',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalContentNicknameComponent implements OnInit {
 
-  constructor() { }
+  @Input() room: any
+  nickname: string
+
+  constructor(private router: Router, private modalService: NgbModal) { }
 
   ngOnInit(): void {
+  }
+
+  goChat() {
+    localStorage.setItem('room', JSON.stringify(this.room))
+    localStorage.setItem('nickname', JSON.stringify(this.nickname))
+    this.modalService.dismissAll()
+    this.router.navigateByUrl('/chat')
+  }
+
+  getFormValues(value) {
+    if (value.nickname) {
+      this.nickname = value.nickname
+    }
   }
 
 }

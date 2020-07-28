@@ -20,7 +20,7 @@ export class RoomComponent implements OnInit {
     this.getTopicRooms()
   }
 
-  //Set flags to the countroes
+  //Set flags to the countries
   getCountriesFlag() {
     for (let room of this.rooms) {
       this.roomService.getAllWithUrlParam(environment.API_COUNTRIES, 'rest/v2/name', room.country)
@@ -43,11 +43,6 @@ export class RoomComponent implements OnInit {
       .subscribe(data => {
         this.topics = data
       })
-  }
-
-  goChat(room) {
-    localStorage.setItem('room', JSON.stringify(room))
-    this.router.navigateByUrl('/chat')
   }
 
 }

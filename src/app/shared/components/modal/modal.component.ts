@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap'
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
 @Component({
   selector: 'chat-modal',
@@ -11,13 +11,19 @@ export class ModalComponent implements OnInit {
   @Input() modalType: any;
   @Input() modalLinkName: any;
   @Input() modalContent: any;
+  @Input() modalSize: any;
 
   constructor(public modalService: NgbModal) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   openModal(content) {
-    this.modalService.open(content, {size: 'sm', centered: true})
+    this.modalService.open(content,
+      {
+        size: this.modalSize,
+        centered: true
+      }
+    )
   }
 
 }
