@@ -1,3 +1,6 @@
-<ng-template [ngIf]="modalType === 'default'">
-    <a (click)="openModal()">{{modalLinkName}}</a>
+<ng-template #content>
+    <ng-container [ngTemplateOutlet]="modalContent"></ng-container>
 </ng-template>
+
+
+<a (click)="openModal(content)" *ngIf="modalType === 'default'">{{modalLinkName}}</a>

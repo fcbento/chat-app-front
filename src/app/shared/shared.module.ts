@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoaderComponent } from './components/loader/loader.component';
 import { SocialButtonComponent } from './components/social-button/social-button.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { ModalContentNicknameComponent } from './components/modal-content-nickname/modal-content-nickname.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { ModalComponent } from './components/modal/modal.component';
     ButtonComponent, 
     LoaderComponent, 
     SocialButtonComponent, 
-    ModalComponent
+    ModalComponent, 
+    ModalContentNicknameComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { ModalComponent } from './components/modal/modal.component';
     ButtonComponent,
     LoaderComponent,
     SocialButtonComponent,
-    ModalComponent
+    ModalComponent,
+    ModalContentNicknameComponent
   ]
 })
 export class SharedModule { }

@@ -10,15 +10,14 @@ export class ModalComponent implements OnInit {
 
   @Input() modalType: any;
   @Input() modalLinkName: any;
+  @Input() modalContent: any;
 
   constructor(public modalService: NgbModal) { }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
-  openModal() {
-    this.modalService.open('', {size: 'sm', centered: true})
+  openModal(content) {
+    this.modalService.open(content, {size: 'sm', centered: true})
   }
 
 }

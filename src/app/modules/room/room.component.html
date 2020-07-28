@@ -11,9 +11,15 @@
         </div>
        
         <div class="col-4">
+
+           <ng-template #modalNickname>
+             <app-modal-content-nickname></app-modal-content-nickname>
+           </ng-template>
+
            <chat-modal 
               class="country-name" 
               [modalType]="'default'" 
+              [modalContent]="modalNickname"
               [modalLinkName]="room.name">
           </chat-modal>
         </div>
