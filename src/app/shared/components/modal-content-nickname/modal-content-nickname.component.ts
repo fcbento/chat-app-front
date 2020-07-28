@@ -14,11 +14,10 @@ export class ModalContentNicknameComponent implements OnInit {
 
   constructor(private router: Router, private modalService: NgbModal) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   goChat() {
-    localStorage.setItem('room', JSON.stringify(this.room))
+    localStorage.setItem('room', JSON.stringify(this.room.name))
     localStorage.setItem('nickname', JSON.stringify(this.nickname))
     this.modalService.dismissAll()
     this.router.navigateByUrl('/chat')
