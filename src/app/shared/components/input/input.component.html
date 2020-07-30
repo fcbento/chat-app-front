@@ -1,14 +1,10 @@
-<form class="form" [formGroup]="form">
+<!-- <form class="form" [formGroup]="form"> -->
     <div class="input-field">
-
-        <i [ngClass]="inputIcon"></i>
-        
+        <i *ngIf="inputIcon" [ngClass]="inputIcon"></i>
         <input 
             [type]="inputType" 
             [placeholder]="inputName" 
-            [formControlName]="formName()" 
-            [ngClass]="validateErrors() ? 'input-error' : ''" 
-            (change)="sendFormValue()">
+            (change)="sendFormValue($event)">
     </div>
-    <small *ngIf="validateErrors()" class="d-flex justify-content-center error-message m-2">{{errorMessage()}}</small>
-</form>
+    <!-- <small *ngIf="validateErrors()" class="d-flex justify-content-center error-message m-2">{{errorMessage()}}</small> -->
+<!-- </form> -->

@@ -13,6 +13,7 @@
             </chat-input>
 
             <chat-input 
+                [inputForm]="'login'"
                 [inputType]="'password'" 
                 [inputName]="'password'"
                 [inputIcon]="'fas fa-lock'"
@@ -44,20 +45,23 @@
             <h2 class="title">Sign up</h2>
 
             <chat-input 
+                [inputForm]="'register'"
                 [inputType]="'text'" 
                 [inputName]="'name'" 
                 [inputIcon]="'far fa-id-card'"
                 (formValues)="getFormValues($event)" >
             </chat-input>
 
-            <chat-input 
+            <chat-input
+                [inputForm]="'register'" 
                 [inputType]="'text'" 
                 [inputName]="'email'"
                 [inputIcon]="'fas fa-at'" 
                 (formValues)="getFormValues($event)" >
             </chat-input>
 
-            <chat-input 
+            <chat-input
+                [inputForm]="'register'"
                 [inputType]="'password'" 
                 [inputName]="'password'"
                 [inputIcon]="'fas fa-lock'" 

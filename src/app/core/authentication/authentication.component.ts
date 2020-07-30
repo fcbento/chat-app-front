@@ -62,13 +62,14 @@ export class AuthenticationComponent implements OnInit {
   }
 
   private loginValues(value) {
-    if (value.email) {
-      this.authentication.email = value.email
-    }
+    console.log(value)
+    // if (value.email) {
+    //   this.authentication.email = value.email
+    // }
 
-    if (value.password) {
-      this.authentication.password = value.password
-    }
+    // if (value.password) {
+    //   this.authentication.password = value.password
+    // }
 
   }
 
