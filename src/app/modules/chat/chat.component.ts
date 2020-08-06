@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, ViewChild, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, ViewChild, TemplateRef, ViewContainerRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import * as io from 'socket.io-client';
 import * as moment from 'moment';
@@ -9,11 +9,11 @@ import { environment } from '../../../environments/environment';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
 
   socket;
   user = {};
-  room = {};
+  room: any;
   message: string;
   moment = moment;
   users = [];
@@ -30,7 +30,7 @@ export class ChatComponent implements OnInit {
 
   ngOnInit() {
 
-    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.user = JSON.parse(localStorage.getItem('nickname'));
     this.room = JSON.parse(localStorage.getItem('room'));
     this.onConnect();
   }
@@ -43,7 +43,7 @@ export class ChatComponent implements OnInit {
   onConnect() {
 
     const params = {
-      user: this.user['user'],
+      user: this.user,
       room: this.room
     }
 
@@ -53,7 +53,7 @@ export class ChatComponent implements OnInit {
       socket.emit('join', params, (err) => {
         if (err) {
           alert(err);
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl('/room');
         }
       });
     });
@@ -85,14 +85,18 @@ export class ChatComponent implements OnInit {
   }
 
   onLeaveRoom() {
-    const user = this.user;
+    this.router.navigateByUrl('/room');
     this.socket.emit('leaveRoom', (err) => {
       if (err) {
-        this.router.navigateByUrl('/rooms');
+        this.router.navigateByUrl('/room');
       }
     });
   }
 
-  logout(){}
+  logout() { }
+
+  ngOnDestroy() {
+    this.onLeaveRoom();
+  }
 
 }

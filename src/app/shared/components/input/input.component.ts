@@ -13,15 +13,9 @@ export class InputComponent implements OnInit {
   @Input() inputIcon: string;
   @Output() formValues = new EventEmitter();
 
-  form: FormGroup;
+  value: any;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.form = this.formBuilder.group({
-      name: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.pattern(/\S+@\S+\.\S+/)]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
-  }
+  constructor() { }
 
   ngOnInit(): void {
     this.onCheckinputName();
@@ -38,28 +32,7 @@ export class InputComponent implements OnInit {
     return this.inputName.toLocaleLowerCase();
   }
 
-  validateErrors(): boolean {
-    return (this.form.get(this.formName()).hasError('minlength') && this.form.get(this.formName()).touched) 
-        || (this.form.get(this.formName()).hasError('required') && this.form.get(this.formName()).touched) 
-        || (this.form.get(this.formName()).hasError('pattern') && this.form.get(this.formName()).touched)
-  }
-
-  errorMessage(): string {
-    
-    if (this.form.get(this.formName()).hasError('required') && this.form.get(this.formName()).touched) {
-      return `${this.formName().charAt(0).toUpperCase() + this.formName().slice(1)} is required`
-    }
-
-    if (this.form.get(this.formName()).hasError('minlength') && this.form.get(this.formName()).touched) {
-      return 'Min is 6'
-    }
-
-    if (this.form.get(this.formName()).hasError('pattern') && this.form.get(this.formName()).touched) {
-      return 'Email is invalid'
-    }
-  }
-
-  sendFormValue(){
-    this.formValues.emit(this.form.value)
+  sendFormValue(value) {
+    this.formValues.emit({ type: this.formName(), content: value.target.value })
   }
 }

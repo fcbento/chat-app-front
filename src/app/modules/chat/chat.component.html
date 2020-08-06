@@ -1,16 +1,15 @@
 <div class="chat">
 
     <div class="chat__sidebar">
-      <h3>People</h3>
+      <h3>{{room}}</h3>
       <div class="links">
-          <a (click)="onLeaveRoom()"><i class="fa fa-comment" aria-hidden="true"></i></a> 
-          <a (click)="logout()"><i class="fa fa-power-off" aria-hidden="true"></i></a> 
+          <a (click)="onLeaveRoom()">Leave room</a> 
        </div>
       <div id="users" *ngFor="let user of users">
         <ul>
           <li>
               <i class="fa fa-user-o"></i>
-            <span> {{user.name}}</span>
+            <span> {{user}}</span>
           </li>
         </ul>
       </div>

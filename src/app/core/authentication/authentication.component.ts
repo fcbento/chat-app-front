@@ -33,7 +33,9 @@ export class AuthenticationComponent implements OnInit {
   }
 
   changeForm(formType) {
+
     let item = this.el.nativeElement.querySelector('.container-auth')
+
     if (formType) {
       item.classList.add('sign-up-mode')
     } else {
@@ -42,7 +44,7 @@ export class AuthenticationComponent implements OnInit {
   }
 
   onAuth(): void {
-    this.service.authentication(this.authentication.name, this.authentication.email, this.authentication.password, this.formType)
+    this.service.authentication(this.authentication, this.formType)
       .subscribe(data => {
         this.service.setCurrentUserValue(data)
         if (this.formType) {
@@ -52,37 +54,17 @@ export class AuthenticationComponent implements OnInit {
   }
 
   getFormValues(value) {
+    if (value.type === "email") {
+      this.authentication.email = value.content
+    }
 
-    if (this.formType) {
-      return this.loginValues(value)
+    if (value.type === "password") {
+      this.authentication.password = value.content
+    }
 
-    } else {
-      return this.registerValues(value)
+    if (value.type === "name") {
+      this.authentication.name = value.content
     }
   }
 
-  private loginValues(value) {
-    if (value.email) {
-      this.authentication.email = value.email
-    }
-
-    if (value.password) {
-      this.authentication.password = value.password
-    }
-
-  }
-
-  private registerValues(value) {
-    if (value.email) {
-      this.authentication.email = value.email
-    }
-
-    if (value.password) {
-      this.authentication.password = value.password
-    }
-
-    if (value.name) {
-      this.authentication.name = value.name
-    }
-  }
 }

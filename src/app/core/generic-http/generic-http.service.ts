@@ -27,6 +27,13 @@ export class GenericHttpService<T> {
             .pipe(map((data: any) => data));
     }
 
+    public getByQuery(name: any): Observable<T> {
+        return this.httpClient
+            .get(`${this.url}/${this.endpoint}/${name}`)
+            .pipe(map((data: any) => data));
+    }
+
+
     public getAll(): Observable<T[]> {
         return this.httpClient
             .get(`${this.url}/${this.endpoint}`)
@@ -37,5 +44,17 @@ export class GenericHttpService<T> {
         return this.httpClient
             .delete(`${this.url}/${this.endpoint}/${id}`)
             .pipe(map(data => data));
+    }
+
+    public getAllWithUrlParam(url: any, endpoint: any, value: any): Observable<T[]> {
+        if (value) {
+            return this.httpClient
+                .get(`${url}/${endpoint}/${value}`)
+                .pipe(map((data: any) => data));
+        } else {
+            return this.httpClient
+                .get(`${url}/${endpoint}`)
+                .pipe(map((data: any) => data));
+        }
     }
 }

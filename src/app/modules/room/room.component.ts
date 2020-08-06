@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoomService } from './room.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-room',
@@ -8,54 +10,39 @@ import { Router } from '@angular/router';
 })
 export class RoomComponent implements OnInit {
 
-  rooms = [
-    {
-      "id": "1",
-      "name": "English ESL"
-    },
-    {
-      "id": "2",
-      "name": "JavaScript"
-    },
-    {
-      "id": "3",
-      "name": "18-32"
-    },
-    {
-      "id": "4",
-      "name": "Dating"
-    },
-    {
-      "id": "6",
-      "name": "Node"
-    },
-    {
-      "id": "7",
-      "name": "Sports"
-    },
-    {
-      "id": "9",
-      "name": "HTML/CSS/JS"
-    },
-    {
-      "id": "10",
-      "name": "UX"
-    },
-    {
-      "id": "11",
-      "name": "Chemistry"
-    }
-  ];
+  rooms: any[] = []
+  topics: any[] = []
 
-  constructor(private router: Router) {
-  }
+  constructor(private router: Router, public roomService: RoomService) {}
 
   ngOnInit(): void {
+    this.getLanguageRooms()
+    this.getTopicRooms()
   }
 
-  goChat(room) {
-    localStorage.setItem('room', JSON.stringify(room));
-    this.router.navigateByUrl('/chat');
+  //Set flags to the countries
+  getCountriesFlag() {
+    for (let room of this.rooms) {
+      this.roomService.getAllWithUrlParam(environment.API_COUNTRIES, 'rest/v2/name', room.country)
+        .subscribe(data => {
+          room.flag = data.map(country => country.flag)[0]
+        })
+    }
+  }
+
+  getLanguageRooms() {
+    this.roomService.getAll()
+      .subscribe(data => {
+        this.rooms = data
+        this.getCountriesFlag()
+      })
+  }
+
+  getTopicRooms() {
+    this.roomService.getAllWithUrlParam(environment.API_URL, 'room/topics', null)
+      .subscribe(data => {
+        this.topics = data
+      })
   }
 
 }

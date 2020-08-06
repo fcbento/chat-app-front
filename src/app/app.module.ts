@@ -10,6 +10,7 @@ import { JwtInterceptor } from './core/interceptor/jwt.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderService } from './core/services/loader.service';
 import { LoaderInterceptor } from './core/interceptor/loader.interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,12 +21,13 @@ import { LoaderInterceptor } from './core/interceptor/loader.interceptor';
     AppRoutingModule,
     SharedModule,
     CoreModule,
-    ModulesModule
+    ModulesModule,
+    NgbModule
   ],
   providers: [
     LoaderService,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
