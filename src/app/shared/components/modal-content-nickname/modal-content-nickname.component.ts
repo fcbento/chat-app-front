@@ -24,8 +24,8 @@ export class ModalContentNicknameComponent implements OnInit {
   }
 
   getFormValues(value) {
-    if (value.nickname) {
-      this.nickname = value.nickname
+    if (value.type === 'nickname') {
+      this.nickname = value.content
     }
   }
 
