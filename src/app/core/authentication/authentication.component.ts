@@ -35,7 +35,7 @@ export class AuthenticationComponent implements OnInit {
   changeForm(formType) {
 
     let item = this.el.nativeElement.querySelector('.container-auth')
-    
+
     if (formType) {
       item.classList.add('sign-up-mode')
     } else {
