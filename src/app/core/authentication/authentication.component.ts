@@ -3,6 +3,7 @@ import { InputComponent } from '../../shared/components/input/input.component';
 import { Authentication } from './authentication.model';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-authentication',
@@ -16,7 +17,7 @@ export class AuthenticationComponent implements OnInit {
   titleType: any
   socialButtons: any[] = []
 
-  constructor(private service: AuthenticationService, private el: ElementRef, private router: Router) { }
+  constructor(private service: AuthenticationService, private el: ElementRef, private router: Router, private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.titleType = 'Sign In'
@@ -50,6 +51,9 @@ export class AuthenticationComponent implements OnInit {
         if (this.formType) {
           this.router.navigateByUrl('/room')
         }
+      }, err => {
+        console.log(err)
+        this.notificationService.error();
       })
   }
 
