@@ -15,7 +15,7 @@ export class InputComponent implements OnInit {
 
   value: any;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.onCheckinputName();
@@ -32,7 +32,7 @@ export class InputComponent implements OnInit {
     return this.inputName.toLocaleLowerCase();
   }
 
-  sendFormValue(value){
-    this.formValues.emit(value.target.value)
+  sendFormValue(value) {
+    this.formValues.emit({ type: this.formName(), content: value.target.value })
   }
 }

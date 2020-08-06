@@ -35,13 +35,13 @@ export class AuthenticationService {
     }
   }
 
-  authentication(name: string, email: string, password: string, authType: boolean) {
+  authentication(authObj: any, authType: boolean) {
     if (authType) {
       return this.http
-        .post(`${environment.API_URL}/user/login`, { email, password })
+        .post(`${environment.API_URL}/user/login`, { email: authObj.email, password: authObj.password })
     } else {
       return this.http
-        .post(`${environment.API_URL}/user`, { name, email, password })
+        .post(`${environment.API_URL}/user`, { name: authObj.name, email: authObj.email, password: authObj.password })
     }
   }
 }
