@@ -54,11 +54,6 @@ export class AuthenticationComponent implements OnInit {
   }
 
   getFormValues(value) {
-    return this.authValues(value)
-  }
-
-  private authValues(value) {
-
     if (value.type === "email") {
       this.authentication.email = value.content
     }
@@ -70,7 +65,6 @@ export class AuthenticationComponent implements OnInit {
     if (value.type === "name") {
       this.authentication.name = value.content
     }
-
   }
 
 }
