@@ -48,7 +48,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       user: this.user,
       room: this.room
     }
-    
+
 
     console.log(params)
     const socket = this.socket;
@@ -56,7 +56,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.socket.on('connect', () => {
 
       socket.emit('join', params, (err) => {
-        this.notificationService.userOn(this.user.name)
         if (err) {
           alert(err);
           this.router.navigateByUrl('/room');
@@ -68,8 +67,12 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   onNewMessage() {
     this.socket.on('newMessage', (message) => {
+      if (message.text.includes('has joined')) {
+        this.notificationService.userOn(this.user.name)
+      }
       this.vc.createEmbeddedView(this.template,
         {
+
           chatMessage:
             { from: message.from.user, createdAt: message.createdAt, text: message.text }
         });
