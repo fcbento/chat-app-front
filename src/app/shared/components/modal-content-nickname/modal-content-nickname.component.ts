@@ -17,8 +17,8 @@ export class ModalContentNicknameComponent implements OnInit {
   ngOnInit(): void {}
 
   goChat() {
-    localStorage.setItem('room', JSON.stringify(this.room.name))
-    localStorage.setItem('nickname', JSON.stringify(this.nickname))
+    // localStorage.setItem('room', JSON.stringify(this.room.name))
+    // localStorage.setItem('nickname', JSON.stringify(this.nickname))
     this.modalService.dismissAll()
     this.router.navigateByUrl('/chat')
   }

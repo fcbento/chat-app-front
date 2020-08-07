@@ -13,7 +13,7 @@ import { NotificationService } from '../../shared/services/notification.service'
 export class ChatComponent implements OnInit, OnDestroy {
 
   socket;
-  user: string;
+  user: any;
   room: any;
   message: string;
   moment = moment;
@@ -31,7 +31,8 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.user = JSON.parse(localStorage.getItem('nickname'));
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.user = this.user.user;
     this.room = JSON.parse(localStorage.getItem('room'));
     this.onConnect();
   }
@@ -48,12 +49,13 @@ export class ChatComponent implements OnInit, OnDestroy {
       room: this.room
     }
 
-    console.log(params)
+    console.log(this.user)
     const socket = this.socket;
 
     this.socket.on('connect', () => {
 
       socket.emit('join', params, (err) => {
+        this.notificationService.userOn(this.user.name)
         if (err) {
           alert(err);
           this.router.navigateByUrl('/room');
@@ -76,7 +78,6 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   onUpdateUserList() {
     this.socket.on('updateUserList', (users) => {
-      this.notificationService.userOn(this.user)
       this.users = users;
     });
   }
