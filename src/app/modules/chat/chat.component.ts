@@ -71,7 +71,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.vc.createEmbeddedView(this.template,
         {
           chatMessage:
-            { from: message.from, createdAt: message.createdAt, text: message.text }
+            { from: message.from.user, createdAt: message.createdAt, text: message.text }
         });
       //scrollToBottom();
     });
