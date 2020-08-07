@@ -12,7 +12,11 @@ export class NotificationService {
     this.toastr.success('Hello world!', 'Toastr fun!');
   }
 
-  error() {
-    this.toastr.error('Something is not right', 'Error')
+  userOn(name: string) {
+    this.toastr.success(`${name} is on`)
+  }
+
+  error(message: string) {
+    this.toastr.error(message)
   }
 }

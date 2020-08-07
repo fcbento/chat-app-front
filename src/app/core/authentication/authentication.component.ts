@@ -17,7 +17,13 @@ export class AuthenticationComponent implements OnInit {
   titleType: any
   socialButtons: any[] = []
 
-  constructor(private service: AuthenticationService, private el: ElementRef, private router: Router, private notificationService: NotificationService) { }
+  constructor
+    (
+      private service: AuthenticationService,
+      private el: ElementRef,
+      private router: Router,
+      private notificationService: NotificationService
+    ) { }
 
   ngOnInit(): void {
     this.titleType = 'Sign In'
@@ -37,38 +43,35 @@ export class AuthenticationComponent implements OnInit {
 
     let item = this.el.nativeElement.querySelector('.container-auth')
 
-    if (formType) {
+    if (formType)
       item.classList.add('sign-up-mode')
-    } else {
+    else
       item.classList.remove('sign-up-mode')
-    }
+
   }
 
   onAuth(): void {
     this.service.authentication(this.authentication, this.formType)
       .subscribe(data => {
         this.service.setCurrentUserValue(data)
-        if (this.formType) {
+        if (this.formType)
           this.router.navigateByUrl('/room')
-        }
       }, err => {
-        console.log(err)
-        this.notificationService.error();
+        this.notificationService.error(err.error.message);
       })
   }
 
   getFormValues(value) {
-    if (value.type === "email") {
+
+    if (value.type === "email")
       this.authentication.email = value.content
-    }
 
-    if (value.type === "password") {
+    if (value.type === "password")
       this.authentication.password = value.content
-    }
 
-    if (value.type === "name") {
+    if (value.type === "name")
       this.authentication.name = value.content
-    }
+
   }
 
 }

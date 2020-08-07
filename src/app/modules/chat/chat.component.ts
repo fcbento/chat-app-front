@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import * as io from 'socket.io-client';
 import * as moment from 'moment';
 import { environment } from '../../../environments/environment';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
   selector: 'app-chat',
@@ -12,7 +13,7 @@ import { environment } from '../../../environments/environment';
 export class ChatComponent implements OnInit, OnDestroy {
 
   socket;
-  user = {};
+  user: string;
   room: any;
   message: string;
   moment = moment;
@@ -24,7 +25,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   @ViewChild('vc', { read: ViewContainerRef })
   private vc: ViewContainerRef;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private notificationService: NotificationService) {
     this.socket = io(environment.SERVER);
   }
 
@@ -47,14 +48,17 @@ export class ChatComponent implements OnInit, OnDestroy {
       room: this.room
     }
 
+    console.log(params)
     const socket = this.socket;
 
     this.socket.on('connect', () => {
+
       socket.emit('join', params, (err) => {
         if (err) {
           alert(err);
           this.router.navigateByUrl('/room');
         }
+
       });
     });
   }
@@ -72,6 +76,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   onUpdateUserList() {
     this.socket.on('updateUserList', (users) => {
+      this.notificationService.userOn(this.user)
       this.users = users;
     });
   }
@@ -85,7 +90,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   onLeaveRoom() {
-    this.router.navigateByUrl('/room');
     this.socket.emit('leaveRoom', (err) => {
       if (err) {
         this.router.navigateByUrl('/room');
