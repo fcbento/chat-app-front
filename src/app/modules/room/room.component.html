@@ -4,15 +4,15 @@
     <div class="col card p-3">
       <p class="d-flex justify-content-center">I would like to practice</p>
 
-      <div class="row room d-flex justify-content-center" *ngFor="let room of rooms">
+      <div class="row room d-flex justify-content-center" *ngFor="let room of rooms" (click)="goChat(room.name)">
         
         <div class="col-1">
           <img [src]="room.flag" width="30px">
         </div>
        
         <div class="col-4">
-
-           <ng-template #modalNickname>
+          <span>{{room.name}}</span>
+           <!-- <ng-template #modalNickname>
              <app-modal-content-nickname [room]="room"></app-modal-content-nickname>
            </ng-template>
 
@@ -22,7 +22,7 @@
               [modalContent]="modalNickname"
               [modalLinkName]="room.name"
               [modalSize]="'sm'">
-          </chat-modal>
+          </chat-modal> -->
         </div>
 
       </div>

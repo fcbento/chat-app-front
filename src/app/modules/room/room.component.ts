@@ -45,4 +45,10 @@ export class RoomComponent implements OnInit {
       })
   }
 
+  goChat(room) {
+    localStorage.setItem('room', JSON.stringify(room))
+    this.router.navigateByUrl('/chat')
+  }
+
+
 }

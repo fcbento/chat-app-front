@@ -48,8 +48,9 @@ export class ChatComponent implements OnInit, OnDestroy {
       user: this.user,
       room: this.room
     }
+    
 
-    console.log(this.user)
+    console.log(params)
     const socket = this.socket;
 
     this.socket.on('connect', () => {
