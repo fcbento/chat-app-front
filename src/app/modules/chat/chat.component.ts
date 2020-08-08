@@ -67,7 +67,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   onNewMessage() {
     this.socket.on('newMessage', (message) => {
       //console.log(message)
-      if (message.text.includes('has joined')) {
+      if (message.text.includes('has joined') && this.user.name !== message.text.split(' ')[0]) {
         this.notificationService.userOn((message.text.split(' ')[0]))
       } else {
 
