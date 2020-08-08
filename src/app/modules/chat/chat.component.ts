@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, ViewChild, TemplateRef, ViewContainerRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, OnDestroy, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as io from 'socket.io-client';
 import * as moment from 'moment';
@@ -10,7 +10,7 @@ import { NotificationService } from '../../shared/services/notification.service'
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   socket;
   user: any;
@@ -49,8 +49,6 @@ export class ChatComponent implements OnInit, OnDestroy {
       room: this.room
     }
 
-
-    console.log(params)
     const socket = this.socket;
 
     this.socket.on('connect', () => {
@@ -67,10 +65,10 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   onNewMessage() {
     this.socket.on('newMessage', (message) => {
+      // if (message.text.includes('has joined')) {
+      //   this.notificationService.userOn((message.text.split(' ')[0]))
+      // } else {
 
-      if (message.text.includes('has joined')) {
-        this.notificationService.userOn((message.text.split(' ')[0]))
-      } else {
         this.vc.createEmbeddedView(this.template,
           {
             chatMessage: {
@@ -80,7 +78,7 @@ export class ChatComponent implements OnInit, OnDestroy {
             }
           });
         //scrollToBottom();
-      }
+      //}
     });
   }
 
