@@ -40,6 +40,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.onNewMessage();
     this.onUpdateUserList();
+    this.newUser();
   }
 
   onConnect() {
@@ -65,9 +66,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onNewMessage() {
     this.socket.on('newMessage', (message) => {
-      // if (message.text.includes('has joined')) {
-      //   this.notificationService.userOn((message.text.split(' ')[0]))
-      // } else {
+      //console.log(message)
+      if (message.text.includes('has joined')) {
+        this.notificationService.userOn((message.text.split(' ')[0]))
+      } else {
 
         this.vc.createEmbeddedView(this.template,
           {
@@ -78,7 +80,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
             }
           });
         //scrollToBottom();
-      //}
+      }
     });
   }
 
@@ -86,6 +88,15 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     this.socket.on('updateUserList', (users) => {
       this.users = users;
     });
+  }
+
+  newUser() {
+    this.socket.emit('newUser', (user) => {
+      if (user) {
+        console.log(user)
+      }
+
+    })
   }
 
   onSendMessage() {
