@@ -69,7 +69,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.socket.on('newMessage', (message) => {
 
       if (message.text.includes('has joined')) {
-        this.notificationService.userOn(message.from.user)
+        this.notificationService.userOn((message.text.split(' ')[0]))
       } else {
         this.vc.createEmbeddedView(this.template,
           {
