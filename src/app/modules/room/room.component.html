@@ -4,42 +4,37 @@
     <div class="col card p-3">
       <p class="d-flex justify-content-center">I would like to practice</p>
 
-      <div class="row room d-flex justify-content-center" *ngFor="let room of rooms" (click)="goChat(room.name)">
-        
+      <div class="row room d-flex justify-content-center" *ngFor="let room of rooms">
+
         <div class="col-1">
           <img [src]="room.flag" width="30px">
         </div>
-       
-        <div class="col-4">
-          <span>{{room.name}}</span>
-           <!-- <ng-template #modalNickname>
-             <app-modal-content-nickname [room]="room"></app-modal-content-nickname>
-           </ng-template>
 
-           <chat-modal 
-              class="country-name" 
-              [modalType]="'default'" 
-              [modalContent]="modalNickname"
-              [modalLinkName]="room.name"
-              [modalSize]="'sm'">
-          </chat-modal> -->
+        <div class="col-4">
+          <span (click)="goChat(room)" class="country-name"> {{room.name}}</span>
         </div>
 
       </div>
     </div>
 
     <div class="col card p-3">
+      
       <p class="d-flex justify-content-center">I would like to talk about</p>
+
       <div class="room" *ngFor="let topic of topics">
         <a class="d-flex justify-content-center">{{topic.name}}</a>
       </div>
+
     </div>
 
     <div class="col card p-3">
+
       <p class="d-flex justify-content-center">I would like to talk about</p>
+
       <div class="room" *ngFor="let room of rooms">
         <a class="d-flex justify-content-center">{{room.name}}</a>
       </div>
+
     </div>
   </div>
 

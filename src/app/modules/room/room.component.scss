@@ -18,8 +18,11 @@
 
 .room{
     margin: 10px;
-    
+ 
+
     .country-name{
         margin-left: 10px;
+        cursor: pointer;
+        color: #5e5e5e;
     }
 }

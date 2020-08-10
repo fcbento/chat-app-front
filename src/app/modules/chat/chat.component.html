@@ -1,49 +1,70 @@
 <div class="chat">
 
-    <div class="chat__sidebar">
-      <h3>{{room}}</h3>
-      <div class="links">
-          <a (click)="onLeaveRoom()">Leave room</a> 
-       </div>
-      <div id="users" *ngFor="let user of users">
-        <ul>
-          <li>
-              <i class="fa fa-user-o"></i>
-            <span> {{user}}</span>
-          </li>
-        </ul>
-      </div>
-  
-    </div>
-  
-    <div class="chat__main">
-  
-      <ol id="messages" class="chat__messages">
-        <ng-container #vc></ng-container>
-      </ol>
-  
-      <div class="chat__footer">
-        <form (ngSubmit)="onSendMessage()">
-          <input name="message" type="text" placeholder="Message" [(ngModel)]="message" autofocus autocomplete="off" />
-          <button mat-raised-button>
-            <i class="fa fa-paper-plane"></i>Send </button>
-        </form>
+  <div class="chat__sidebar">
+
+    <div class="row">
+      <div class="col" style="background-color: rgb(44, 44, 44);">
+
+        <div class="ml-1 mt-4">
+          <h3>{{room.name}} <img [src]="room.flag" width="30px"> </h3>
+        </div>
+
+        <div class="links">
+          <a (click)="onLeaveRoom()"><i class="fas fa-arrow-alt-circle-left fa-2x"></i></a>
+        </div>
+
       </div>
     </div>
-  
+
+
+    <div id="users" *ngFor="let user of users">
+      <ul>
+        <li>
+          <i class="fa fa-user-o"></i>
+          <span> {{user}}</span>
+        </li>
+      </ul>
+    </div>
+
   </div>
-  
-  <ng-template #template let-chatMessage='chatMessage'>
-  
-    <li class="message">
-      <div class="message__title">
-        <h4>{{chatMessage.from}}
-          <span>{{moment(chatMessage.createdAt).format('h:mm a')}}</span>
-        </h4>
-      </div>
-      <div class="message__body">
-        <p>{{chatMessage.text}}</p>
-      </div>
-    </li>
-  
-  </ng-template>
+
+  <div class="chat__main">
+
+    <ol id="messages" class="chat__messages">
+      <ng-container #vc></ng-container>
+    </ol>
+
+    <div class="chat__footer">
+      <form (ngSubmit)="onSendMessage()">
+        <input name="message" type="text" placeholder="Message" [(ngModel)]="message" autofocus autocomplete="off" />
+        <button mat-raised-button>
+          <i class="fa fa-paper-plane"></i>Send </button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #template let-chatMessage='chatMessage'>
+
+  <li class="message" [style.background]="user.name === chatMessage.from ? '#3ea8ff' : '#f2f2f2'">
+
+    <div class="message__title">
+      <b [style.color]="user.name === chatMessage.from ? 'white' : 'black'">
+        {{chatMessage.from}}
+      </b>
+    </div>
+
+    <div class="message__body">
+      <p [style.color]="user.name === chatMessage.from ? 'white' : 'black'">
+        {{chatMessage.text}} 
+        <span 
+          [style.color]="user.name === chatMessage.from ? 'black' : '#ffa600'" class="time">
+          {{moment(chatMessage.createdAt).format('h:mm a')}}</span>
+      </p>
+
+
+    </div>
+  </li>
+
+</ng-template>

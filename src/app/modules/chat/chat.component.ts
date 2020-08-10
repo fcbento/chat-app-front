@@ -34,6 +34,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.user = this.user.user;
     this.room = JSON.parse(localStorage.getItem('room'));
+    console.log(this.room)
     this.onConnect();
   }
 
@@ -47,7 +48,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
     const params = {
       user: this.user,
-      room: this.room
+      room: this.room.name
     }
 
     const socket = this.socket;
@@ -56,20 +57,21 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
       socket.emit('join', params, (err) => {
         if (err) {
-          alert(err);
+          this.notificationService.error(err);
           this.router.navigateByUrl('/room');
         }
-
       });
     });
   }
 
   onNewMessage() {
     this.socket.on('newMessage', (message) => {
-      //console.log(message)
+
       if (message.text.includes('has joined') && this.user.name !== message.text.split(' ')[0]) {
+        console.log(message)
         this.notificationService.userOn((message.text.split(' ')[0]))
       } else {
+        console.log(message)
 
         this.vc.createEmbeddedView(this.template,
           {
@@ -78,6 +80,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
               createdAt: message.createdAt,
               text: message.text
             }
+            
           });
         //scrollToBottom();
       }
@@ -93,7 +96,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   newUser() {
     this.socket.emit('newUser', (user) => {
       if (user) {
-        console.log(user)
+        return
       }
 
     })
