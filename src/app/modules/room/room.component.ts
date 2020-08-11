@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RoomService } from './room.service';
 import { environment } from '../../../environments/environment';
+import * as io from 'socket.io-client';
 
 @Component({
   selector: 'app-room',
@@ -12,12 +13,25 @@ export class RoomComponent implements OnInit {
 
   rooms: any[] = []
   topics: any[] = []
+  socket: any
 
   constructor(private router: Router, public roomService: RoomService) {}
 
   ngOnInit(): void {
     this.getLanguageRooms()
     this.getTopicRooms()
+  }
+
+  checkConnection(){
+    this.socket.on('connect', () => {
+
+      socket.emit('disconnect', params, (err) => {
+        if (err) {
+          this.notificationService.error(err);
+          this.router.navigateByUrl('/room');
+        }
+      });
+    });
   }
 
   //Set flags to the countries

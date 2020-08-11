@@ -1,14 +1,23 @@
-@import url('https://fonts.googleapis.com/css?family=Oswald');
+@import url("https://fonts.googleapis.com/css?family=Oswald");
 
-*{
-    font-family: 'Oswald', sans-serif;
+* {
+    font-family: "Oswald", sans-serif;
 }
 
-.feature-chat{
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+
+    &:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+}
+
+.feature-chat {
     margin-top: 10%;
 }
 
-.country-name{
+.country-name {
     margin-left: 10px;
 }
 
@@ -16,11 +25,10 @@
     margin-left: 10px;
 }
 
-.room{
+.room {
     margin: 10px;
- 
 
-    .country-name{
+    .country-name {
         margin-left: 10px;
         cursor: pointer;
         color: #5e5e5e;

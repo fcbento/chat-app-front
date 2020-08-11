@@ -6,9 +6,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoaderComponent } from './components/loader/loader.component';
 import { SocialButtonComponent } from './components/social-button/social-button.component';
 import { ModalComponent } from './components/modal/modal.component';
-import { ModalContentNicknameComponent } from './components/modal-content-nickname/modal-content-nickname.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { ChatComponent } from '../modules/chat/chat.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +16,8 @@ import { ToastrModule } from 'ngx-toastr';
     ButtonComponent, 
     LoaderComponent, 
     SocialButtonComponent, 
-    ModalComponent, 
-    ModalContentNicknameComponent
+    ModalComponent,
+    ChatComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
     LoaderComponent,
     SocialButtonComponent,
     ModalComponent,
-    ModalContentNicknameComponent
+    ChatComponent
   ]
 })
 export class SharedModule { }

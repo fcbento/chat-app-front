@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [RoomComponent, ChatComponent],
+  declarations: [RoomComponent],
   imports: [
     CommonModule,
     ModulesRoutingModule,
