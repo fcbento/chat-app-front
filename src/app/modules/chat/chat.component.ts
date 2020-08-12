@@ -5,6 +5,7 @@ import { NotificationService } from '../../shared/services/notification.service'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderService } from '../../core/services/loader.service';
 import { ChatService } from './chat.service';
+import scroll from './scroll';
 
 @Component({
   selector: 'app-chat',
@@ -70,7 +71,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
             }
 
           });
-        //scrollToBottom();
+        scroll();
       }
     });
   }

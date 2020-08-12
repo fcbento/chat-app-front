@@ -30,9 +30,9 @@
 
   <div class="chat__main">
 
-    <ol id="messages" class="chat__messages">
+    <div id="messages" class="chat__messages">
       <ng-container #vc></ng-container>
-    </ol>
+    </div>
 
     <div class="chat__footer">
       <form (ngSubmit)="onSendMessage()">
@@ -62,7 +62,6 @@
           [style.color]="user.name === chatMessage.from ? 'black' : '#ffa600'" class="time">
           {{moment(chatMessage.createdAt).format('h:mm a')}}</span>
       </p>
-
 
     </div>
   </li>
