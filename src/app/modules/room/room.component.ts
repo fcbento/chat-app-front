@@ -22,18 +22,6 @@ export class RoomComponent implements OnInit {
     this.getTopicRooms()
   }
 
-  checkConnection(){
-    this.socket.on('connect', () => {
-
-      socket.emit('disconnect', params, (err) => {
-        if (err) {
-          this.notificationService.error(err);
-          this.router.navigateByUrl('/room');
-        }
-      });
-    });
-  }
-
   //Set flags to the countries
   getCountriesFlag() {
     for (let room of this.rooms) {
@@ -63,6 +51,5 @@ export class RoomComponent implements OnInit {
     localStorage.setItem('room', JSON.stringify(room))
     this.router.navigateByUrl('/chat')
   }
-
 
 }

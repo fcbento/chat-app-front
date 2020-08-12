@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { environment } from '../../../environments/environment';
 import { NotificationService } from '../../shared/services/notification.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoaderService } from '../../core/services/loader.service';
 
 @Component({
   selector: 'app-chat',
@@ -29,7 +30,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private router: Router,
     private notificationService: NotificationService,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,
+    private loaderService: LoaderService) {
     this.socket = io(environment.SERVER);
   }
 
@@ -43,7 +45,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.onNewMessage();
     this.onUpdateUserList();
-
   }
 
   onConnect() {
@@ -112,8 +113,10 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   checkConnection() {
-
-    window.location.reload()
+    this.loaderService.show()
+    setTimeout(() => {
+      window.location.reload()
+    }, 1000)
   }
 
   logout() { }
