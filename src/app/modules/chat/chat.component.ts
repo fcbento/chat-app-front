@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, OnDestroy, AfterViewInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import * as io from 'socket.io-client';
 import * as moment from 'moment';
-import { environment } from '../../../environments/environment';
 import { NotificationService } from '../../shared/services/notification.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderService } from '../../core/services/loader.service';
+import { ChatService } from './chat.service';
 
 @Component({
   selector: 'app-chat',
@@ -14,7 +13,6 @@ import { LoaderService } from '../../core/services/loader.service';
 })
 export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  socket;
   user: any;
   @Input() room: any;
   message: string;
@@ -31,8 +29,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     private router: Router,
     private notificationService: NotificationService,
     private modalService: NgbModal,
-    private loaderService: LoaderService) {
-    this.socket = io(environment.SERVER);
+    private loaderService: LoaderService,
+    private chatService: ChatService) {
   }
 
   ngOnInit() {
@@ -54,23 +52,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
       room: this.room.name
     }
 
-    const socket = this.socket;
-
-    this.socket.on('connect', () => {
-
-      socket.emit('join', params, (err) => {
-        if (err) {
-          this.notificationService.error(err);
-          this.router.navigateByUrl('/room');
-          this.modalService.dismissAll()
-        }
-      });
-    });
+    this.chatService.on('connect');
+    this.chatService.emit('join', params);
   }
 
   onNewMessage() {
-    this.socket.on('newMessage', (message) => {
-
+    this.chatService.on('newMessage').subscribe(message => {
       if (message.text.includes('has joined') && this.user.name !== message.text.split(' ')[0]) {
         this.notificationService.userOn((message.text.split(' ')[0]))
       } else {
@@ -89,27 +76,19 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   onUpdateUserList() {
-    this.socket.on('updateUserList', (users) => {
+    this.chatService.on('updateUserList').subscribe(users => {
       this.users = users;
-    });
-  }
-
-  onSendMessage() {
-    this.socket.emit('createMessage', {
-      text: this.message
-    }, () => {
-      this.message = '';
     })
   }
 
+  onSendMessage() {
+    this.chatService.emit('createMessage', { text: this.message });
+    this.message = ''
+  }
+
   onLeaveRoom() {
-    this.socket.emit('leaveRoom', (err) => {
-      if (err) {
-        this.modalService.dismissAll();
-        this.router.navigateByUrl('/room');
-        this.checkConnection()
-      }
-    });
+    this.chatService.emit('leaveRoom', null);
+    this.checkConnection();
   }
 
   checkConnection() {
