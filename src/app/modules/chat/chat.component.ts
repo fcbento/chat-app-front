@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, OnDestroy, AfterViewInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { NotificationService } from '../../shared/services/notification.service';
+import { notification, NotificationService } from '../../shared/services/notification.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderService } from '../../core/services/loader.service';
 import { ChatService } from './chat.service';
@@ -27,9 +26,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   private vc: ViewContainerRef;
 
   constructor(
-    private router: Router,
-    private notificationService: NotificationService,
-    private modalService: NgbModal,
+    private notification: NotificationService,
     private loaderService: LoaderService,
     private chatService: ChatService) {
   }
@@ -60,7 +57,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   onNewMessage() {
     this.chatService.on('newMessage').subscribe(message => {
       if (message.text.includes('has joined') && this.user.name !== message.text.split(' ')[0]) {
-        this.notificationService.userOn((message.text.split(' ')[0]))
+        this.notification.userOn((message.text.split(' ')[0]))
+        this.notification.audio('pristine');
       } else {
         this.vc.createEmbeddedView(this.template,
           {
