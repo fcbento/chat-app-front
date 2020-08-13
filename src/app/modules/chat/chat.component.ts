@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, OnDestroy, AfterViewInit, Input } from '@angular/core';
 import * as moment from 'moment';
-import { notification, NotificationService } from '../../shared/services/notification.service';
+import { NotificationService } from '../../shared/services/notification.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderService } from '../../core/services/loader.service';
 import { ChatService } from './chat.service';
