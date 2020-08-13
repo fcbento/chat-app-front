@@ -13,11 +13,11 @@ import scroll from './scroll';
 })
 export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  user: any;
-  @Input() room: any;
-  message: string;
-  moment = moment;
-  users = [];
+  user: any
+  @Input() room: any
+  message: string
+  moment = moment
+  users = []
 
   @ViewChild('template')
   private template: TemplateRef<any>;
@@ -33,14 +33,14 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
 
-    this.user = JSON.parse(localStorage.getItem('currentUser'));
-    this.user = this.user.user;
+    this.user = JSON.parse(localStorage.getItem('currentUser'))
+    this.user = this.user.user
     this.onConnect()
   }
 
   ngAfterViewInit() {
-    this.onNewMessage();
-    this.onUpdateUserList();
+    this.onNewMessage()
+    this.onUpdateUserList()
   }
 
   onConnect() {
@@ -56,38 +56,49 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onNewMessage() {
     this.chatService.on('newMessage').subscribe(message => {
-      if (message.text.includes('has joined') && this.user.name !== message.text.split(' ')[0]) {
-        this.notification.userOn((message.text.split(' ')[0]))
-        this.notification.audio('pristine');
-      } else {
-        this.vc.createEmbeddedView(this.template,
-          {
-            chatMessage: {
-              from: message.from.user,
-              createdAt: message.createdAt,
-              text: message.text
-            }
 
-          });
-        scroll();
+      let user = message.text.split(' ')[0]
+      let hasJoined = message.text.includes('has joined')
+
+      if (hasJoined && this.user.name !== user) {
+        this.notification.userOn(user)
+        this.notification.audio('pristine')
+      } else {
+
+        this.createMessageTemplate(message)
       }
     });
+
+  }
+
+  createMessageTemplate(message) {
+    this.vc.createEmbeddedView(this.template,
+      {
+        chatMessage: {
+          from: message.from.user,
+          createdAt: message.createdAt,
+          text: message.text
+        }
+
+      });
+
+    scroll();
   }
 
   onUpdateUserList() {
     this.chatService.on('updateUserList').subscribe(users => {
-      this.users = users;
+      this.users = users
     })
   }
 
   onSendMessage() {
-    this.chatService.emit('createMessage', { text: this.message });
+    this.chatService.emit('createMessage', { text: this.message })
     this.message = ''
   }
 
   onLeaveRoom() {
-    this.chatService.emit('leaveRoom', null);
-    this.checkConnection();
+    this.chatService.emit('leaveRoom', null)
+    this.checkConnection()
   }
 
   checkConnection() {
@@ -100,7 +111,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   logout() { }
 
   ngOnDestroy() {
-    this.onLeaveRoom();
+    this.onLeaveRoom()
   }
 
 }
