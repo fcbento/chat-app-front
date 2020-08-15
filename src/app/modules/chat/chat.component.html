@@ -10,7 +10,11 @@
         </div>
 
         <div class="links">
-          <a (click)="onLeaveRoom()"><i class="fas fa-arrow-alt-circle-left fa-2x"></i></a>
+          <a (click)="onLeaveRoom()"><i class="fas fa-arrow-alt-circle-left"></i></a>
+        </div>
+
+        <div class="links">
+          <a (click)="disableSounds()"><i [ngClass]="disable ? 'fas fa-volume-up' : 'fas fa-volume-mute'"></i></a>
         </div>
 
       </div>

@@ -18,6 +18,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   message: string
   moment = moment
   users = []
+  disable: boolean = true;
 
   @ViewChild('template')
   private template: TemplateRef<any>;
@@ -56,22 +57,15 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onNewMessage() {
     this.chatService.on('newMessage').subscribe(message => {
-
-      let user = message.text.split(' ')[0]
-      let hasJoined = message.text.includes('has joined')
-
-      if (hasJoined && this.user.name !== user) {
-        this.notification.userOn(user)
-        this.notification.audio('pristine')
-      } else {
-
-        this.createMessageTemplate(message)
-      }
+      this.createMessageTemplate(message)
     });
 
   }
 
   createMessageTemplate(message) {
+
+    this.handleNotification(message);
+
     this.vc.createEmbeddedView(this.template,
       {
         chatMessage: {
@@ -83,6 +77,33 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
       });
 
     scroll();
+  }
+
+
+  handleNotification(message) {
+
+    let user = message.text.split(' ')[0]
+    let hasJoined = message.text.includes('has joined')
+    let hasLeft = message.text.includes('has left')
+
+    if (hasJoined && this.user.name !== user) {
+      this.notification.userOn(user)
+      this.notification.audio('juntos', this.disable)
+    }
+
+    if (hasLeft && this.user.name !== user) {
+      this.notification.userOff(user)
+      this.notification.audio('ended', this.disable)
+    }
+
+    if (this.user.name !== message.from.user) {
+      this.notification.audio('intuition', this.disable)
+    }
+
+  }
+
+  disableSounds() {
+    this.disable = !this.disable;
   }
 
   onUpdateUserList() {

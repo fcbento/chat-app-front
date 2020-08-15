@@ -16,14 +16,20 @@ export class NotificationService {
     this.toastr.success(`${name} is on`)
   }
 
+  userOff(name: string) {
+    this.toastr.info(`${name} has left`)
+  }
+
   error(message: string) {
     this.toastr.error(message)
   }
 
-  audio(fileName: string) {
-    let audio = new Audio()
-    audio.src = `../../../assets/${fileName}.mp3`
-    audio.load()
-    audio.play()
+  audio(fileName: string, disable: boolean) {
+    if (disable) {
+      let audio = new Audio()
+      audio.src = `../../../assets/mp3/${fileName}.mp3`
+      audio.load()
+      audio.play()
+    }
   }
 }
