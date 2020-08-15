@@ -96,7 +96,7 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
       this.notification.audio('ended', this.disable)
     }
 
-    if (this.user.name !== message.from.user) {
+    if (this.user.name !== message.from.user && !hasLeft) {
       this.notification.audio('intuition', this.disable)
     }
 
