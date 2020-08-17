@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col-12">
+        <form (ngSubmit)="onSendMessage()">
+
+            <input 
+                class="chat__footer__input" 
+                name="message" type="text" 
+                placeholder="Write a message"
+                [(ngModel)]="message" 
+            />
+
+            <chat-button [buttonType]="'default'" [buttonName]="'Send'"> </chat-button>
+
+        </form>
+    </div>
+</div>

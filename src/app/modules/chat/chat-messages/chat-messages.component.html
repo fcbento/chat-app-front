@@ -1,0 +1,28 @@
+<div id="messages" class="chat__messages">
+  <ng-container #vc></ng-container>
+</div>
+
+
+<ng-template #template let-chatMessage='chatMessage'>
+
+  <li class="message" [style.background]="user.name === chatMessage.from ? '#5CB3FF' : '#f2f2f2'">
+
+    <div class="row">
+      <p [style.color]="user.name === chatMessage.from ? 'white' : 'black'">
+
+        <span [style.color]="user.name === chatMessage.from ? 'white' : 'black'">
+          {{chatMessage.from !== user.name ? chatMessage.from + ':' : ''}}
+        </span>
+
+        <span class="content-body">{{chatMessage.text}}</span>
+
+        <span [style.color]="user.name === chatMessage.from ? 'black' : '#ffa600'"
+          class="d-flex justify-content-start time">
+          {{moment(chatMessage.createdAt).format('h:mm a')}}
+        </span>
+      </p>
+
+    </div>
+  </li>
+
+</ng-template>

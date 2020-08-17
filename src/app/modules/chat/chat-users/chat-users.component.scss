@@ -1,0 +1,39 @@
+.links{
+
+    margin-bottom: 20px;
+
+    a{
+      margin-left: 20px;
+      margin-right: 1px;
+      color: rgb(190, 190, 190);
+      cursor: pointer;
+    }
+  }
+
+  ul{
+    list-style-type: none;
+  }
+
+  li{
+    background: #e6eaee;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  i{
+    color: #969595;
+  }
+
+  span{
+    font-weight: 600;
+    color: #969595;
+  }
+
+  
+  h3{
+    color: black;
+    margin: 10px 20px;
+    text-align: left;
+  }

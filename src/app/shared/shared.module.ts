@@ -9,6 +9,9 @@ import { ModalComponent } from './components/modal/modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { ChatComponent } from '../modules/chat/chat.component';
+import { ChatUsersComponent } from '../modules/chat/chat-users/chat-users.component';
+import { ChatFormComponent } from '../modules/chat/chat-form/chat-form.component';
+import { ChatMessagesComponent } from '../modules/chat/chat-messages/chat-messages.component';
 
 @NgModule({
   declarations: [
@@ -17,14 +20,18 @@ import { ChatComponent } from '../modules/chat/chat.component';
     LoaderComponent, 
     SocialButtonComponent, 
     ModalComponent,
-    ChatComponent
+    ChatComponent,
+    ChatUsersComponent, 
+    ChatFormComponent, 
+    ChatMessagesComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    FormsModule
   ],
   exports: [
     InputComponent, 
@@ -32,7 +39,10 @@ import { ChatComponent } from '../modules/chat/chat.component';
     LoaderComponent,
     SocialButtonComponent,
     ModalComponent,
-    ChatComponent
+    ChatComponent,
+    ChatUsersComponent, 
+    ChatFormComponent, 
+    ChatMessagesComponent
   ]
 })
 export class SharedModule { }

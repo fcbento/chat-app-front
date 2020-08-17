@@ -11,20 +11,10 @@ import scroll from './scroll';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ChatComponent implements OnInit, OnDestroy {
 
   user: any
   @Input() room: any
-  message: string
-  moment = moment
-  users = []
-  disable: boolean = true;
-
-  @ViewChild('template')
-  private template: TemplateRef<any>;
-
-  @ViewChild('vc', { read: ViewContainerRef })
-  private vc: ViewContainerRef;
 
   constructor(
     private notification: NotificationService,
@@ -39,11 +29,6 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     this.onConnect()
   }
 
-  ngAfterViewInit() {
-    this.onNewMessage()
-    this.onUpdateUserList()
-  }
-
   onConnect() {
 
     const params = {
@@ -55,84 +40,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     this.chatService.emit('join', params);
   }
 
-  onNewMessage() {
-    this.chatService.on('newMessage').subscribe(message => {
-      this.createMessageTemplate(message)
-    });
-
-  }
-
-  createMessageTemplate(message) {
-
-    this.handleNotification(message);
-
-    this.vc.createEmbeddedView(this.template,
-      {
-        chatMessage: {
-          from: message.from.user,
-          createdAt: message.createdAt,
-          text: message.text
-        }
-
-      });
-
-    scroll();
-  }
-
-
-  handleNotification(message) {
-
-    let user = message.text.split(' ')[0]
-    let hasJoined = message.text.includes('has joined')
-    let hasLeft = message.text.includes('has left')
-
-    if (hasJoined && this.user.name !== user) {
-      this.notification.userOn(user)
-      this.notification.audio('juntos', this.disable)
-    }
-
-    if (hasLeft && this.user.name !== user) {
-      this.notification.userOff(user)
-      this.notification.audio('ended', this.disable)
-    }
-
-    if (this.user.name !== message.from.user && !hasLeft) {
-      this.notification.audio('intuition', this.disable)
-    }
-
-  }
-
-  disableSounds() {
-    this.disable = !this.disable;
-  }
-
-  onUpdateUserList() {
-    this.chatService.on('updateUserList').subscribe(users => {
-      this.users = users
-    })
-  }
-
-  onSendMessage() {
-    this.chatService.emit('createMessage', { text: this.message })
-    this.message = ''
-  }
-
-  onLeaveRoom() {
-    this.chatService.emit('leaveRoom', null)
-    this.checkConnection()
-  }
-
-  checkConnection() {
-    this.loaderService.show()
-    setTimeout(() => {
-      window.location.reload()
-    }, 1000)
-  }
-
-  logout() { }
-
   ngOnDestroy() {
-    this.onLeaveRoom()
+    //this.onLeaveRoom()
   }
 
 }
