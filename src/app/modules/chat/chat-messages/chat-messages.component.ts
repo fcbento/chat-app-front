@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, AfterViewInit, ElementRef, AfterViewChecked } from '@angular/core';
 import { ChatService } from '../chat.service';
 import { NotificationService } from '../../../shared/services/notification.service';
-import scroll from '../scroll';
 import * as moment from '../../../../../node_modules/moment';
 
 @Component({
@@ -9,7 +8,7 @@ import * as moment from '../../../../../node_modules/moment';
   templateUrl: './chat-messages.component.html',
   styleUrls: ['./chat-messages.component.scss']
 })
-export class ChatMessagesComponent implements OnInit, AfterViewInit {
+export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   message: any
   user: any
@@ -21,15 +20,25 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
   @ViewChild('vc', { read: ViewContainerRef })
   private vc: ViewContainerRef;
 
+  @ViewChild('scrollMe')
+  private scrollMe: ElementRef;
+
   constructor(private chatService: ChatService, private notification: NotificationService) { }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('currentUser'))
     this.user = this.user.user
+    this.scrollToBottom();
+  }
+
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
   }
 
   ngAfterViewInit() {
     this.onNewMessage()
+    this.scrollToBottom();
   }
 
   onNewMessage() {
@@ -52,9 +61,16 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit {
             text: message.text
           }
         });
-      scroll();
+
+      this.scrollToBottom();
     }
 
+  }
+
+  scrollToBottom(): void {
+    try {
+      this.scrollMe.nativeElement.scrollTop = this.scrollMe.nativeElement.scrollHeight;
+    } catch (err) { }
   }
 
   handleNotification(message) {
