@@ -25,17 +25,14 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.user = JSON.parse(localStorage.getItem('currentUser'))
-    this.user = this.user.user
+    this.user = JSON.parse(localStorage.getItem('currentUser')) || {}
+    this.user = this.user.user || {}
     this.onConnect()
   }
 
   onConnect() {
 
-    const params = {
-      user: this.user,
-      room: this.room.name
-    }
+    const params = { user: this.user, room: this.room.name }
 
     this.chatService.on('connect');
     this.chatService.emit('join', params);
@@ -46,7 +43,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    //this.onLeaveRoom()
+    this.chatService.emit('leaveRoom', null)
   }
 
 }
