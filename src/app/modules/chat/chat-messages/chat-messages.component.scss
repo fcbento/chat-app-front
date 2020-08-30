@@ -1,17 +1,27 @@
-.time{
-    font-size: 11px;
-    //margin-left: 15px;
-  }
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+
+*{
+  font: 14px/20px "Lato", Arial, sans-serif;
+}
+
+.message-from{
+  color: lighten(#252525, 8%);
+}
+
+.message-time{
+  color: lighten(#92959E, 8%);
+  padding-left: 6px;
+}
   
  .message {
-  padding: 6px 0 0px 19px;
+  padding: 20px;
   margin-bottom: 15px;
   border-radius: 6px;
   font-size: 15px;
 
   .content-body {
-    //margin-left: 15px;
     font-weight: 100;
+    color: #ffffff;
   }
 }
 

@@ -10,6 +10,7 @@ export class ButtonComponent implements OnInit {
   @Input() buttonType: any;
   @Input() buttonColor: any
   @Input() buttonName: any;
+  @Input() buttonIconName: any;
 
   constructor() { }
 

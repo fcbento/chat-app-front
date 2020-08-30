@@ -1,6 +1,6 @@
 <div id="messages" #scrollMe>
   <div class="row">
-    <div class="col-11">
+    <div class="col-8">
       <ng-container #vc></ng-container>
     </div>
   </div>
@@ -10,23 +10,22 @@
 
 <ng-template #template let-chatMessage='chatMessage'>
 
-  <li class="message" [style.background]="user.name === chatMessage.from ? '#5CB3FF' : '#f2f2f2'">
+  <div  class="d-flex justify-content-start">
+
+    <span class="message-from">
+      {{chatMessage.from !== user.name ? chatMessage.from + '  ' : user.name }}
+    </span>
+
+    <span class="message-time">
+      {{moment(chatMessage.createdAt).format('h:mm a')}}
+    </span>
+
+  </div>
+
+  <li class="message" [style.background]="user.name === chatMessage.from ? '#94C2ED' : '#86BB71'">
 
     <div class="row">
-      <p [style.color]="user.name === chatMessage.from ? 'white' : 'black'">
-
-        <span [style.color]="user.name === chatMessage.from ? 'white' : 'black'">
-          {{chatMessage.from !== user.name ? chatMessage.from + ':' : ''}}
-        </span>
-
-        <span class="content-body">{{chatMessage.text}}</span>
-
-        <span [style.color]="user.name === chatMessage.from ? 'black' : '#ffa600'"
-          class="d-flex justify-content-start time">
-          {{moment(chatMessage.createdAt).format('h:mm a')}}
-        </span>
-      </p>
-
+      <span class="content-body">{{chatMessage.text}}</span>
     </div>
   </li>
 

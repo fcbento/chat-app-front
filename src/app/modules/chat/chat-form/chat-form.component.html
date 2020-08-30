@@ -2,15 +2,30 @@
     <div class="col-12">
         <form (ngSubmit)="onSendMessage()">
 
-            <input 
+            <textarea 
                 class="chat__footer__input" 
-                name="message" type="text" 
+                name="message" 
+                type="text" 
                 placeholder="Write a message"
-                [(ngModel)]="message" 
-            />
+                [(ngModel)]="message">
+            </textarea>
 
-            <chat-button [buttonType]="'default'" [buttonName]="'Send'"> </chat-button>
+            <chat-button 
+                [buttonType]="'icon'" 
+                [buttonIconName]="'image'"> 
+             </chat-button>
+
+             <chat-button 
+                [buttonType]="'icon'" 
+                [buttonIconName]="'video'"> 
+            </chat-button>
+
+            <chat-button 
+                [buttonType]="'message'" 
+                [buttonName]="'Send'"> 
+            </chat-button>
 
         </form>
+
     </div>
 </div>

@@ -5,3 +5,19 @@
 <ng-template [ngIf]="buttonType === 'transparent'">
     <input type="submit" [value]="buttonName" class="btn transparent">
 </ng-template>
+
+<ng-template [ngIf]="buttonType === 'message'">
+    <input type="submit" [value]="buttonName" class="btn-message">
+</ng-template>
+
+<ng-template [ngIf]="buttonType === 'icon'">
+    <i class="far fa-file-image icon" *ngIf="buttonIconName === 'image'"></i>
+</ng-template>
+
+<ng-template [ngIf]="buttonType === 'icon'">
+    <i class="fab fa-youtube icon" *ngIf="buttonIconName === 'video'"></i>
+</ng-template>
+
+<ng-template [ngIf]="buttonType === 'icon'">
+    <i class="far fa-file-image icon" *ngIf="buttonIconName === 'file'"></i>
+</ng-template>
