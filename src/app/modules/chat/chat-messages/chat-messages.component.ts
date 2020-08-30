@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, AfterViewInit, ElementRef, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, AfterViewInit, ElementRef, AfterViewChecked, Input } from '@angular/core';
 import { ChatService } from '../chat.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import * as moment from '../../../../../node_modules/moment';
@@ -23,6 +23,8 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   @ViewChild('scrollMe')
   private scrollMe: ElementRef;
 
+  @Input() disableSounds: boolean;
+ 
   constructor(private chatService: ChatService, private notification: NotificationService) { }
 
   ngOnInit(): void {
@@ -81,16 +83,16 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
 
     if (hasJoined && this.user.name !== user) {
       this.notification.userOn(user)
-      this.notification.audio('juntos', true)
+      this.notification.audio('juntos', this.disableSounds !== undefined ? this.disableSounds : true) 
     }
 
     if (hasLeft && this.user.name !== user) {
       this.notification.userOff(user)
-      this.notification.audio('ended', true)
+      this.notification.audio('ended', this.disableSounds !== undefined ? this.disableSounds : true)
     }
 
     if (this.user.name !== message.from.user && !hasLeft) {
-      this.notification.audio('intuition', true)
+      this.notification.audio('intuition', this.disableSounds !== undefined ? this.disableSounds : true)
     }
 
   }

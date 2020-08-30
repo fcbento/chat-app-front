@@ -1,13 +1,13 @@
 <div class="chat">
 
   <div class="chat__sidebar">
-    <app-chat-users [room]="room"></app-chat-users>
+    <app-chat-users [room]="room" (disableSound)="disableSounds($event)"></app-chat-users>
   </div>
 
   <div class="chat__main">
 
     <div class="chat__messages">
-      <app-chat-messages></app-chat-messages>
+      <app-chat-messages [disableSounds]="disable"></app-chat-messages>
     </div>
 
     <app-chat-form></app-chat-form>

@@ -15,6 +15,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   user: any
   @Input() room: any
+  disable: boolean;
 
   constructor(
     private notification: NotificationService,
@@ -38,6 +39,10 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     this.chatService.on('connect');
     this.chatService.emit('join', params);
+  }
+
+  disableSounds(e) {
+    this.disable = e;
   }
 
   ngOnDestroy() {

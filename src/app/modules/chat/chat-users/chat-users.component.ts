@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ChatService } from '../chat.service';
 import { LoaderService } from '../../../core/services/loader.service';
 
@@ -12,6 +12,7 @@ export class ChatUsersComponent implements OnInit, AfterViewInit {
   @Input() room: any;
   users: any;
   disable: boolean = true;
+  @Output() disableSound = new EventEmitter<>();
 
   constructor(private chatService: ChatService, private loaderService: LoaderService) { }
 
@@ -35,6 +36,7 @@ export class ChatUsersComponent implements OnInit, AfterViewInit {
 
   disableSounds() {
     this.disable = !this.disable;
+    this.disableSound.emit(this.disable)
   }
 
   onUpdateUserList() {
