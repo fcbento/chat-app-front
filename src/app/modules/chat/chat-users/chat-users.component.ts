@@ -12,7 +12,7 @@ export class ChatUsersComponent implements OnInit, AfterViewInit {
   @Input() room: any;
   users: any;
   disable: boolean = true;
-  @Output() disableSound = new EventEmitter<>();
+  @Output() disableSound = new EventEmitter();
 
   constructor(private chatService: ChatService, private loaderService: LoaderService) { }
 

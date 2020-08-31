@@ -1,8 +1,16 @@
+<!-- Modal content -->
 <ng-template #content>
     <div class="modal-body">
         <ng-container [ngTemplateOutlet]="modalContent"></ng-container>
     </div>
 </ng-template>
 
-
+<!-- Modal Default -->
 <a (click)="openModal(content)" *ngIf="modalType === 'default'">{{modalLinkName}}</a>
+
+<!-- Modal Icon -->
+<a (click)="openModal(content)" *ngIf="modalType === 'icon'">
+    <i class="fab fa-youtube icon" *ngIf="modalIconName === 'video'"></i>
+</a>
+
+

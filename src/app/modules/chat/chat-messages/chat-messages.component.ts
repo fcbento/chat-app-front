@@ -24,7 +24,7 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   private scrollMe: ElementRef;
 
   @Input() disableSounds: boolean;
- 
+
   constructor(private chatService: ChatService, private notification: NotificationService) { }
 
   ngOnInit(): void {
@@ -83,18 +83,22 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
 
     if (hasJoined && this.user.name !== user) {
       this.notification.userOn(user)
-      this.notification.audio('juntos', this.disableSounds !== undefined ? this.disableSounds : true) 
+      this.notification.audio('juntos', this.disable())
     }
 
     if (hasLeft && this.user.name !== user) {
       this.notification.userOff(user)
-      this.notification.audio('ended', this.disableSounds !== undefined ? this.disableSounds : true)
+      this.notification.audio('ended', this.disable())
     }
 
     if (this.user.name !== message.from.user && !hasLeft) {
-      this.notification.audio('intuition', this.disableSounds !== undefined ? this.disableSounds : true)
+      this.notification.audio('intuition', this.disable())
     }
 
+  }
+
+  disable(): boolean {
+    return this.disableSounds !== undefined ? this.disableSounds : true
   }
 
 }

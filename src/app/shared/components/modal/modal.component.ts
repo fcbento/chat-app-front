@@ -12,6 +12,7 @@ export class ModalComponent implements OnInit {
   @Input() modalLinkName: any;
   @Input() modalContent: any;
   @Input() modalSize: any;
+  @Input() modalIconName: any;
 
   constructor(public modalService: NgbModal) { }
 
