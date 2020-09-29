@@ -13,18 +13,18 @@
             <chat-button 
                 [buttonType]="'icon'" 
                 [buttonIconName]="'image'"> 
-             </chat-button>
+            </chat-button>
 
-             <chat-modal
+            <ng-template #youtubeLink>
+                <app-youtube-link></app-youtube-link>
+            </ng-template>
+
+            <chat-modal
                 [modalType]="'icon'"
                 [modalIconName]="'video'"
+                [modalContent]="youtubeLink"
                 [modalSize]="'sm'">
             </chat-modal>
-
-             <chat-button 
-                [buttonType]="'icon'" 
-                [buttonIconName]="'video'"> 
-            </chat-button>
 
             <chat-button 
                 [buttonType]="'message'" 

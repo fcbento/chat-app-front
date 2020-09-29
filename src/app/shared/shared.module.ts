@@ -12,6 +12,7 @@ import { ChatComponent } from '../modules/chat/chat.component';
 import { ChatUsersComponent } from '../modules/chat/chat-users/chat-users.component';
 import { ChatFormComponent } from '../modules/chat/chat-form/chat-form.component';
 import { ChatMessagesComponent } from '../modules/chat/chat-messages/chat-messages.component';
+import { YoutubeLinkComponent } from './components/modal/content/youtube-link/youtube-link.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { ChatMessagesComponent } from '../modules/chat/chat-messages/chat-messag
     ChatComponent,
     ChatUsersComponent, 
     ChatFormComponent, 
-    ChatMessagesComponent
+    ChatMessagesComponent, YoutubeLinkComponent
   ],
   imports: [
     CommonModule,
