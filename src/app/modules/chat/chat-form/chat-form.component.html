@@ -18,19 +18,21 @@
             </chat-button>
 
             <ng-template #youtubeLink>
-                <app-youtube-link></app-youtube-link>
+                <app-youtube-link (youtubeLink)="getLink($event)"></app-youtube-link>
             </ng-template>
 
             <chat-modal
                 [modalType]="'icon'"
                 [modalIconName]="'video'"
                 [modalContent]="youtubeLink"
-                [modalSize]="'sm'">
+                [modalSize]="'sm'"
+                (modalRef)="modalRef($event)">
             </chat-modal>
 
             <chat-button 
                 [buttonType]="'icon'" 
-                [buttonIconName]="'send'"> 
+                [buttonIconName]="'send'"
+                (click)="onSendMessage()"> 
             </chat-button>
 
         </form>

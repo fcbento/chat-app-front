@@ -1,18 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ChatService } from '../chat.service';
 
 @Component({
   selector: 'app-chat-form',
   templateUrl: './chat-form.component.html',
-  styleUrls: ['./chat-form.component.scss']
+  styleUrls: ['./chat-form.component.scss'],
 })
 export class ChatFormComponent implements OnInit {
 
   message: any;
+  activeModal: any;
 
-  constructor(private chatService: ChatService) { }
+  constructor(
+    private chatService: ChatService
+  ) { }
 
   ngOnInit(): void {
+
   }
 
   onSendMessage() {
@@ -28,6 +33,15 @@ export class ChatFormComponent implements OnInit {
       event.preventDefault();
       this.onSendMessage();
     }
+  }
+
+  getLink(e) {
+    this.chatService.emit('createMessage', { text: e })
+    this.activeModal.close()
+  }
+
+  modalRef(e) {
+    this.activeModal = e;
   }
 
 }
