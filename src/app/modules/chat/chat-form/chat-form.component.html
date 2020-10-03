@@ -6,8 +6,10 @@
                 class="chat__footer__input" 
                 name="message" 
                 type="text" 
+                id="txtarea"
                 placeholder="Write a message"
-                [(ngModel)]="message">
+                [(ngModel)]="message"
+                (keydown)="triggerFunction($event)">
             </textarea>
 
             <chat-button 
@@ -27,8 +29,8 @@
             </chat-modal>
 
             <chat-button 
-                [buttonType]="'message'" 
-                [buttonName]="'Send'"> 
+                [buttonType]="'icon'" 
+                [buttonIconName]="'send'"> 
             </chat-button>
 
         </form>

@@ -12,19 +12,19 @@
     display: flex;
   }
   
-  .chat__sidebar {
+  .sidebar {
     width: 300px;
     height: 80vh;
   }
 
-  .chat__main {
+  .main {
     display: flex;
     flex-direction: column;
     height: 80vh;
     width: 100%;
   }
  
-  .chat__messages {
+  .messages {
     list-style-type: none;
     padding: 10px;
     flex-grow: 1;
@@ -34,15 +34,16 @@
   
   
 @media (max-width: 600px) {
+  
     * {
       font-size: 1rem;
     }
   
-    .chat__sidebar {
+    .sidebar {
       display: none;
     }
   
-    .chat__footer {
+    .footer {
       flex-direction: column;
 
       form{

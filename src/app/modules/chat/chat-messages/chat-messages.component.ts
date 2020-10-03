@@ -25,7 +25,10 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
 
   @Input() disableSounds: boolean;
 
-  constructor(private chatService: ChatService, private notification: NotificationService) { }
+  constructor(
+    private chatService: ChatService,
+    private notification: NotificationService
+  ) { }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('currentUser'))
@@ -51,19 +54,12 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   }
 
   createMessageTemplate(message) {
+
     if (message.text.includes('has joined') || message.text.includes('has left')) {
       this.handleNotification(message);
     } else {
       this.handleNotification(message);
-      this.vc.createEmbeddedView(this.template,
-        {
-          chatMessage: {
-            from: message.from.user,
-            createdAt: message.createdAt,
-            text: message.text
-          }
-        });
-
+      this.vc.createEmbeddedView(this.template, { chatMessage: this.messageObj(message) });
       this.scrollToBottom();
     }
 
@@ -101,4 +97,11 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
     return this.disableSounds !== undefined ? this.disableSounds : true
   }
 
+  messageObj(message) {
+    return {
+      from: message.from.user,
+      createdAt: message.createdAt,
+      text: message.text
+    }
+  }
 }
