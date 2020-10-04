@@ -27,16 +27,8 @@
       <span class="content-body">{{chatMessage.text}}</span>
     </div>
 
-    <div class="row" *ngIf="chatMessage.isYoutube">
-      <div class="col">
-        <div class="card">
-          <div class="card-body">
-            <h3>sd</h3>
-          </div>
-        </div>
-      </div>
+    <app-chat-message-youtube *ngIf="chatMessage.isYoutube"></app-chat-message-youtube>
 
-    </div>
   </li>
 
 </ng-template>
