@@ -24,10 +24,19 @@
   <li class="message" [style.background]="user.name === chatMessage.from ? '#94C2ED' : '#86BB71'">
 
     <div class="row">
-      <span class="content-body">{{chatMessage.text}}</span>
+      
+      <span 
+        class="content-body" 
+        *ngIf="!chatMessage.isYoutube" >
+        {{chatMessage.text}}
+      </span>
+    
     </div>
 
-    <app-chat-message-youtube *ngIf="chatMessage.isYoutube"></app-chat-message-youtube>
+    <app-chat-message-youtube 
+      *ngIf="chatMessage.isYoutube" 
+      [youtubeLink]="chatMessage.text">
+    </app-chat-message-youtube>
 
   </li>
 

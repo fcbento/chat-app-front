@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-chat-message-youtube',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatMessageYoutubeComponent implements OnInit {
 
-  constructor() { }
+  @Input() youtubeLink: string;
+  embedVideo: any;
+
+  constructor(public sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+     this.embedVideo = this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/" + this.youtubeLink.split('/')[3]);
   }
 
 }
