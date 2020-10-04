@@ -1,6 +1,6 @@
 <div id="messages" #scrollMe>
   <div class="row">
-    <div class="col-8">
+    <div class="col-11">
       <ng-container #vc></ng-container>
     </div>
   </div>
@@ -9,7 +9,7 @@
 
 <ng-template #template let-chatMessage='chatMessage'>
 
-  <div  class="d-flex justify-content-start">
+  <div class="d-flex justify-content-start">
 
     <span class="message-from">
       {{chatMessage.from !== user.name ? chatMessage.from + '  ' : user.name }}
@@ -25,6 +25,17 @@
 
     <div class="row">
       <span class="content-body">{{chatMessage.text}}</span>
+    </div>
+
+    <div class="row" *ngIf="chatMessage.isYoutube">
+      <div class="col">
+        <div class="card">
+          <div class="card-body">
+            <h3>sd</h3>
+          </div>
+        </div>
+      </div>
+
     </div>
   </li>
 

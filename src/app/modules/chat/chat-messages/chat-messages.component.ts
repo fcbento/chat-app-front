@@ -13,6 +13,7 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   message: any
   user: any
   moment = moment
+  isYoutube: boolean = false;
 
   @ViewChild('template')
   private template: TemplateRef<any>;
@@ -54,7 +55,6 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   }
 
   createMessageTemplate(message) {
-
     if (message.text.includes('has joined') || message.text.includes('has left')) {
       this.handleNotification(message);
     } else {
@@ -101,7 +101,8 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
     return {
       from: message.from.user,
       createdAt: message.createdAt,
-      text: message.text
+      text: message.text,
+      isYoutube: message.isYoutube
     }
   }
 }

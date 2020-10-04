@@ -21,7 +21,7 @@ export class ChatFormComponent implements OnInit {
   }
 
   onSendMessage() {
-    this.chatService.emit('createMessage', { text: this.message })
+    this.chatService.emit('createMessage', { text: this.message, isYoutube: false })
     this.message = ''
   }
 
@@ -36,7 +36,7 @@ export class ChatFormComponent implements OnInit {
   }
 
   getLink(e) {
-    this.chatService.emit('createMessage', { text: e })
+    this.chatService.emit('createMessage', { text: e, isYoutube: true})
     this.activeModal.close()
   }
 
