@@ -1,5 +1,10 @@
 button {
     margin-top: 15px;
+
+    &:disabled {
+        background-color: grey;
+        border-color: grey;
+    }
 }
 
 input {
