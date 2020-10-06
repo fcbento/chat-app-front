@@ -9,14 +9,26 @@ import { LoaderService } from '../../../core/services/loader.service';
 })
 export class ChatUsersComponent implements OnInit, AfterViewInit {
 
-  @Input() room: any;
-  users: any;
-  disable: boolean = true;
   @Output() disableSound = new EventEmitter();
+  @Output() blockedUser = new EventEmitter();
+  @Input() room: any;
 
-  constructor(private chatService: ChatService, private loaderService: LoaderService) { }
+  users: any = [];
+  currentUser: any;
+  disable: boolean = true;
+  userBlocked: any;
+  isBlocked: boolean = false;
+  display: number;
+  blockedUsers: any = []
 
-  ngOnInit(): void { }
+  constructor(
+    private chatService: ChatService,
+    private loaderService: LoaderService
+  ) { }
+
+  ngOnInit(): void {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
 
   ngAfterViewInit() {
     this.onUpdateUserList()
@@ -43,6 +55,20 @@ export class ChatUsersComponent implements OnInit, AfterViewInit {
     this.chatService.on('updateUserList').subscribe(users => {
       this.users = users
     })
+  }
+
+  blockUser(user) {
+    this.blockedUsers.push(user);
+    this.users = this.users.filter(item => item !== user)
+    this.userBlocked = user;
+    this.blockedUser.emit(this.blockedUsers);
+  }
+
+  unblockUser(user) {
+    this.blockedUsers = this.blockedUsers.filter(item => item !== user)
+    this.users.push(user);
+    this.userBlocked = null;
+    this.blockedUser.emit(this.blockedUsers);
   }
 
 }

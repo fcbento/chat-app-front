@@ -11,26 +11,23 @@
 
   <div class="d-flex justify-content-start">
 
-    <span class="message-from">
-      {{chatMessage.from !== user.name ? chatMessage.from + '  ' : user.name }}
-    </span>
+      <span class="message-from">
+        {{chatMessage.from !== user.name ? chatMessage.from + '  ' : user.name }}
+      </span>
 
-    <span class="message-time">
-      {{moment(chatMessage.createdAt).format('h:mm a')}}
-    </span>
-
+      <span class="message-time">
+        {{moment(chatMessage.createdAt).format('h:mm a')}}
+      </span>
   </div>
 
   <li class="message" [style.background]="user.name === chatMessage.from ? '#94C2ED' : '#86BB71'">
 
     <div class="row">
-      
-      <span 
-        class="content-body" 
-        *ngIf="!chatMessage.isYoutube" >
+
+      <span class="content-body" *ngIf="!chatMessage.isYoutube">
         {{chatMessage.text}}
       </span>
-    
+
     </div>
 
     <app-chat-message-youtube 

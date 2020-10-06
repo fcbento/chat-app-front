@@ -11,10 +11,10 @@ import { ChatService } from './chat.service';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit, OnDestroy {
-
-  user: any
   @Input() room: any
+  user: any
   disable: boolean;
+  userBlocked: any;
 
   constructor(
     private notification: NotificationService,
@@ -23,18 +23,14 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     this.user = JSON.parse(localStorage.getItem('currentUser')) || {}
     this.user = this.user.user || {}
     this.onConnect()
   }
 
   onConnect() {
-
-    const params = { user: this.user, room: this.room.name }
-
     this.chatService.on('connect');
-    this.chatService.emit('join', params);
+    this.chatService.emit('join', { user: this.user, room: this.room.name });
   }
 
   disableSounds(e) {
@@ -43,6 +39,10 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.chatService.emit('leaveRoom', null)
+  }
+
+  blockUser(e) {
+    this.userBlocked = e;
   }
 
 }

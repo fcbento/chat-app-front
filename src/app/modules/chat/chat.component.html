@@ -3,14 +3,15 @@
   <div class="sidebar">
     <app-chat-users 
       [room]="room" 
-      (disableSound)="disableSounds($event)">
+      (disableSound)="disableSounds($event)"
+      (blockedUser)="blockUser($event)">
     </app-chat-users>
   </div>
 
   <div class="main">
 
     <div class="messages">
-      <app-chat-messages [disableSounds]="disable"></app-chat-messages>
+      <app-chat-messages [disableSounds]="disable" [userBlocked]="userBlocked"></app-chat-messages>
     </div>
 
     <app-chat-form></app-chat-form>

@@ -25,6 +25,7 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   private scrollMe: ElementRef;
 
   @Input() disableSounds: boolean;
+  @Input() userBlocked: any = [];
 
   constructor(
     private chatService: ChatService,
@@ -35,8 +36,8 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
     this.user = JSON.parse(localStorage.getItem('currentUser'))
     this.user = this.user.user
     this.scrollToBottom();
-  }
 
+  }
 
   ngAfterViewChecked() {
     this.scrollToBottom();
@@ -59,8 +60,16 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
       this.handleNotification(message);
     } else {
       this.handleNotification(message);
-      this.vc.createEmbeddedView(this.template, { chatMessage: this.messageObj(message) });
-      this.scrollToBottom();
+
+      if (this.userBlocked && this.userBlocked.length > 0) {
+
+        if (!this.userBlocked.filter(blocked => blocked === message.from.user)[0]) {
+          this.vc.createEmbeddedView(this.template, { chatMessage: this.messageObj(message) });
+        }
+      } else {
+        this.vc.createEmbeddedView(this.template, { chatMessage: this.messageObj(message) });
+        this.scrollToBottom();
+      }
     }
 
   }

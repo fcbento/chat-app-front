@@ -17,15 +17,46 @@
             </a>
         </div>
 
-        <div *ngFor="let user of users">
+        <div *ngFor="let user of users; let i = index">
             <ul>
                 <li>
-                    <img class="user-img rounded-circle" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_10.jpg" alt="avatar" />
-                    
+                    <img class="user-img rounded-circle"
+                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_10.jpg" alt="avatar" />
+
                     <div class="about">
                         <div class="name"> {{user}}</div>
                         <div class="status">
                             <i class="fa fa-circle online "></i> online
+                            
+                            <i 
+                                class="fas fa-ban block" 
+                                *ngIf="user !== currentUser.user.name"
+                                (click)="blockUser(user)">
+                            </i>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <span>Blocked users</span>
+        <div *ngFor="let user of blockedUsers; let i = index">
+            <ul>
+                <li>
+                    <img class="user-img rounded-circle"
+                        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_10.jpg" alt="avatar" />
+
+                    <div class="about">
+                        <div class="name"> {{user}}</div>
+                        <div class="status">
+                            <i class="fa fa-circle online "></i> online
+                            
+                            <i 
+                                class="fas fa-thumbs-up block" 
+                                *ngIf="user !== currentUser.user.name"
+                                (click)="unblockUser(user)">
+                            </i>
                         </div>
                     </div>
                 </li>
