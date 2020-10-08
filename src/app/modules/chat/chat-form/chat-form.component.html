@@ -30,6 +30,21 @@
             </chat-modal>
 
             <chat-button 
+                *ngIf="!recording"
+                [buttonType]="'icon'" 
+                [buttonIconName]="'micon'"
+                (click)="initiateRecording()" > 
+            </chat-button>
+
+            <chat-button 
+                *ngIf="recording"
+                [buttonType]="'icon'" 
+                [buttonIconName]="'micoff'"
+                (click)="stopRecording()"> 
+            </chat-button>            
+
+
+            <chat-button 
                 [buttonType]="'icon'" 
                 [buttonIconName]="'send'"
                 (click)="onSendMessage()"> 

@@ -24,9 +24,13 @@
 
     <div class="row">
 
-      <span class="content-body" *ngIf="!chatMessage.isYoutube">
+      <span class="content-body" *ngIf="!chatMessage.isYoutube && !chatMessage.isAudio">
         {{chatMessage.text}}
       </span>
+
+      <audio controls="" *ngIf="chatMessage.isAudio">
+        <source [src]="sanitize(chatMessage.text)" type="audio/wav">
+      </audio>
 
     </div>
 

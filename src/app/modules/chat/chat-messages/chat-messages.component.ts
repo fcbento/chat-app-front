@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, AfterViewI
 import { ChatService } from '../chat.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import * as moment from '../../../../../node_modules/moment';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-chat-messages',
@@ -29,7 +30,8 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
 
   constructor(
     private chatService: ChatService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private domSanitizer: DomSanitizer
   ) { }
 
   ngOnInit(): void {
@@ -107,11 +109,18 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   }
 
   messageObj(message) {
+    console.log(message)
     return {
       from: message.from.user,
       createdAt: message.createdAt,
       text: message.text,
-      isYoutube: message.isYoutube
+      isYoutube: message.isYoutube,
+      isAudio: message.isAudio
     }
   }
+
+  sanitize(url: string) {
+    return this.domSanitizer.bypassSecurityTrustUrl(url);
+  }
+
 }
