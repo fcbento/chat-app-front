@@ -1,11 +1,22 @@
 .chat__footer__input{
+
     border:1px #b6b6b6 solid;
     width: 100%;
     padding: 9px;
     border-radius: 5px;
     font-size: 16px;
     margin-right: 10px;
+
     &:focus {
       outline-width: 0;
     }
-  }
+}
+
+form{
+  padding: 20px;
+}
+
+.recording{
+  color: rgb(255, 0, 0);
+  font-size: 12px;
+}

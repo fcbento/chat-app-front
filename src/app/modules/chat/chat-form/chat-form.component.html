@@ -41,9 +41,10 @@
                 [buttonType]="'icon'" 
                 [buttonIconName]="'micoff'"
                 (click)="stopRecording()"> 
-            </chat-button>            
+            </chat-button>
 
-
+            <span *ngIf="recording" class="recording">{{timeLeft}}s</span>   
+        
             <chat-button 
                 [buttonType]="'icon'" 
                 [buttonIconName]="'send'"

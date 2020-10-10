@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ChatService } from '../chat.service';
 import * as RecordRTC from 'recordrtc';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-chat-form',
@@ -17,6 +18,8 @@ export class ChatFormComponent implements OnInit {
   recording = false;
   url: any
   error: any;
+  counter;
+  timeLeft: number = 0;
 
   constructor(
     private chatService: ChatService,
@@ -24,8 +27,12 @@ export class ChatFormComponent implements OnInit {
   ) { }
 
   initiateRecording() {
+
     this.recording = true;
-    
+    this.timeLeft = 0
+    clearInterval(this.counter)
+    this.startTimer()
+
     let mediaConstraints = {
       video: false,
       audio: true
@@ -33,8 +40,8 @@ export class ChatFormComponent implements OnInit {
 
     navigator.mediaDevices
       .getUserMedia(mediaConstraints)
-      .then(this.successCallback.bind(this), 
-            this.errorCallback.bind(this));
+      .then(this.successCallback.bind(this),
+        this.errorCallback.bind(this));
 
   }
 
@@ -53,6 +60,7 @@ export class ChatFormComponent implements OnInit {
 
   stopRecording() {
     this.recording = false;
+    clearInterval(this.counter)
     this.record.stop(this.processRecording.bind(this));
   }
 
@@ -101,4 +109,17 @@ export class ChatFormComponent implements OnInit {
     this.activeModal = e;
   }
 
+  startTimer() {
+    this.counter = setInterval(() => {
+      if (this.timeLeft >= 0) {
+        this.timeLeft++;
+      } else {
+        this.timeLeft = 60;
+      }
+    }, 1000)
+  }
+
+  pauseTimer() {
+    clearInterval(this.counter);
+  }
 }
