@@ -7,38 +7,48 @@
 
 </div>
 
-<ng-template #template let-chatMessage='chatMessage'>
+<ng-template #template let-message='message'>
 
-  <div class="d-flex justify-content-start">
+  <div [ngClass]="isCurrentUser(message) && !message.isYoutube ? 'self' : ''">
 
-      <span class="message-from">
-        {{chatMessage.from !== user.name ? chatMessage.from + '  ' : user.name }}
-      </span>
+    <span class="message-from">
+      {{!isCurrentUser(message) ? message.from + '  ' : user.name }}
+    </span>
 
-      <span class="message-time">
-        {{moment(chatMessage.createdAt).format('h:mm a')}}
-      </span>
+    <span class="message-time">
+      {{moment(message.createdAt).format('h:mm a')}}
+    </span>
+
   </div>
 
-  <li class="message" [style.background]="user.name === chatMessage.from ? '#94C2ED' : '#86BB71'">
+  <ng-container *ngIf="!message.isYoutube && !message.isAudio">
 
-    <div class="row">
+    <li [ngClass]="isCurrentUser(message) ? 'message self self-color' : 'message other-color'">
+      <div class="row">
 
-      <span class="content-body" *ngIf="!chatMessage.isYoutube && !chatMessage.isAudio">
-        {{chatMessage.text}}
-      </span>
+        <span class="content-body">
+          {{message.text}}
+        </span>
 
-      <audio controls="" *ngIf="chatMessage.isAudio">
-        <source [src]="sanitize(chatMessage.text)" type="audio/wav">
-      </audio>
+      </div>
+    </li>
 
-    </div>
+  </ng-container>
 
-    <app-chat-message-youtube 
-      *ngIf="chatMessage.isYoutube" 
-      [youtubeLink]="chatMessage.text">
-    </app-chat-message-youtube>
+  <ng-container *ngIf="message.isYoutube">
 
-  </li>
+    <li class="message message-yt">
+      <app-chat-message-youtube *ngIf="message.isYoutube" [youtubeLink]="message.text"> </app-chat-message-youtube>
+    </li>
+
+  </ng-container>
+
+  <ng-container *ngIf="message.isAudio">
+
+    <audio controls="" [ngClass]="isCurrentUser(message) && message.isAudio ? 'self' : ''">
+      <source [src]="sanitize(message.text)" type="audio/wav">
+    </audio>
+
+  </ng-container>
 
 </ng-template>

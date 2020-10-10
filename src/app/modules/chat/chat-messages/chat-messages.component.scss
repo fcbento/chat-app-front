@@ -12,18 +12,6 @@
   color: lighten(#92959E, 8%);
   padding-left: 6px;
 }
-  
- .message {
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 6px;
-  font-size: 15px;
-
-  .content-body {
-    font-weight: 100;
-    color: #ffffff;
-  }
-}
 
 #messages {
   overflow:auto; 
@@ -42,4 +30,34 @@
 #messages::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
+}
+
+.message {
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  font-size: 15px;
+  width: 58%;
+  
+  .content-body {
+    font-weight: 100;
+    color: #ffffff;
+  }
+}
+
+.message-yt {
+  width: 100%;
+  background-color: black;
+}
+
+.self {
+  margin-left: 50%;
+}
+
+.self-color{
+  background-color: #94C2ED;
+}
+
+.other-color {
+  background-color: #86BB71;
 }

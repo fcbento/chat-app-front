@@ -15,6 +15,7 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   user: any
   moment = moment
   isYoutube: boolean = false;
+  isUser;
 
   @ViewChild('template')
   private template: TemplateRef<any>;
@@ -37,8 +38,6 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('currentUser'))
     this.user = this.user.user
-    this.scrollToBottom();
-
   }
 
   ngAfterViewChecked() {
@@ -57,7 +56,12 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
 
   }
 
+  isCurrentUser(message) {
+    return message.from === this.user.name
+  }
+  
   createMessageTemplate(message) {
+    this.isCurrentUser(message)
     if (message.text.includes('has joined') || message.text.includes('has left')) {
       this.handleNotification(message);
     } else {
@@ -66,14 +70,13 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
       if (this.userBlocked && this.userBlocked.length > 0) {
 
         if (!this.userBlocked.filter(blocked => blocked === message.from.user)[0]) {
-          this.vc.createEmbeddedView(this.template, { chatMessage: this.messageObj(message) });
+          this.vc.createEmbeddedView(this.template, { message: this.messageObj(message) });
         }
       } else {
-        this.vc.createEmbeddedView(this.template, { chatMessage: this.messageObj(message) });
+        this.vc.createEmbeddedView(this.template, { message: this.messageObj(message) });
         this.scrollToBottom();
       }
     }
-
   }
 
   scrollToBottom(): void {
@@ -109,7 +112,6 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   }
 
   messageObj(message) {
-    console.log(message)
     return {
       from: message.from.user,
       createdAt: message.createdAt,
