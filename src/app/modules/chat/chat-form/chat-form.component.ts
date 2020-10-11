@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ChatService } from '../chat.service';
 import * as RecordRTC from 'recordrtc';
 import { timer } from 'rxjs';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-chat-form',
@@ -20,6 +21,7 @@ export class ChatFormComponent implements OnInit {
   error: any;
   counter;
   timeLeft: number = 0;
+  audioFile: any;
 
   constructor(
     private chatService: ChatService,
@@ -65,6 +67,15 @@ export class ChatFormComponent implements OnInit {
   }
 
   processRecording(blob) {
+    this.audioFile = blob;
+    let reader = new FileReader();
+    reader.onload =  () => {
+      let dataUrl = reader.result;
+      let k = dataUrl.toString()
+      let base64 = k.split(',')[1];
+      this.audioFile = base64
+    };
+    reader.readAsDataURL(blob);
     this.url = URL.createObjectURL(blob);
     this.sendAudioMessage();
   }
@@ -102,7 +113,14 @@ export class ChatFormComponent implements OnInit {
   }
 
   sendAudioMessage() {
-    this.chatService.emit('createMessage', { text: this.url, isYoutube: false, isAudio: true })
+    this.chatService.emit('createMessage',
+      {
+        text: this.url,
+        isYoutube: false,
+        isAudio: true,
+        audioFile: this.audioFile
+      }
+    )
   }
 
   modalRef(e) {

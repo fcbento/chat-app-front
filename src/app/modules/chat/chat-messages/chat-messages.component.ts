@@ -3,7 +3,7 @@ import { ChatService } from '../chat.service';
 import { NotificationService } from '../../../shared/services/notification.service';
 import * as moment from '../../../../../node_modules/moment';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { environment } from '../../../../environments/environment'
 @Component({
   selector: 'app-chat-messages',
   templateUrl: './chat-messages.component.html',
@@ -59,7 +59,7 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   isCurrentUser(message) {
     return message.from === this.user.name
   }
-  
+
   createMessageTemplate(message) {
     this.isCurrentUser(message)
     if (message.text.includes('has joined') || message.text.includes('has left')) {
@@ -122,7 +122,8 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   }
 
   sanitize(url: string) {
-    return this.domSanitizer.bypassSecurityTrustUrl(url);
+    console.log(environment.SERVER + url)
+    return this.domSanitizer.bypassSecurityTrustUrl(environment.SERVER + url);
   }
 
 }
