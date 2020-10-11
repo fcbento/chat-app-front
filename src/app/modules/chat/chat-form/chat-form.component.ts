@@ -70,7 +70,7 @@ export class ChatFormComponent implements OnInit {
     this.audioFile = blob;
     let reader = new FileReader();
     reader.onload =  () => {
-      let dataUrl = reader.result;
+      var dataUrl = reader.result;
       let k = dataUrl.toString()
       let base64 = k.split(',')[1];
       this.audioFile = base64
