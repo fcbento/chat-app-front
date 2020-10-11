@@ -122,19 +122,7 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   }
 
   sanitize(url: string) {
-
-    let server = '';
-    
-    if(server === 'https://chat-back.azurewebsites.net/home/site/wwwroot') {
-      server = 'https://chat-back.azurewebsites.net'
-    }
-
-    if(server === 'https://chat-back.azurewebsites.net/home/site/wwwroot') {
-      server = 'https://chat-back.azurewebsites.net'
-    }
-
-    console.log(server)
-    return this.domSanitizer.bypassSecurityTrustUrl(server + url);
+    return this.domSanitizer.bypassSecurityTrustUrl(url);
   }
 
 }

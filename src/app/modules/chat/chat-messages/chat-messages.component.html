@@ -46,7 +46,7 @@
   <ng-container *ngIf="message.isAudio">
 
     <audio controls="" [ngClass]="isCurrentUser(message) && message.isAudio ? 'self' : ''">
-      <source [src]="sanitize(message.text)" type="audio/wav">
+      <source [src]="'https://chat-back.azurewebsites.net' + sanitize(message.text)" type="audio/wav">
     </audio>
 
   </ng-container>
