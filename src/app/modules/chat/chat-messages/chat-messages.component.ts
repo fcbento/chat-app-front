@@ -122,8 +122,8 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   }
 
   sanitize(url: string) {
-    console.log(url)
-    return environment.SERVER + url;
+    console.log(url.split('public'))
+    return environment.SERVER + url.split('public')[1];
   }
 
 }
