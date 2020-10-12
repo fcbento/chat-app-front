@@ -122,7 +122,7 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
   }
 
   sanitize(url: string) {
-    return this.domSanitizer.bypassSecurityTrustUrl(url);
+    return environment.SERVER + url;
   }
 
 }
