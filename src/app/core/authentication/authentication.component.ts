@@ -16,6 +16,7 @@ export class AuthenticationComponent implements OnInit {
   formType: boolean = true
   titleType: any
   socialButtons: any[] = []
+  center: string = 'h-100 d-flex justify-content-center align-items-center';
 
   constructor
     (
@@ -41,12 +42,12 @@ export class AuthenticationComponent implements OnInit {
 
   changeForm(formType) {
 
-    let item = this.el.nativeElement.querySelector('.container-auth')
+    // let item = this.el.nativeElement.querySelector('.container-auth')
 
-    if (formType)
-      item.classList.add('sign-up-mode')
-    else
-      item.classList.remove('sign-up-mode')
+    // if (formType)
+    //   item.classList.add('sign-up-mode')
+    // else
+    //   item.classList.remove('sign-up-mode')
 
   }
 

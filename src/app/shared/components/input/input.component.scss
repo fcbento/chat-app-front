@@ -1,47 +1,46 @@
 .input-field {
-  background-color: #f0f0f0;
-  margin: 10px 0;
-  height: 55px;
-  border-radius: 55px;
-  padding: 0 2.4rem;
-  position: relative;
-  max-width: 480px;
-  width: 100%;
 
   input {
     background: none;
     outline: none;
-    border: none;
+    border: 1px solid rgb(201, 200, 200);
     line-height: 1;
-    font-weight: 600;
-    font-size: 1.1rem;
-    color: #333;
+    font-weight: 300;
+    font-size: 1rem;
+    color: white;
     width: 300px;
     text-align: left;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;;
   }
-
+  
   i {
     text-align: center;
     line-height: 55px;
-    color: #acacac;
+    color: white;
     transition: 0.5s;
     font-size: 1.1rem;
     margin: 0 10px;
   }
 
   ::-webkit-input-placeholder {
+    color: white;
     text-transform: capitalize;
   }
   
   :-moz-placeholder { 
+    color: white;
     text-transform: capitalize;
   }
   
   ::-moz-placeholder {  
+    color: white;
     text-transform: capitalize;
   }
   
   :-ms-input-placeholder { 
+    color: white;
     text-transform: capitalize;
   }
 
