@@ -21,11 +21,11 @@
 
 ## Examples
 Sign In
-<img alt="example" src=".images/1.PNG">
-<img alt="example" src=".images/2.PNG">
-<img alt="example" src=".images/3.PNG">
-<img alt="example" src=".images/4.PNG">
-<img alt="example" src=".images/5.PNG">
+<img alt="example" src="1.PNG">
+<img alt="example" src="2.PNG">
+<img alt="example" src="3.PNG">
+<img alt="example" src="4.PNG">
+<img alt="example" src="5.PNG">
 
 ## Install
 
