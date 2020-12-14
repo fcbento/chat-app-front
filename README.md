@@ -1,27 +1,61 @@
-# Test
+<h1 align="center">Welcome to chat-front-angular 👋</h1>
+<p>
+  <a href="https://www.npmjs.com/package/svelte-app" target="_blank">
+    <img alt="Version" src="https://img.shields.io/npm/v/svelte-app.svg">
+  </a>
+</p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0.
+> Chat app using Angular.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Features
 
-## Code scaffolding
+```sh
+- Sign In / Sign Up
+- Rooms
+- Chat audios (enable / disable)
+- Block/unblock users
+- Record and play audios
+- Allow embeded youtube video on messages
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Examples
+Sign In
+<img alt="example" src=".images/1.PNG">
+<img alt="example" src=".images/2.PNG">
+<img alt="example" src=".images/3.PNG">
+<img alt="example" src=".images/4.PNG">
+<img alt="example" src=".images/5.PNG">
 
-## Build
+## Install
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```sh
+npm install
+```
 
-## Running unit tests
+## Usage
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```sh
+ng serve
+```
 
-## Running end-to-end tests
+## Run tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```sh
+npm test (work in progress)
+```
 
-## Further help
+## Author
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+👤 **Felipe C. Bento**
+
+* Website: linkedin.com/in/felipe-bento
+* Github: [@fcbento](https://github.com/fcbento)
+* LinkedIn: [@felipe-bento](https://linkedin.com/in/felipe-bento)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
