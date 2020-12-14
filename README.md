@@ -20,7 +20,6 @@
 ```
 
 ## Examples
-Sign In
 <img alt="example" width="800" src="1.PNG">
 <img alt="example" width="800" src="2.PNG">
 <img alt="example" width="800" src="3.PNG">
