@@ -32,23 +32,11 @@ export class AuthenticationComponent implements OnInit {
   }
 
   changeFormType() {
-    this.changeForm(this.formType)
     this.authentication.name = ''
     this.authentication.password = ''
     this.authentication.email = ''
     this.formType = !this.formType
     this.formType ? this.titleType = 'Sign In' : this.titleType = 'Sign Up'
-  }
-
-  changeForm(formType) {
-
-    // let item = this.el.nativeElement.querySelector('.container-auth')
-
-    // if (formType)
-    //   item.classList.add('sign-up-mode')
-    // else
-    //   item.classList.remove('sign-up-mode')
-
   }
 
   onAuth(): void {
@@ -57,6 +45,10 @@ export class AuthenticationComponent implements OnInit {
         this.service.setCurrentUserValue(data)
         if (this.formType)
           this.router.navigateByUrl('/room')
+        else {
+          this.notificationService.success('User created');
+          this.formType = !this.formType;
+        }
       }, err => {
         this.notificationService.error(err.error.message);
       })

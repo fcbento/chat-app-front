@@ -8,8 +8,8 @@ export class NotificationService {
 
   constructor(private toastr: ToastrService) { }
 
-  success() {
-    this.toastr.success('Hello world!', 'Toastr fun!')
+  success(message: string) {
+    this.toastr.success(message, 'OK')
   }
 
   userOn(name: string) {
