@@ -8,3 +8,10 @@ hr {
 html, .container-fluid{
     background-color: #3a3a3a;
 }
+
+ul{
+    li{
+        list-style-type: none;
+        text-align: left;
+    }
+}

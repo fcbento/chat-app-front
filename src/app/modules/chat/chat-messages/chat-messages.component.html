@@ -10,18 +10,36 @@
 <ng-template #template let-message='message'>
 
   <div [ngClass]="isCurrentUser(message) && !message.isYoutube ? 'self' : ''">
+    <div class="row messages">
 
-    <span class="message-from">
-      {{!isCurrentUser(message) ? message.from + '  ' : user.name }}
-    </span>
+      <div class="col-avatar">
+        <img class="avatar"
+          src="https://cdn.discordapp.com/avatars/231489103428845568/9100a11f4f29b976c525ba3f3b728117.png?size=128"
+          alt="">
+      </div>
 
-    <span class="message-time">
-      {{moment(message.createdAt).format('h:mm a')}}
-    </span>
+      <div class="col-xs-11">
+        <span class="message-from">
+          {{!isCurrentUser(message) ? message.from + ' ' : user.name }}
+        </span>
+
+        <time class="message-time">
+          {{moment(message.createdAt).fromNow()}}
+        </time>
+
+        <div class="row start-xs">
+          <div class="col">
+            <span class="content-body">
+              {{message.text}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 
-  <ng-container *ngIf="!message.isYoutube && !message.isAudio">
+  <!-- <ng-container *ngIf="!message.isYoutube && !message.isAudio">
 
     <li [ngClass]="isCurrentUser(message) ? 'message self self-color' : 'message other-color'">
       <div class="row">
@@ -33,7 +51,7 @@
       </div>
     </li>
 
-  </ng-container>
+  </ng-container> -->
 
   <ng-container *ngIf="message.isYoutube">
 
@@ -52,3 +70,4 @@
   </ng-container>
 
 </ng-template>
+

@@ -5,11 +5,21 @@
 }
 
 .message-from{
-  color: lighten(#252525, 8%);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.375rem;
+  color: #fff;
+  display: inline;
+  vertical-align: baseline;
+  position: relative;
+  overflow: hidden;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
 }
 
 .message-time{
-  color: lighten(#92959E, 8%);
+  font-size: 0.75rem;
+  color: #72767d;
   padding-left: 6px;
 }
 
@@ -33,16 +43,25 @@
 }
 
 .message {
-  padding: 20px;
+  padding: 10px;
   margin-bottom: 15px;
   border-radius: 6px;
   font-size: 15px;
   width: 58%;
-  
-  .content-body {
-    font-weight: 100;
-    color: #ffffff;
-  }
+}
+
+.content-body {
+  font-size: 1rem;
+  line-height: 1.375rem;
+  white-space: pre-wrap;
+  white-space: break-spaces;
+  word-wrap: break-word;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  color: #dcddde;
+  font-weight: 400;
 }
 
 .message-yt {
@@ -50,14 +69,23 @@
   background-color: black;
 }
 
-.self {
-  margin-left: 50%;
+.avatar{
+  position: absolute;
+  left: 16px;
+  margin-top: calc(4px - .125rem);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-.self-color{
-  background-color: #94C2ED;
+.col-avatar{
+  width: 4%;
+  margin-right: 15px;
 }
 
-.other-color {
-  background-color: #86BB71;
+.messages{
+  margin-top: 1.0625rem;
+  margin-bottom: 10px;
 }

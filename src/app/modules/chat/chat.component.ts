@@ -11,7 +11,8 @@ import { ChatService } from './chat.service';
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit, OnDestroy {
-  @Input() room: any
+
+  // @Input() room: any
   user: any
   disable: boolean;
   userBlocked: any;
@@ -30,7 +31,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   onConnect() {
     this.chatService.on('connect');
-    this.chatService.emit('join', { user: this.user, room: this.room.name });
+    this.chatService.emit('join', { user: this.user, room: 'this.room.name' });
   }
 
   disableSounds(e) {

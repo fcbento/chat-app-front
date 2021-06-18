@@ -5,44 +5,44 @@ import { map } from 'rxjs/operators';
 export class GenericHttpService<T> {
     constructor(
         private httpClient: HttpClient,
-        private url: string,
-        private endpoint: string
+        private url: string
     ) { }
 
-    public create(item: T): Observable<T> {
+    public create(item: T, endpoint: T): Observable<T> {
+        console.log(item, endpoint)
         return this.httpClient
-            .post<T>(`${this.url}/${this.endpoint}`, item)
+            .post<T>(`${this.url}/${endpoint}`, item)
             .pipe(map(data => data));
     }
 
-    public update(item: T, id: any): Observable<T> {
+    public update(item: T, id: any, endpoint: T): Observable<T> {
         return this.httpClient
-            .put<T>(`${this.url}/${this.endpoint}/${id}`, item)
+            .put<T>(`${this.url}/${endpoint}/${id}`, item)
             .pipe(map(data => data));
     }
 
-    public getById(id: number): Observable<T> {
+    public getById(id: string, endpoint: T): Observable<T> {
         return this.httpClient
-            .get(`${this.url}/${this.endpoint}/${id}`)
+            .get(`${this.url}/${endpoint}/${id}`)
             .pipe(map((data: any) => data));
     }
 
-    public getByQuery(name: any): Observable<T> {
+    public getByQuery(name: any, endpoint: T): Observable<T> {
         return this.httpClient
-            .get(`${this.url}/${this.endpoint}/${name}`)
+            .get(`${this.url}/${endpoint}/${name}`)
             .pipe(map((data: any) => data));
     }
 
 
-    public getAll(): Observable<T[]> {
+    public getAll(endpoint: T): Observable<T[]> {
         return this.httpClient
-            .get(`${this.url}/${this.endpoint}`)
+            .get(`${this.url}/${endpoint}`)
             .pipe(map((data: any) => data));
     }
 
-    public deleteById(id: number) {
+    public deleteById(id: number, endpoint: T) {
         return this.httpClient
-            .delete(`${this.url}/${this.endpoint}/${id}`)
+            .delete(`${this.url}/${endpoint}/${id}`)
             .pipe(map(data => data));
     }
 

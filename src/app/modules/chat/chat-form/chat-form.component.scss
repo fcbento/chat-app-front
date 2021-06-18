@@ -1,22 +1,32 @@
 .chat__footer__input{
-
-    border:1px #b6b6b6 solid;
+    background-color: #40444b;
+    border:1px #40444b solid;
     width: 100%;
-    padding: 9px;
-    border-radius: 5px;
+    padding-right: 9px;
+    padding-left: 9px;
+    padding-top: 9px;
+    padding-bottom: 9px;
     font-size: 16px;
     margin-right: 10px;
-
+    resize: none;
+    height: 40px;
+    overflow: hidden;
+    color: #fff;
     &:focus {
       outline-width: 0;
     }
 }
 
-form{
-  padding: 20px;
+.recording{
+  color: #fa4242;
+  font-size: 12px;
 }
 
-.recording{
-  color: rgb(255, 0, 0);
-  font-size: 12px;
+
+.text-input{
+  background-color: #40444b;
+}
+
+.buttons{
+  align-self: center;
 }

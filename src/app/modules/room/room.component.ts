@@ -33,7 +33,7 @@ export class RoomComponent implements OnInit {
   }
 
   getLanguageRooms() {
-    this.roomService.getAll()
+    this.roomService.getAll('room/countries')
       .subscribe(data => {
         this.rooms = data
         this.getCountriesFlag()

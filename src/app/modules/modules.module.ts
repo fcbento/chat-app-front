@@ -5,9 +5,13 @@ import { ModulesRoutingModule } from './modules-routing.module';
 import { ChatComponent } from './chat/chat.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { CommunitiesChatComponent } from './communities-chat/communities-chat.component';
+import { CommunitiesComponent } from './communities-chat/communities/communities.component';
+import { ChannelsComponent } from './communities-chat/channels/channels.component';
+import { UsersComponent } from './communities-chat/users/users.component';
 
 @NgModule({
-  declarations: [RoomComponent],
+  declarations: [RoomComponent, CommunitiesChatComponent, CommunitiesComponent,ChatComponent, ChannelsComponent, UsersComponent],
   imports: [
     CommonModule,
     ModulesRoutingModule,

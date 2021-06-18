@@ -1,0 +1,74 @@
+.channels-heading {
+    margin-top: 10px;
+}
+
+.channels-title{
+    background-color: transparent;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+img{
+    width: 40%;
+}
+
+hr{
+    background-color: #FFFFFF0F;
+    height: 2px;
+    width: 100%;
+    border-radius: 1px;
+}
+
+.title{
+    font-size: 15px;
+    color: #fff;
+    font-weight: bold;
+}
+
+li {
+
+
+    position: relative;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 8px;
+    margin-left: 8px;
+    border-radius: 4px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    span{
+        color: #fff;
+        padding: 6px 0;
+        font-size: 16px;
+        line-height: 20px;
+        font-weight: 500;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        white-space: normal;
+        cursor: pointer;
+        
+    }
+
+    &:hover {
+        background-color: #35373d;
+    }
+}
+
+.icon {
+    color: #72767d;
+    margin-right: 10px;
+}
+
+.members{
+    color: #8e9297;
+}

@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="row start-xs">
+
+        <app-communities
+            [ngClass]="communities.length > 100 ? 'col-xs-1 communities scroll' : 'col-xs-1 communities'"
+            [user]="user"
+            [communities]="communities">
+        </app-communities>
+      
+        <app-channels 
+            [ngClass]="communities.length > 30 ? 'col-xs-2 channels scroll' : 'col-xs-2 channels'" 
+            [channels]="communities">
+        </app-channels>
+
+        <app-chat 
+            class="col-xs-8 chat">
+        </app-chat> 
+
+        <app-users
+            [ngClass]="communities.length > 30 ? 'col-xs-1 info scroll' : 'col-xs-1 info'" 
+            [users]="communities">
+        </app-users>
+
+    </div>
+</div>

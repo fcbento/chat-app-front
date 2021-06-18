@@ -44,7 +44,7 @@ export class AuthenticationComponent implements OnInit {
       .subscribe(data => {
         this.service.setCurrentUserValue(data)
         if (this.formType)
-          this.router.navigateByUrl('/room')
+          this.router.navigateByUrl('/chat')
         else {
           this.notificationService.success('User created');
           this.formType = !this.formType;

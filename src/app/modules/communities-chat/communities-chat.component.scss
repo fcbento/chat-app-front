@@ -1,0 +1,30 @@
+.scroll{
+    overflow-y:scroll; 
+    position:relative;
+    height: 910px;
+}
+
+.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.communities{
+    background-color: #202225;
+    height: 100vh;
+    width: 6%;
+    text-align: left;
+}
+
+.channels{
+    background-color: #2f3136;
+    height: 100vh;
+}
+
+.info{
+    background-color: #2f3136;
+}
+
+.chat{
+    background-color: #36393f;
+}

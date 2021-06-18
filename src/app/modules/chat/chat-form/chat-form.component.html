@@ -1,57 +1,62 @@
-<div class="row">
-    <div class="col-12">
+<div class="row text-input">
+
+    <div class="col-10">
         <form (ngSubmit)="onSendMessage()">
 
             <textarea 
                 class="chat__footer__input" 
                 name="message" 
                 type="text" 
-                id="txtarea"
-                placeholder="Write a message"
-                [(ngModel)]="message"
+                id="txtarea" 
+                placeholder="Message"
+                [(ngModel)]="message" 
                 (keydown)="triggerFunction($event)">
             </textarea>
-
-            <chat-button 
-                [buttonType]="'icon'" 
-                [buttonIconName]="'image'"> 
-            </chat-button>
-
-            <ng-template #youtubeLink>
-                <app-youtube-link (youtubeLink)="getLink($event)"></app-youtube-link>
-            </ng-template>
-
-            <chat-modal
-                [modalType]="'icon'"
-                [modalIconName]="'video'"
-                [modalContent]="youtubeLink"
-                [modalSize]="'sm'"
-                (modalRef)="modalRef($event)">
-            </chat-modal>
-
-            <chat-button 
-                *ngIf="!recording"
-                [buttonType]="'icon'" 
-                [buttonIconName]="'micon'"
-                (click)="initiateRecording()" > 
-            </chat-button>
-
-            <chat-button 
-                *ngIf="recording"
-                [buttonType]="'icon'" 
-                [buttonIconName]="'micoff'"
-                (click)="stopRecording()"> 
-            </chat-button>
-
-            <span *ngIf="recording" class="recording">{{timeLeft}}s</span>   
-        
-            <chat-button 
-                [buttonType]="'icon'" 
-                [buttonIconName]="'send'"
-                (click)="onSendMessage()"> 
-            </chat-button>
-
         </form>
 
+    </div>
+    
+    <div class="col-2 buttons">
+
+        <chat-button 
+            [buttonType]="'icon'" 
+            [buttonIconName]="'image'">
+        </chat-button>
+
+        <ng-template #youtubeLink>
+            <app-youtube-link 
+                (youtubeLink)="getLink($event)">
+            </app-youtube-link>
+        </ng-template>
+
+        <chat-modal 
+            [modalType]="'icon'" 
+            [modalIconName]="'video'" 
+            [modalContent]="youtubeLink" 
+            [modalSize]="'sm'"
+            (modalRef)="modalRef($event)">
+        </chat-modal>
+
+        <chat-button 
+            *ngIf="!recording" 
+            [buttonType]="'icon'" 
+            [buttonIconName]="'micon'" 
+            (click)="initiateRecording()">
+        </chat-button>
+
+        <chat-button 
+            *ngIf="recording" 
+            [buttonType]="'icon'" 
+            [buttonIconName]="'micoff'" 
+            (click)="stopRecording()">
+        </chat-button>
+
+        <span *ngIf="recording" class="recording">{{timeLeft}}s</span>
+
+        <chat-button 
+            [buttonType]="'icon'" 
+            [buttonIconName]="'send'" 
+            (click)="onSendMessage()">
+        </chat-button>
     </div>
 </div>
