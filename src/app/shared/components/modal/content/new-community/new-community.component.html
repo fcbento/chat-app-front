@@ -1,0 +1,29 @@
+<div class="row center-xs" style="margin-top: 20px;">  
+    <div class="col">
+
+        <chat-input
+            [inputType]="'text'"
+            [inputName]="'Name'"
+            [inputIcon]="'fas fa-address-card'"
+            [inputIconColor]="'black'"
+            [inputColor]="'black'"
+            (formValues)="getFormValues($event)">
+        </chat-input>
+ 
+        <chat-input
+            [inputType]="'text'"
+            [inputName]="'Logo URL'"
+            [inputIcon]="'fas fa-image'"
+            [inputIconColor]="'black'"
+            [inputColor]="'black'"
+            (formValues)="getFormValues($event)">
+        </chat-input>
+
+        <chat-button 
+            [buttonType]="'default'" 
+            [buttonColor]="'blue'" 
+            [buttonName]="'create'"
+            (click)="createNewCommunity()">
+        </chat-button>
+    </div>
+</div>

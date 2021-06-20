@@ -11,6 +11,8 @@ export class InputComponent implements OnInit {
   @Input() inputType: string;
   @Input() inputName: string;
   @Input() inputIcon: string;
+  @Input() inputIconColor: string;
+  @Input() inputColor: string;
   @Output() formValues = new EventEmitter();
 
   value: any;

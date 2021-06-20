@@ -7,7 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ChannelsComponent implements OnInit {
 
-  @Input() channels: any = [];
+  @Input() channels: any;
 
   constructor() { }
 

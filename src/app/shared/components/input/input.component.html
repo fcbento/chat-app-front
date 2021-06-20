@@ -1,7 +1,11 @@
 <!-- <form class="form" [formGroup]="form"> -->
     <div class="input-field">
-        <i *ngIf="inputIcon" [ngClass]="inputIcon"></i>
+        <i 
+            *ngIf="inputIcon" 
+            [ngClass]="inputIcon"
+            [ngStyle]="{'color' : inputIconColor}"></i>
         <input 
+            [ngStyle]="{'color' : inputColor, 'placeholder': inputColor}"
             [type]="inputType" 
             [placeholder]="inputName" 
             (change)="sendFormValue($event)">

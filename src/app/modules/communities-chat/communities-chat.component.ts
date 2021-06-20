@@ -10,6 +10,7 @@ export class CommunitiesChatComponent implements OnInit {
 
   user: any
   communities: any = []
+  communitySelected: any;
 
   constructor(
     private communityService: CommunitiesService
@@ -31,4 +32,7 @@ export class CommunitiesChatComponent implements OnInit {
     })
   }
 
+  selectCommunity(e){
+    this.communitySelected = e;
+  }
 }

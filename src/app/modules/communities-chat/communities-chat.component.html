@@ -4,12 +4,14 @@
         <app-communities
             [ngClass]="communities.length > 100 ? 'col-xs-1 communities scroll' : 'col-xs-1 communities'"
             [user]="user"
-            [communities]="communities">
+            [communities]="communities"
+            (selectCommunity)="selectCommunity($event)">
         </app-communities>
       
         <app-channels 
+            *ngIf="communitySelected"
             [ngClass]="communities.length > 30 ? 'col-xs-2 channels scroll' : 'col-xs-2 channels'" 
-            [channels]="communities">
+            [channels]="communitySelected">
         </app-channels>
 
         <app-chat 
