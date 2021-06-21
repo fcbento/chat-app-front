@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoaderService } from '../../core/services/loader.service';
 import { CommunitiesService } from './communities.service';
 
 @Component({
@@ -11,14 +12,21 @@ export class CommunitiesChatComponent implements OnInit {
   user: any
   communities: any = []
   communitySelected: any;
+  currentChannel: any;
+  loader: boolean = false;
 
   constructor(
-    private communityService: CommunitiesService
+    private communityService: CommunitiesService,
+    private loaderService: LoaderService
   ) { }
 
   ngOnInit(): void {
     this.getUser();
     this.getCommunitiesByUser();
+    this.loader = true;
+    setTimeout(() =>{ 
+      this.loader = false;
+    }, 2000)
   }
 
   getUser() {
@@ -34,5 +42,9 @@ export class CommunitiesChatComponent implements OnInit {
 
   selectCommunity(e){
     this.communitySelected = e;
+  }
+
+  getCurrentChannel(e){
+      this.currentChannel = e.name;
   }
 }

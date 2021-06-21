@@ -1,21 +1,26 @@
-<div class="chat">
+<!-- <div *ngFor="let channel of communities.channels">
+  <div *ngIf="channel.name === channelSelected"> -->
+    <div class="chat">
 
-  <!-- <div class="sidebar">
-    <app-chat-users 
-      [room]="room" 
-      (disableSound)="disableSounds($event)"
-      (blockedUser)="blockUser($event)">
-    </app-chat-users>
-  </div> -->
+      <!-- <div class="sidebar">
+        <app-chat-users 
+          [room]="channelSelected" 
+          (disableSound)="disableSounds($event)"
+          (blockedUser)="blockUser($event)">
+        </app-chat-users>
+      </div> -->
 
-  <div class="main">
+      <div class="main">
+        <h1>Channel : {{channelSelected}}</h1>
+        <div class="messages">
+          <app-chat-messages [disableSounds]="disable" [userBlocked]="userBlocked"></app-chat-messages>
+        </div>
 
-    <div class="messages">
-      <app-chat-messages [disableSounds]="disable" [userBlocked]="userBlocked"></app-chat-messages>
+        <app-chat-form></app-chat-form>
+
+      </div>
+
     </div>
 
-    <app-chat-form></app-chat-form>
-
-  </div>
-
-</div>
+  <!-- </div>
+</div> -->

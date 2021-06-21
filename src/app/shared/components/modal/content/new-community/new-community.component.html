@@ -11,6 +11,7 @@
         </chat-input>
  
         <chat-input
+            *ngIf="type !== 'channel'"
             [inputType]="'text'"
             [inputName]="'Logo URL'"
             [inputIcon]="'fas fa-image'"

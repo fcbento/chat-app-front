@@ -9,7 +9,6 @@ export class GenericHttpService<T> {
     ) { }
 
     public create(item: T, endpoint: T): Observable<T> {
-        console.log(item, endpoint)
         return this.httpClient
             .post<T>(`${this.url}/${endpoint}`, item)
             .pipe(map(data => data));

@@ -53,7 +53,7 @@ export class ChatUsersComponent implements OnInit, AfterViewInit {
 
   onUpdateUserList() {
     this.chatService.on('updateUserList').subscribe(users => {
-      this.users = users
+      this.users = users;
     })
   }
 

@@ -9,6 +9,8 @@ import { CommunitiesService } from '../../../../../modules/communities-chat/comm
 export class NewCommunityComponent implements OnInit {
 
   @Input() user: any;
+  @Input() type: any;
+  @Input() communities: any;
 
   newCommunity: any = {};
 
@@ -29,14 +31,33 @@ export class NewCommunityComponent implements OnInit {
 
   }
 
-  createNewCommunity(){
+  createNewCommunity() {
+
     const community = {
       owner: this.user,
       name: this.newCommunity.name,
       logo: this.newCommunity.logo
     }
+
+    const channel = {
+      channel: this.newCommunity.name
+    }
+
+    if (this.type == 'channel') {
+      this.saveNewChannel(channel);
+    } else {
+      this.saveNewCommunity(community);
+    }
+
+  }
+
+  saveNewCommunity(community) {
     this.communityService.create(community, 'communities').subscribe(data => {
-      console.log(data);
+    })
+  }
+
+  saveNewChannel(channel) {
+    this.communityService.update(channel, this.communities._id, 'addchannel').subscribe(data => {
     })
   }
 

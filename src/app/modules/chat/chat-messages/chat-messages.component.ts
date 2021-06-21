@@ -28,6 +28,7 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
 
   @Input() disableSounds: boolean;
   @Input() userBlocked: any = [];
+  @Input() from: any;
 
   constructor(
     private chatService: ChatService,
@@ -37,7 +38,7 @@ export class ChatMessagesComponent implements OnInit, AfterViewInit, AfterViewCh
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('currentUser'))
-    this.user = this.user.user
+    this.user = this.user.user;
   }
 
   ngAfterViewChecked() {

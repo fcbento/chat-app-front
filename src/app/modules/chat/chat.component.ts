@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, OnDestroy, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from '@angular/core';
 import * as moment from 'moment';
 import { NotificationService } from '../../shared/services/notification.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -10,28 +10,43 @@ import { ChatService } from './chat.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit, OnDestroy, OnChanges {
 
-  // @Input() room: any
+  @Input() channelSelected: any;
+  @Input() communities: any;
+
+  users: any = [];
+
   user: any
   disable: boolean;
   userBlocked: any;
+  isChanged = false;
+  j: number;
 
   constructor(
-    private notification: NotificationService,
-    private loaderService: LoaderService,
     private chatService: ChatService) {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.user = JSON.parse(localStorage.getItem('currentUser')) || {}
+    this.user = this.user.user || {}
+    if (changes.channelSelected.firstChange) {
+      this.channelSelected = changes.channelSelected.currentValue;
+    } else {
+      localStorage.setItem('channelSelected',  JSON.stringify(this.channelSelected));
+      this.chatService.emit('leaveRoom', null);
+      window.location.reload();
+    }
   }
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('currentUser')) || {}
     this.user = this.user.user || {}
-    this.onConnect()
+    this.onConnect();
   }
-
   onConnect() {
     this.chatService.on('connect');
-    this.chatService.emit('join', { user: this.user, room: 'this.room.name' });
+    this.chatService.emit('join', { user: this.user, room: this.channelSelected });
   }
 
   disableSounds(e) {

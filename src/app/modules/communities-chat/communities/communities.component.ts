@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterContentChecked, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommunitiesService } from '../communities.service';
 
 @Component({
@@ -6,22 +6,29 @@ import { CommunitiesService } from '../communities.service';
   templateUrl: './communities.component.html',
   styleUrls: ['./communities.component.scss']
 })
-export class CommunitiesComponent implements OnInit {
+export class CommunitiesComponent implements OnInit, AfterViewInit {
 
   @Input() communities: any = [];
   @Input() user: any;
   @Output() selectCommunity = new EventEmitter();
   activeModal: any;
-  
-  constructor(private communityService: CommunitiesService) { }
+
+  constructor(private communityService: CommunitiesService, private cdr: ChangeDetectorRef) { }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      
+      this.changeCommunity(this.communities[0]);
+
+      this.cdr.detectChanges();
+    }, 1000)
+  }
 
   ngOnInit(): void {
-    console.log(this.communities)
   }
 
   addNewCommunity() {
     this.communityService.create({ name: 'JavaScript', owner: this.user }, 'communities').subscribe((data) => {
-      console.log(data)
     })
   }
 
