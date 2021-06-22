@@ -1,4 +1,5 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AuthenticationService } from '../../../core/services/authentication.service';
 
 @Component({
   selector: 'app-channels',
@@ -12,12 +13,12 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
 
   activeModal: any;
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef, public auth: AuthenticationService) { }
 
   ngAfterViewInit() {
     setTimeout(() => {
       if (localStorage.getItem('channelSelected')) {
-        this.getCurrentChannel({name: JSON.parse(localStorage.getItem('channelSelected'))});
+        this.getCurrentChannel({ name: JSON.parse(localStorage.getItem('channelSelected')) });
       } else {
         this.getCurrentChannel(this.channels.channels[0])
         this.cdr.detectChanges();
@@ -27,7 +28,8 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
+    this.getCurrentUser();
+    this.checkCommunityOwner();
   }
 
   modalRef(e) {
@@ -36,6 +38,21 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
 
   getCurrentChannel(cuurentChannel) {
     this.sendCurrentChannel.emit(cuurentChannel);
+  }
+
+  getCurrentUser(){
+   return this.auth.currentUserValue['user'].name;
+  }
+
+  checkCommunityOwner() {
+    
+    let isSame = false;
+
+    if(this.getCurrentUser() === this.channels.owner.name) {
+      isSame = true;
+    }
+
+    return isSame;
   }
 
 }
