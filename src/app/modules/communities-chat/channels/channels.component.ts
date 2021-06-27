@@ -57,8 +57,7 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   }
 
   checkStatusMember() {
-    const user = this.channels.members.filter(item => item.user.name === this.getCurrentUser());
-    console.log(user)
+    const user = this.channels.members.filter(item =>  item.user && item.user.name === this.getCurrentUser());
   }
 
 }

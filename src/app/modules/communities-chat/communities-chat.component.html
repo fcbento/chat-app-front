@@ -1,6 +1,6 @@
 <div class="overlay" *ngIf="loader">
     <div class="spinner">
-        <div class="spinner-border text-primary" role="status"  style="width: 5rem; height: 5rem;">
+        <div class="spinner-border text-primary" role="status" style="width: 5rem; height: 5rem;">
             <span class="sr-only">Loading...</span>
           </div>
     </div>
@@ -11,7 +11,7 @@
 
         <app-communities
             *ngIf="communities"
-            [ngClass]="communities.length > 100 ? 'col-xs-1 communities scroll' : 'col-xs-1 communities'"
+            [ngClass]="checkWhenToShowScroll(1, 'col-xs-1', 'communities')"
             [user]="user"
             [communities]="communities"
             (selectCommunity)="selectCommunity($event)">
@@ -19,7 +19,7 @@
       
         <app-channels 
             *ngIf="communitySelected"
-            [ngClass]="communities.length > 30 ? 'col-xs-2 channels scroll' : 'col-xs-2 channels'" 
+            [ngClass]="checkWhenToShowScroll(30, 'col-xs-2', 'channels')" 
             [channels]="communitySelected"
             (sendCurrentChannel)="getCurrentChannel($event)">
         </app-channels>
@@ -32,7 +32,7 @@
         </app-chat> 
 
         <app-users
-            [ngClass]="communities.length > 30 ? 'col-xs-1 info scroll' : 'col-xs-1 info'" 
+            [ngClass]="checkWhenToShowScroll(30, 'col-xs-1', 'info')" 
             [users]="communities.members">
         </app-users>
 

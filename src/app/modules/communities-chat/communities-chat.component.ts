@@ -16,17 +16,13 @@ export class CommunitiesChatComponent implements OnInit {
   loader: boolean = false;
 
   constructor(
-    private communityService: CommunitiesService,
-    private loaderService: LoaderService
+    private communityService: CommunitiesService
   ) { }
 
   ngOnInit(): void {
     this.getUser();
     this.getCommunitiesByUser();
-    this.loader = true;
-    setTimeout(() =>{ 
-      this.loader = false;
-    }, 2000)
+    this.loadSpinner();
   }
 
   getUser() {
@@ -37,15 +33,36 @@ export class CommunitiesChatComponent implements OnInit {
   getCommunitiesByUser() {
     this.communityService.getById(this.user._id, 'communitybymember').subscribe((data) => {
       this.communities = data;
-      console.log(this.communities)
     })
   }
 
-  selectCommunity(e){
+  selectCommunity(e: string) {
     this.communitySelected = e;
   }
 
-  getCurrentChannel(e){
-      this.currentChannel = e.name;
+  getCurrentChannel(e: HTMLObjectElement) {
+    this.currentChannel = e.name;
   }
+
+  checkWhenToShowScroll(length: number, col: string, className: string): string {
+
+    let scrollClass: string;
+
+    if (this.communities.length > length) {
+      scrollClass = `${col} ${className} scroll`;
+    } else {
+      scrollClass = `${col} ${className}`;
+    }
+
+    return scrollClass;
+
+  }
+
+  loadSpinner() {
+    this.loader = true;
+    setTimeout(() => {
+      this.loader = false;
+    }, 2000)
+  }
+  
 }
