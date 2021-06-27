@@ -28,12 +28,14 @@
             *ngIf="currentChannel && communitySelected"
             class="col-xs-8 chat"
             [communities]="communitySelected"
-            [channelSelected]="currentChannel">
+            [channelSelected]="currentChannel"
+            (sendUserList)="getUserList($event)">
         </app-chat> 
 
         <app-users
+            *ngIf="userList.length > 0"
             [ngClass]="checkWhenToShowScroll(30, 'col-xs-1', 'info')" 
-            [users]="communities.members">
+            [users]="userList">
         </app-users>
 
     </div>

@@ -15,6 +15,7 @@ export class CommunitiesChatComponent implements OnInit {
   communitySelected: any;
   currentChannel: any;
   loader: boolean = false;
+  userList: any = [];
 
   constructor(
     private communityService: CommunitiesService,
@@ -65,6 +66,10 @@ export class CommunitiesChatComponent implements OnInit {
     setTimeout(() => {
       this.loader = false;
     }, 2000)
+  }
+
+  getUserList(e) {
+    this.userList = e;
   }
 
 }

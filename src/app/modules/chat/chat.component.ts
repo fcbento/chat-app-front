@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, OnChanges, SimpleChanges, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import * as moment from 'moment';
 import { NotificationService } from '../../shared/services/notification.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -11,14 +11,14 @@ import { StorageService } from '../../shared/services/storage.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, OnDestroy, OnChanges {
+export class ChatComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
   @Input() channelSelected: any;
   @Input() communities: any;
+  @Output() sendUserList = new EventEmitter();
 
-  users: any = [];
-
-  user: any
+  usersList: any = [];
+  user: any;
   disable: boolean;
   userBlocked: any;
   isChanged = false;
@@ -27,6 +27,10 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges {
     private chatService: ChatService,
     private storageService: StorageService
   ) { }
+
+  ngAfterViewInit(): void {
+    this.onUpdateUserList();
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -76,6 +80,13 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges {
       user: this.user,
       room: this.channelSelected
     }
+  }
+
+  onUpdateUserList() {
+    this.chatService.on('updateUserList').subscribe(users => {
+      this.usersList = users;
+      this.sendUserList.emit(this.usersList);
+    })
   }
 
 }

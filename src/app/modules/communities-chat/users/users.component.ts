@@ -12,6 +12,7 @@ export class UsersComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.users)
   }
 
 }

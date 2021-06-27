@@ -13,6 +13,7 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   @Output() sendCurrentChannel = new EventEmitter;
 
   activeModal: any;
+  members: any = [];
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -37,7 +38,8 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getCurrentUser();
     this.checkCommunityOwner();
-    this.checkStatusMember();
+    this.checkMembersStatus();
+    this.checkCurrentMemberStatus();
   }
 
   modalRef(e) {
@@ -56,15 +58,19 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
 
     let isSame = false;
 
-    if (this.getCurrentUser() === this.channels.owner.name) {
+    if (this.getCurrentUser()._id === this.channels.owner._id) {
       isSame = true;
     }
 
     return isSame;
   }
 
-  checkStatusMember() {
-    const user = this.channels.members.filter(item => item.user && item.user.name === this.getCurrentUser());
+  checkMembersStatus() {
+    this.members = this.channels.members.filter(item => item.status === 2);
+  }
+
+  checkCurrentMemberStatus() {
+    const currentMemberStatus = this.channels.members.filter(item => item.status === 1 && item.user.id === this.getCurrentUser()._id);
   }
 
 }
