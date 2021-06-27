@@ -30,6 +30,7 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.getCurrentUser();
     this.checkCommunityOwner();
+    this.checkStatusMember();
   }
 
   modalRef(e) {
@@ -40,19 +41,24 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
     this.sendCurrentChannel.emit(cuurentChannel);
   }
 
-  getCurrentUser(){
-   return this.auth.currentUserValue['user'].name;
+  getCurrentUser() {
+    return this.auth.currentUserValue['user'];
   }
 
   checkCommunityOwner() {
-    
+
     let isSame = false;
 
-    if(this.getCurrentUser() === this.channels.owner.name) {
+    if (this.getCurrentUser() === this.channels.owner.name) {
       isSame = true;
     }
 
     return isSame;
+  }
+
+  checkStatusMember() {
+    const user = this.channels.members.filter(item => item.user.name === this.getCurrentUser());
+    console.log(user)
   }
 
 }
