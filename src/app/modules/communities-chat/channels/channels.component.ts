@@ -1,5 +1,6 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthenticationService } from '../../../core/services/authentication.service';
+import { StorageService } from '../../../shared/services/storage.service';
 
 @Component({
   selector: 'app-channels',
@@ -13,18 +14,24 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
 
   activeModal: any;
 
-  constructor(private cdr: ChangeDetectorRef, public auth: AuthenticationService) { }
+  constructor(
+    private cdr: ChangeDetectorRef,
+    public auth: AuthenticationService,
+    public storageService: StorageService
+  ) { }
 
   ngAfterViewInit() {
+
     setTimeout(() => {
-      if (localStorage.getItem('channelSelected')) {
-        this.getCurrentChannel({ name: JSON.parse(localStorage.getItem('channelSelected')) });
+      if (this.storageService.getStorage('channelSelected')) {
+        this.getCurrentChannel({ name: this.storageService.getStorage('channelSelected') });
       } else {
         this.getCurrentChannel(this.channels.channels[0])
         this.cdr.detectChanges();
       }
 
-    }, 1000)
+    }, 1000);
+
   }
 
   ngOnInit(): void {
@@ -37,8 +44,8 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
     this.activeModal = e;
   }
 
-  getCurrentChannel(cuurentChannel) {
-    this.sendCurrentChannel.emit(cuurentChannel);
+  getCurrentChannel(currentChannel) {
+    this.sendCurrentChannel.emit(currentChannel);
   }
 
   getCurrentUser() {
@@ -57,7 +64,7 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   }
 
   checkStatusMember() {
-    const user = this.channels.members.filter(item =>  item.user && item.user.name === this.getCurrentUser());
+    const user = this.channels.members.filter(item => item.user && item.user.name === this.getCurrentUser());
   }
 
 }

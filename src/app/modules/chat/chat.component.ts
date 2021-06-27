@@ -4,6 +4,7 @@ import { NotificationService } from '../../shared/services/notification.service'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderService } from '../../core/services/loader.service';
 import { ChatService } from './chat.service';
+import { StorageService } from '../../shared/services/storage.service';
 
 @Component({
   selector: 'app-chat',
@@ -21,32 +22,31 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges {
   disable: boolean;
   userBlocked: any;
   isChanged = false;
-  j: number;
 
   constructor(
-    private chatService: ChatService) {
-  }
+    private chatService: ChatService,
+    private storageService: StorageService
+  ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.user = JSON.parse(localStorage.getItem('currentUser')) || {}
-    this.user = this.user.user || {}
+
+    this.getCurrentUser();
+
     if (changes.channelSelected.firstChange) {
       this.channelSelected = changes.channelSelected.currentValue;
     } else {
-      localStorage.setItem('channelSelected',  JSON.stringify(this.channelSelected));
-      this.chatService.emit('leaveRoom', null);
-      window.location.reload();
+      this.setStorageAndReloadPage();
     }
   }
 
   ngOnInit() {
-    this.user = JSON.parse(localStorage.getItem('currentUser')) || {}
-    this.user = this.user.user || {}
+    this.getCurrentUser();
     this.onConnect();
   }
+
   onConnect() {
     this.chatService.on('connect');
-    this.chatService.emit('join', { user: this.user, room: this.channelSelected });
+    this.chatService.emit('join', this.chatServiceObject());
   }
 
   disableSounds(e) {
@@ -59,6 +59,23 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges {
 
   blockUser(e) {
     this.userBlocked = e;
+  }
+
+  getCurrentUser() {
+    this.user = this.storageService.getStorage('currentUser').user || {};
+  }
+
+  setStorageAndReloadPage() {
+    this.storageService.setStorage('channelSelected', this.channelSelected);
+    this.chatService.emit('leaveRoom', null);
+    window.location.reload();
+  }
+
+  chatServiceObject() {
+    return {
+      user: this.user,
+      room: this.channelSelected
+    }
   }
 
 }

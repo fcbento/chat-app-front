@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoaderService } from '../../core/services/loader.service';
+import { StorageService } from '../../shared/services/storage.service';
 import { CommunitiesService } from './communities.service';
 
 @Component({
@@ -16,7 +17,8 @@ export class CommunitiesChatComponent implements OnInit {
   loader: boolean = false;
 
   constructor(
-    private communityService: CommunitiesService
+    private communityService: CommunitiesService,
+    private storageService: StorageService
   ) { }
 
   ngOnInit(): void {
@@ -26,8 +28,8 @@ export class CommunitiesChatComponent implements OnInit {
   }
 
   getUser() {
-    this.user = JSON.parse(localStorage.getItem('currentUser')) || {}
-    this.user = this.user.user || {}
+    this.user = this.storageService.getStorage('currentUser');
+    this.user = this.user.user || {};
   }
 
   getCommunitiesByUser() {
@@ -64,5 +66,5 @@ export class CommunitiesChatComponent implements OnInit {
       this.loader = false;
     }, 2000)
   }
-  
+
 }
