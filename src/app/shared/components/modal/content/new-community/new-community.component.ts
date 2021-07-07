@@ -11,6 +11,7 @@ export class NewCommunityComponent implements OnInit {
   @Input() user: any;
   @Input() type: any;
   @Input() communities: any;
+  @Input() community: any;
 
   newCommunity: any = {};
 
@@ -57,7 +58,8 @@ export class NewCommunityComponent implements OnInit {
   }
 
   saveNewChannel(channel) {
-    this.communityService.update(channel, this.communities._id, 'addchannel').subscribe(data => {
+    this.communityService.create({community: this.community, name: channel.channel}, 'channels').subscribe(data => {
+      console.log(data)
     })
   }
 

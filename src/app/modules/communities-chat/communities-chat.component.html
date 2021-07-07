@@ -11,16 +11,16 @@
 
         <app-communities
             *ngIf="communities"
-            [ngClass]="checkWhenToShowScroll(1, 'col-xs-1', 'communities')"
+            [ngClass]="checkWhenToShowScroll(30, 'col-xs-1', 'communities')"
             [user]="user"
             [communities]="communities"
             (selectCommunity)="selectCommunity($event)">
         </app-communities>
-      
+
         <app-channels 
             *ngIf="communitySelected"
             [ngClass]="checkWhenToShowScroll(30, 'col-xs-2', 'channels')" 
-            [channels]="communitySelected"
+            [community]="communitySelected"
             (sendCurrentChannel)="getCurrentChannel($event)">
         </app-channels>
 

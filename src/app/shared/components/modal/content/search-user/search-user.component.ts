@@ -10,27 +10,25 @@ export class SearchUserComponent implements OnInit {
 
   searchName: string;
   users: any = [];
-  @Input() communityId: any;
+  @Input() community: any;
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    console.log('channels')
-    console.log(this.communityId)
   }
 
   getFormValues(e) {
     this.searchName = e.content;
-    this.userService.getByQuery(this.searchName, 'users').subscribe(data =>{
+    this.userService.getByQuery(this.searchName, 'users').subscribe(data => {
       this.users = data;
     })
   }
 
   addUserToCommunity(user) {
-    
-    this.userService.update({newUser : user}, this.communityId, 'adduser').subscribe(data =>{ 
+
+    this.userService.create({ user: user, community: this.community, status: 1 }, 'addmember').subscribe(data => {
       console.log(data)
-    })
+    });
   }
 
 }

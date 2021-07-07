@@ -6,12 +6,27 @@
 
 <hr>
 
-<ul>
+<ul *ngIf="communities.length > 0">
     <li *ngFor="let community of communities">
-        <img (click)="changeCommunity(community)" [src]="community.logo">
-        <span style="color: white">{{community.name}}</span>
+        
+        <div *ngIf="community.status == 2">
+            <img (click)="changeCommunity(community)" [src]="community.logo">
+            <span style="color: white">{{community.name}}</span>
+        </div>
+
+        <div *ngIf="community.status == 1">
+            <br>
+            <p style="color: white;">Pending</p>
+            <img [src]="community.logo">
+            <span (click)="acceptInvitation(community)" style="color: white">{{community.name}}</span>
+        </div>
+
     </li>
 </ul>
+
+<div *ngIf="communities.length === 0">
+    <p>No communities</p>
+</div>
 
 <hr>
 

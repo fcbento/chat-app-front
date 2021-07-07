@@ -1,45 +1,52 @@
-import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { AuthenticationService } from '../../../core/services/authentication.service';
 import { StorageService } from '../../../shared/services/storage.service';
+import { CommunitiesService } from '../communities.service';
 
 @Component({
   selector: 'app-channels',
   templateUrl: './channels.component.html',
   styleUrls: ['./channels.component.scss']
 })
-export class ChannelsComponent implements OnInit, AfterViewInit {
+export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
 
-  @Input() channels: any;
+  @Input() community: any;
   @Output() sendCurrentChannel = new EventEmitter;
 
   activeModal: any;
   members: any = [];
+  currentPendingInvitation: any = [];
+  channels: any = [];
 
   constructor(
     private cdr: ChangeDetectorRef,
     public auth: AuthenticationService,
-    public storageService: StorageService
+    public storageService: StorageService,
+    public service: CommunitiesService
   ) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.community = changes.community.currentValue;
+    this.getChannels();
+  }
 
   ngAfterViewInit() {
 
-    setTimeout(() => {
-      if (this.storageService.getStorage('channelSelected')) {
-        this.getCurrentChannel({ name: this.storageService.getStorage('channelSelected') });
-      } else {
-        this.getCurrentChannel(this.channels.channels[0])
-        this.cdr.detectChanges();
-      }
+    // setTimeout(() => {
+    //   if (this.storageService.getStorage('channelSelected')) {
+    //     this.getCurrentChannel({ name: this.storageService.getStorage('channelSelected') });
+    //   } else {
+    //     this.getCurrentChannel(this.channels.channels[0])
+    //     this.cdr.detectChanges();
+    //   }
 
-    }, 1000);
+    // }, 1000);
 
   }
 
   ngOnInit(): void {
     this.getCurrentUser();
-    this.checkCommunityOwner();
-    this.checkMembersStatus();
-    this.checkCurrentMemberStatus();
+    this.getChannels();
   }
 
   modalRef(e) {
@@ -51,26 +58,24 @@ export class ChannelsComponent implements OnInit, AfterViewInit {
   }
 
   getCurrentUser() {
-    return this.auth.currentUserValue['user'];
+    return this.storageService.getStorage('currentUser').user;
   }
 
   checkCommunityOwner() {
 
     let isSame = false;
 
-    if (this.getCurrentUser()._id === this.channels.owner._id) {
+    if (this.getCurrentUser()._id === this.community.owner._id) {
       isSame = true;
     }
 
     return isSame;
   }
 
-  checkMembersStatus() {
-    this.members = this.channels.members.filter(item => item.status === 2);
-  }
-
-  checkCurrentMemberStatus() {
-    const currentMemberStatus = this.channels.members.filter(item => item.status === 1 && item.user.id === this.getCurrentUser()._id);
+  getChannels() {
+    this.service.getById(this.community._id, 'channels').subscribe(data => {
+      this.channels = data;
+    })
   }
 
 }
