@@ -34,9 +34,9 @@ export class CommunitiesChatComponent implements OnInit {
   }
 
   getCommunitiesByUser() {
-    this.communityService.getById(this.user._id, 'communitybymember').subscribe((data) => {
+    this.communityService.getById(this.user._id, 'bymember').subscribe((data) => {
       this.communities = data;
-    })
+    });
   }
 
   selectCommunity(e: string) {

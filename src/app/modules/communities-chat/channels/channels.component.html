@@ -1,29 +1,29 @@
 <div class="row center-xs channels-heading">
     <div class="col">
-        <span class="title">{{channels.name}}</span>
+        <span class="title">{{community.name}}</span>
     </div>
 </div>
 
 <div class="row center-xs">
     <div class="col channels-title">
-        <img class="image" [src]="channels.logo">
+        <img class="image" [src]="community.logo">
     </div>
 </div>
 
 <hr>
-<p class="row center-xs members">Members: {{members.length}}</p>
-<p class="row center-xs members">Owner: {{channels.owner.name}}</p>
+<p class="row center-xs members">Members: 80</p>
+<p class="row center-xs members">Owner: {{community.owner.name}}</p>
 <hr>
 
 <ul>
-    <li *ngFor="let channel of channels.channels; let i = index">
+    <li *ngFor="let channel of channels; let i = index">
         <span class="justify-content-start" (click)="getCurrentChannel(channel)">
             <img src="assets/svg/hashtag.svg">
             {{channel.name}}
         </span>
-        <span class="d-flex justify-content-end">
+        <span class="d-flex justify-content-end" *ngIf="checkCommunityOwner()">
             <ng-template #newChannel>
-                <app-search-user [communityId]="channels._id">
+                <app-search-user [community]="community">
                 </app-search-user>
             </ng-template>
     
@@ -45,7 +45,7 @@
             <app-new-community
                 [user]="user"
                 [type]="'channel'"
-                [communities]="channels">
+                [community]="community">
             </app-new-community>
         </ng-template>
 
