@@ -41,6 +41,7 @@ export class CommunitiesChatComponent implements OnInit {
 
   selectCommunity(e: string) {
     this.communitySelected = e;
+    this.storageService.removeStorage('channelSelected');
   }
 
   getCurrentChannel(e: HTMLObjectElement) {

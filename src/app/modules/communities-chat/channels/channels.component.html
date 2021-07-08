@@ -6,7 +6,7 @@
             class="menu" 
             [data]="community" 
             [items]="menuItems"
-            (sendAction)="getAction($event)">
+            (sendAction)="getAction($event, community, 'community')">
         </app-menu>
     </div>
 </div>
@@ -37,7 +37,7 @@
                 *ngIf="checkCommunityOwner()" 
                 [data]="community" 
                 [items]="channelMenuItems"
-                (sendAction)="getAction($event)">
+                (sendAction)="getAction($event, channel, 'channel')">
             </app-menu>
           </span>
     </li>
@@ -56,7 +56,8 @@
     </app-new-community>
 </ng-template>
 
-<ng-template #deleteChannel>
-    <app-content-delete>
+<ng-template #deleteModal>
+    <app-content-delete
+        (sendItemClicked)="getItemClicked($event)">
     </app-content-delete>
 </ng-template>

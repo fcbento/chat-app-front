@@ -26,6 +26,7 @@ export class MenuComponent implements OnInit, OnDestroy {
   }
 
   getAction(action) {
+    this.showMenu = false;
     this.sendAction.emit(action);
   }
 

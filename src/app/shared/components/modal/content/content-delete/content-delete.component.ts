@@ -17,5 +17,5 @@ export class ContentDeleteComponent implements OnInit {
   itemClicked(answer: string) {
     this.sendItemClicked.emit(answer);
   }
-
+  
 }

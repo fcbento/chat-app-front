@@ -15,10 +15,14 @@
         </div>
 
         <div *ngIf="community.status == 1">
-            <br>
-            <p style="color: white;">Pending</p>
             <img [src]="community.logo">
-            <span (click)="acceptInvitation(community)" style="color: white">{{community.name}}</span>
+            <span style="color: white">{{community.name}}</span>
+            <app-menu 
+                class="menu" 
+                [data]="community" 
+                [items]="menuItems"
+                (sendAction)="getAction($event, community)">
+             </app-menu>
         </div>
 
     </li>

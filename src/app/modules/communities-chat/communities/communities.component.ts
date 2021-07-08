@@ -1,4 +1,5 @@
 import { AfterContentChecked, AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { StorageService } from '../../../shared/services/storage.service';
 import { CommunitiesService } from '../communities.service';
 
 @Component({
@@ -12,12 +13,24 @@ export class CommunitiesComponent implements OnInit, AfterViewInit {
   @Input() user: any;
   @Output() selectCommunity = new EventEmitter();
   activeModal: any;
+  menuItems = [
+    {
+      icon: 'fas fa-check',
+      name: 'Accept',
+      action: 'accept'
+    },
+    {
+      icon: 'fas fa-ban',
+      name: 'Decline',
+      action: 'decline'
+    }
+  ]
 
-  constructor(private communityService: CommunitiesService, private cdr: ChangeDetectorRef) { }
+  constructor(private communityService: CommunitiesService, private cdr: ChangeDetectorRef, private storageService: StorageService) { }
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.changeCommunity(this.communities[0]);
+      this.changeCommunity(this.storageService.getStorage('communitySelected'));
       this.cdr.detectChanges();
     }, 1000)
   }
@@ -26,6 +39,7 @@ export class CommunitiesComponent implements OnInit, AfterViewInit {
   }
 
   changeCommunity(community) {
+    this.storageService.setStorage('communitySelected', community);
     this.selectCommunity.emit(community);
   }
 
@@ -34,10 +48,15 @@ export class CommunitiesComponent implements OnInit, AfterViewInit {
   }
 
   acceptInvitation(community) {
-
     this.communityService.updateWithParams({ status: 2 }, community._id, this.user._id, 'changestatus').subscribe(data => {
       console.log(data)
-    })
+    });
   }
-  
+
+  getAction(e, item) {
+    if (e === 'accept') {
+      this.acceptInvitation(item);
+    }
+  }
+
 }

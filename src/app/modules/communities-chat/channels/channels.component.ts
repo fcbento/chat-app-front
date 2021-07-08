@@ -1,6 +1,5 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
-import { AuthenticationService } from '../../../core/services/authentication.service';
 import { StorageService } from '../../../shared/services/storage.service';
 import { CommunitiesService } from '../communities.service';
 
@@ -15,13 +14,13 @@ export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() sendCurrentChannel = new EventEmitter;
   @ViewChild('addUser', { static: true }) addUser;
   @ViewChild('addChannel', { static: true }) addChannel;
-  @ViewChild('deleteChannel', { static: true }) deleteChannel: any;
+  @ViewChild('deleteModal', { static: true }) deleteModal: any;
 
   activeModal: any;
-  members: any = [];
-  currentPendingInvitation: any = [];
   channels: any = [];
   modalContent: any;
+  channelClicked: any;
+  type: any;
 
   menuItems: any = [
     {
@@ -42,7 +41,7 @@ export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
     {
       icon: 'fas fa-trash-alt',
       name: 'Remove',
-      action: 'removeCommunity'
+      action: 'deleteCommunity'
     }
   ]
 
@@ -61,7 +60,6 @@ export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
 
   constructor(
     private cdr: ChangeDetectorRef,
-    private auth: AuthenticationService,
     private storageService: StorageService,
     private service: CommunitiesService,
     private modalService: NgbModal,
@@ -80,10 +78,12 @@ export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
   ngAfterViewInit() {
 
     setTimeout(() => {
+      this.getCurrentChannel(this.channels[0])
+      this.cdr.detectChanges();
       if (this.storageService.getStorage('channelSelected')) {
         this.getCurrentChannel({ name: this.storageService.getStorage('channelSelected') });
       } else {
-        this.getCurrentChannel(this.channels.channels[0])
+        this.getCurrentChannel(this.channels[0])
         this.cdr.detectChanges();
       }
 
@@ -122,10 +122,12 @@ export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
   getChannels() {
     this.service.getById(this.community._id, 'channels').subscribe(data => {
       this.channels = data;
-    })
+    });
   }
 
-  getAction(action: string) {
+  getAction(action: string, channel: any, type: any) {
+    this.channelClicked = channel;
+    this.type = type;
     this.selectAction(action);
     if (this.modalContent) {
       this.modalService.open(this.modalContent);
@@ -140,12 +142,25 @@ export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
 
       case 'addChannel':
         return this.modalContent = this.addChannel;
-        
+
       case 'deleteChannel':
-        return this.modalContent = this.deleteChannel;
+      case 'deleteCommunity':
+        return this.modalContent = this.deleteModal;
 
       default:
         return this.modalContent = null;
+    }
+  }
+
+  getItemClicked(e) {
+    if (e === 'no') {
+      this.modalService.dismissAll();
+    } else {
+      this.service.deleteById(this.channelClicked._id, this.type === 'channel' ? 'channels' : 'communities').subscribe(res => {
+        if (res) {
+          this.modalService.dismissAll();
+        }
+      });
     }
   }
 

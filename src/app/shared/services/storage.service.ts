@@ -30,4 +30,10 @@ export class StorageService {
       return JSON.parse(item);
     }
   }
+
+  removeStorage(name: string) {
+    if (name) {
+      localStorage.removeItem(name);
+    }
+  }
 }

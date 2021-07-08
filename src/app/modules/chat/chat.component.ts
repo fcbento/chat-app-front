@@ -33,10 +33,8 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges, AfterViewIni
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
     this.getCurrentUser();
-
-    if (changes.channelSelected.firstChange) {
+    if (changes.communities && changes.communities.firstChange) {
       this.channelSelected = changes.channelSelected.currentValue;
     } else {
       this.setStorageAndReloadPage();
