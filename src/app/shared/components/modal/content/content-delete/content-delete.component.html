@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-body">
+        <h5>Are you sure you want to delete?</h5>
+        <small>All information associated to this user profile will be permanently deleted. This operation can not be undone.</small>
+    </div>
+    <div class="d-flex card-footer justify-content-end">
+
+        <chat-button 
+            [buttonType]="'default'" 
+            [buttonColor]="'#ff4d4d'"
+            [buttonName]="'Yes'"
+            [buttonFontColor]="'#fff'"
+            (click)="itemClicked('yes')">
+        </chat-button>
+
+        <chat-button 
+            [buttonType]="'default'" 
+            [buttonColor]="'#5995fd'"
+            [buttonName]="'No'"
+            [buttonFontColor]="'#fff'"
+            (click)="itemClicked('no')">
+        </chat-button>
+        
+    </div>
+</div>

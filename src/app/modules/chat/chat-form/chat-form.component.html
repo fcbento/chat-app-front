@@ -13,14 +13,13 @@
                 (keydown)="triggerFunction($event)">
             </textarea>
         </form>
-
     </div>
     
     <div class="col-2 buttons">
 
         <chat-button 
             [buttonType]="'icon'" 
-            [buttonIconName]="'image'">
+            [buttonIconFont]="'far fa-file-image'">
         </chat-button>
 
         <ng-template #youtubeLink>
@@ -40,14 +39,14 @@
         <chat-button 
             *ngIf="!recording" 
             [buttonType]="'icon'" 
-            [buttonIconName]="'micon'" 
+            [buttonIconFont]="'fas fa-microphone'" 
             (click)="initiateRecording()">
         </chat-button>
 
         <chat-button 
             *ngIf="recording" 
             [buttonType]="'icon'" 
-            [buttonIconName]="'micoff'" 
+            [buttonIconFont]="'fas fa-microphone-slash'" 
             (click)="stopRecording()">
         </chat-button>
 
@@ -55,7 +54,7 @@
 
         <chat-button 
             [buttonType]="'icon'" 
-            [buttonIconName]="'send'" 
+            [buttonIconFont]="'fas fa-paper-plane'" 
             (click)="onSendMessage()">
         </chat-button>
     </div>

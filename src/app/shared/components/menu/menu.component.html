@@ -1,0 +1,36 @@
+
+<div [ngClass]="!showMenu ? 'list-container' : 'list-container active'">
+
+    <button class="more-button" (click)="openMenu()">
+        <div class="menu-icon">
+            <div class="menu-icon-line half first"></div>
+            <div class="menu-icon-line"></div>
+            <div class="menu-icon-line half last"></div>
+        </div>
+    </button>
+
+    <ul class="more-button-list" *ngIf="showMenu">
+
+        <li class="more-button-list-item" *ngFor="let item of items" (click)="getAction(item.action)">
+            <i class="{{item.icon}}"></i>
+            <span>{{item.name}}</span>
+        </li>
+<!-- 
+        <li class="more-button-list-item">
+            <i class="far fa-copy"></i>
+            <span>Copy</span>
+        </li>
+
+        <li class="more-button-list-item">
+            <i class="fas fa-share-alt"></i>
+            <span>Share</span>
+        </li>
+
+        <li class="more-button-list-item">
+            <i class="fas fa-trash-alt"></i>
+            <span>Delete</span>
+        </li> -->
+
+    </ul>
+
+</div>

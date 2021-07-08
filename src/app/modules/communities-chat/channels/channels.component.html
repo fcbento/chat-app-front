@@ -1,6 +1,13 @@
 <div class="row center-xs channels-heading">
     <div class="col">
         <span class="title">{{community.name}}</span>
+        <app-menu 
+            *ngIf="checkCommunityOwner()" 
+            class="menu" 
+            [data]="community" 
+            [items]="menuItems"
+            (sendAction)="getAction($event)">
+        </app-menu>
     </div>
 </div>
 
@@ -17,44 +24,39 @@
 
 <ul>
     <li *ngFor="let channel of channels; let i = index">
-        <span class="justify-content-start" (click)="getCurrentChannel(channel)">
+
+        <span 
+            class="justify-content-start" 
+            (click)="getCurrentChannel(channel)">
             <img src="assets/svg/hashtag.svg">
             {{channel.name}}
-        </span>
-        <span class="d-flex justify-content-end" *ngIf="checkCommunityOwner()">
-            <ng-template #newChannel>
-                <app-search-user [community]="community">
-                </app-search-user>
-            </ng-template>
-    
-            <chat-modal 
-                [modalType]="'icon'" 
-                [modalIconName]="'user'" 
-                [modalContent]="newChannel" 
-                [modalSize]="'md'"
-                (modalRef)="modalRef($event)">
-            </chat-modal>
-        </span>
+          </span>
+
+          <span class="justify-content-end">
+            <app-menu 
+                *ngIf="checkCommunityOwner()" 
+                [data]="community" 
+                [items]="channelMenuItems"
+                (sendAction)="getAction($event)">
+            </app-menu>
+          </span>
     </li>
 </ul>
 
-<div class="row center-xs" *ngIf="checkCommunityOwner()">
-    <div class="col-xs-6">
-        
-        <ng-template #newChannel>
-            <app-new-community
-                [user]="user"
-                [type]="'channel'"
-                [community]="community">
-            </app-new-community>
-        </ng-template>
+<ng-template #addUser>
+    <app-search-user [community]="community">
+    </app-search-user>
+</ng-template>
 
-        <chat-modal 
-            [modalType]="'icon'" 
-            [modalIconName]="'plus'" 
-            [modalContent]="newChannel" 
-            [modalSize]="'md'"
-            (modalRef)="modalRef($event)">
-        </chat-modal>
-    </div>
-</div>
+<ng-template #addChannel>
+    <app-new-community
+        [user]="user"
+        [type]="'channel'"
+        [community]="community">
+    </app-new-community>
+</ng-template>
+
+<ng-template #deleteChannel>
+    <app-content-delete>
+    </app-content-delete>
+</ng-template>

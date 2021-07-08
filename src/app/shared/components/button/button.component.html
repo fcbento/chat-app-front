@@ -1,37 +1,7 @@
 <ng-template [ngIf]="buttonType === 'default'">
-    <input type="submit" [value]="buttonName" class="btn">
-</ng-template>
-
-<ng-template [ngIf]="buttonType === 'transparent'">
-    <input type="submit" [value]="buttonName" class="btn transparent">
-</ng-template>
-
-<ng-template [ngIf]="buttonType === 'message'">
-    <input type="submit" [value]="buttonName" class="btn-message">
+    <input type="submit" [value]="buttonName" class="btn" [style.background]="buttonColor" [style.color]="buttonFontColor">
 </ng-template>
 
 <ng-template [ngIf]="buttonType === 'icon'">
-    <i class="far fa-file-image icon" *ngIf="buttonIconName === 'image'"></i>
+    <i [ngClass]="buttonIconFont" class="icon"></i>
 </ng-template>
-
-<ng-template [ngIf]="buttonType === 'icon'">
-    <i class="fab fa-youtube icon" *ngIf="buttonIconName === 'video'"></i>
-</ng-template>
-
-<ng-template [ngIf]="buttonType === 'icon'">
-    <i class="far fa-file-image icon" *ngIf="buttonIconName === 'file'"></i>
-</ng-template>
-
-<ng-template [ngIf]="buttonType === 'icon'">
-    <i class="fas fa-paper-plane icon" *ngIf="buttonIconName === 'send'"></i>
-</ng-template>
-
-<ng-template [ngIf]="buttonType === 'icon'">
-    <i class="fas fa-microphone icon" *ngIf="buttonIconName === 'micon'"></i>
-</ng-template>
-
-<ng-template [ngIf]="buttonType === 'icon'">
-    <i class="fas fa-microphone-slash icon" *ngIf="buttonIconName === 'micoff'"></i>
-</ng-template>
-
-

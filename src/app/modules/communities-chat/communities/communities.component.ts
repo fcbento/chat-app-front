@@ -17,9 +17,7 @@ export class CommunitiesComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-
       this.changeCommunity(this.communities[0]);
-
       this.cdr.detectChanges();
     }, 1000)
   }
@@ -35,11 +33,11 @@ export class CommunitiesComponent implements OnInit, AfterViewInit {
     this.activeModal = e;
   }
 
-  acceptInvitation(community){
-    
-    this.communityService.updateWithParams({status: 2}, community._id, this.user._id,'changestatus').subscribe(data => {
+  acceptInvitation(community) {
+
+    this.communityService.updateWithParams({ status: 2 }, community._id, this.user._id, 'changestatus').subscribe(data => {
       console.log(data)
     })
   }
-
+  
 }

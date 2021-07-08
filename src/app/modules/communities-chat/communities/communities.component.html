@@ -6,12 +6,12 @@
 
 <hr>
 
-<ul *ngIf="communities.length > 0">
+<ul *ngIf="communities.length > 0" class="center-xs">
     <li *ngFor="let community of communities">
-        
+
         <div *ngIf="community.status == 2">
             <img (click)="changeCommunity(community)" [src]="community.logo">
-            <span style="color: white">{{community.name}}</span>
+            <p style="color: white;">{{community.name}}</p>
         </div>
 
         <div *ngIf="community.status == 1">
@@ -32,20 +32,14 @@
 
 <div class="row center-xs">
     <div class="col-xs-6">
-        
+
         <ng-template #youtubeLink>
-            <app-new-community
-                [user]="user">
+            <app-new-community [user]="user">
             </app-new-community>
         </ng-template>
 
-        <chat-modal 
-            [modalType]="'icon'" 
-            [modalIconName]="'plus'" 
-            [modalContent]="youtubeLink" 
-            [modalSize]="'md'"
+        <chat-modal [modalType]="'icon'" [modalIconName]="'plus'" [modalContent]="youtubeLink" [modalSize]="'md'"
             (modalRef)="modalRef($event)">
         </chat-modal>
     </div>
 </div>
-
