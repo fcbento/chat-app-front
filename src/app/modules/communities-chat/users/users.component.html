@@ -1,8 +1,8 @@
 <div class="row center-xs">
     <div class="col">
         <ul>
-            <li *ngFor="let user of users">
-                <span class="online"></span>{{user}}
+            <li *ngFor="let user of usersInCommunity">
+                <span [ngClass]="user.online ? 'online' : 'not-oline'"></span>{{user.name}}
             </li>
         </ul>
     </div>

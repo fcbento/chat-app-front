@@ -5,6 +5,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderService } from '../../core/services/loader.service';
 import { ChatService } from './chat.service';
 import { StorageService } from '../../shared/services/storage.service';
+import { Channel } from '../../shared/models/channel.interface';
+import { Community } from '../../shared/models/community.interface';
+import { User } from '../../shared/models/user.interface';
+import { ChatStorage } from '../../shared/enums/storage.enum';
 
 @Component({
   selector: 'app-chat',
@@ -13,8 +17,8 @@ import { StorageService } from '../../shared/services/storage.service';
 })
 export class ChatComponent implements OnInit, OnDestroy, OnChanges, AfterViewInit {
 
-  @Input() channelSelected: any;
-  @Input() communities: any;
+  @Input() channelSelected: Channel;
+  @Input() communities: Community;
   @Output() sendUserList = new EventEmitter();
 
   usersList: any = [];
@@ -64,11 +68,11 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges, AfterViewIni
   }
 
   getCurrentUser() {
-    this.user = this.storageService.getStorage('currentUser').user || {};
+    this.user = this.storageService.getStorage(ChatStorage.user).user;
   }
 
   setStorageAndReloadPage() {
-    this.storageService.setStorage('channelSelected', this.channelSelected);
+    this.storageService.setStorage(ChatStorage.channel, this.channelSelected);
     this.chatService.emit('leaveRoom', null);
     window.location.reload();
   }
@@ -76,12 +80,12 @@ export class ChatComponent implements OnInit, OnDestroy, OnChanges, AfterViewIni
   chatServiceObject() {
     return {
       user: this.user,
-      room: this.channelSelected
+      room: this.channelSelected.name
     }
   }
 
   onUpdateUserList() {
-    this.chatService.on('updateUserList').subscribe(users => {
+    this.chatService.on('updateUserList').subscribe((users: User[]) => {
       this.usersList = users;
       this.sendUserList.emit(this.usersList);
     })

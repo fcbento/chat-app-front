@@ -46,7 +46,7 @@ export class GenericHttpService<T> {
             .pipe(map((data: any) => data));
     }
 
-    public deleteById(id: number, endpoint: T) {
+    public deleteById(id: string, endpoint: T) {
         return this.httpClient
             .delete(`${this.url}/${endpoint}/${id}`)
             .pipe(map(data => data));

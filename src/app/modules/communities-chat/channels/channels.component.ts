@@ -1,7 +1,14 @@
+import { ClassField } from '@angular/compiler';
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Endpoint } from '../../../shared/enums/endpoint.enum';
+import { ChatStorage } from '../../../shared/enums/storage.enum';
+import { Channel } from '../../../shared/models/channel.interface';
+import { Community } from '../../../shared/models/community.interface';
+import { Menu } from '../../../shared/models/menu.interface';
 import { StorageService } from '../../../shared/services/storage.service';
 import { CommunitiesService } from '../communities.service';
+import { CommunitiesUtils } from '../communities.utils';
 
 @Component({
   selector: 'app-channels',
@@ -10,53 +17,23 @@ import { CommunitiesService } from '../communities.service';
 })
 export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
 
-  @Input() community: any;
+  @Input() community: Community;
   @Output() sendCurrentChannel = new EventEmitter;
   @ViewChild('addUser', { static: true }) addUser;
   @ViewChild('addChannel', { static: true }) addChannel;
   @ViewChild('deleteModal', { static: true }) deleteModal: any;
 
+  channels: Channel[] = [];
+  channelClicked: Channel;
+
+  menuItems: Menu[] = [];
+  channelMenuItems: Menu[] = [];
+  
+  type: string;
   activeModal: any;
-  channels: any = [];
   modalContent: any;
-  channelClicked: any;
-  type: any;
 
-  menuItems: any = [
-    {
-      icon: 'fas fa-cog',
-      name: 'Settings',
-      action: 'settings'
-    },
-    {
-      icon: 'fas fa-user-plus',
-      name: 'User',
-      action: 'addUser'
-    },
-    {
-      icon: 'fas fa-folder-plus',
-      name: 'Channel',
-      action: 'addChannel'
-    },
-    {
-      icon: 'fas fa-trash-alt',
-      name: 'Remove',
-      action: 'deleteCommunity'
-    }
-  ]
-
-  channelMenuItems: any = [
-    {
-      icon: 'fas fa-cog',
-      name: 'Edit',
-      action: 'edit'
-    },
-    {
-      icon: 'fas fa-trash-alt',
-      name: 'Delete',
-      action: 'deleteChannel'
-    }
-  ]
+  communitiesUtils = new CommunitiesUtils();
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -67,7 +44,10 @@ export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
   ) {
     config.centered = true;
     config.keyboard = false;
-    config.size = 'md'
+    config.size = 'md';
+
+    this.menuItems = this.communitiesUtils.getCommunityMenuItems();
+    this.channelMenuItems = this.communitiesUtils.getChannelMenuItems();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -77,11 +57,12 @@ export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngAfterViewInit() {
 
+    let currentChannel: Channel = this.storageService.getStorage(ChatStorage.channel);
+
     setTimeout(() => {
-      this.getCurrentChannel(this.channels[0])
-      this.cdr.detectChanges();
-      if (this.storageService.getStorage('channelSelected')) {
-        this.getCurrentChannel({ name: this.storageService.getStorage('channelSelected') });
+
+      if (this.community._id === currentChannel.community._id) {
+        this.getCurrentChannel(currentChannel);
       } else {
         this.getCurrentChannel(this.channels[0])
         this.cdr.detectChanges();
@@ -100,12 +81,12 @@ export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
     this.activeModal = e;
   }
 
-  getCurrentChannel(currentChannel) {
+  getCurrentChannel(currentChannel: Channel) {
     this.sendCurrentChannel.emit(currentChannel);
   }
 
   getCurrentUser() {
-    return this.storageService.getStorage('currentUser').user;
+    return this.storageService.getStorage(ChatStorage.user).user;
   }
 
   checkCommunityOwner() {
@@ -120,18 +101,21 @@ export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   getChannels() {
-    this.service.getById(this.community._id, 'channels').subscribe(data => {
+    this.service.getById(this.community._id, Endpoint.channels).subscribe(data => {
       this.channels = data;
     });
   }
 
-  getAction(action: string, channel: any, type: any) {
+  getAction(action: string, channel: Channel, type: string) {
+
     this.channelClicked = channel;
     this.type = type;
     this.selectAction(action);
+
     if (this.modalContent) {
       this.modalService.open(this.modalContent);
     }
+
   }
 
   selectAction(action: string): string {
@@ -156,12 +140,18 @@ export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
     if (e === 'no') {
       this.modalService.dismissAll();
     } else {
-      this.service.deleteById(this.channelClicked._id, this.type === 'channel' ? 'channels' : 'communities').subscribe(res => {
-        if (res) {
-          this.modalService.dismissAll();
-        }
-      });
+      this.deleteItem();
     }
+  }
+
+  deleteItem() {
+    this.service.deleteById(this.channelClicked._id, this.type === 'channel' ? Endpoint.channels : Endpoint.communities).subscribe(res => {
+      if (res) {
+        this.storageService.removeStorage(ChatStorage.channel);
+        this.storageService.removeStorage(ChatStorage.community);
+        this.modalService.dismissAll();
+      }
+    });
   }
 
 }

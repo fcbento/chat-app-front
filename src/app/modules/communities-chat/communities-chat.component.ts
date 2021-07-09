@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { LoaderService } from '../../core/services/loader.service';
+import { Endpoint } from '../../shared/enums/endpoint.enum';
+import { ChatStorage } from '../../shared/enums/storage.enum';
+import { Channel } from '../../shared/models/channel.interface';
+import { Community } from '../../shared/models/community.interface';
+import { User } from '../../shared/models/user.interface';
 import { StorageService } from '../../shared/services/storage.service';
 import { CommunitiesService } from './communities.service';
 
@@ -10,12 +15,12 @@ import { CommunitiesService } from './communities.service';
 })
 export class CommunitiesChatComponent implements OnInit {
 
-  user: any
-  communities: any = []
-  communitySelected: any;
-  currentChannel: any;
+  user: User;
+  communities: Community[] = [];
+  communitySelected: Community;
+  currentChannel: Channel;
   loader: boolean = false;
-  userList: any = [];
+  userList: User[] = [];
 
   constructor(
     private communityService: CommunitiesService,
@@ -29,23 +34,23 @@ export class CommunitiesChatComponent implements OnInit {
   }
 
   getUser() {
-    this.user = this.storageService.getStorage('currentUser');
-    this.user = this.user.user || {};
+    const { user, token } = this.storageService.getStorage(ChatStorage.user);
+    this.user = user;
+    this.user.token = token;
   }
 
   getCommunitiesByUser() {
-    this.communityService.getById(this.user._id, 'bymember').subscribe((data) => {
-      this.communities = data;
+    this.communityService.getById(this.user._id, Endpoint.byMember).subscribe((res: Community[]) => {
+      this.communities = res;
     });
   }
 
-  selectCommunity(e: string) {
-    this.communitySelected = e;
-    this.storageService.removeStorage('channelSelected');
+  selectCommunity(community: Community) {
+    this.communitySelected = community;
   }
 
-  getCurrentChannel(e: HTMLObjectElement) {
-    this.currentChannel = e.name;
+  getCurrentChannel(channel: Channel) {
+    this.currentChannel = channel;
   }
 
   checkWhenToShowScroll(length: number, col: string, className: string): string {
@@ -69,8 +74,8 @@ export class CommunitiesChatComponent implements OnInit {
     }, 2000)
   }
 
-  getUserList(e) {
-    this.userList = e;
+  getUserList(user: User[]) {
+    this.userList = user;
   }
 
 }

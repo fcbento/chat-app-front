@@ -33,9 +33,10 @@
         </app-chat> 
 
         <app-users
-            *ngIf="userList.length > 0"
+            *ngIf="userList.length > 0 && communitySelected"
             [ngClass]="checkWhenToShowScroll(30, 'col-xs-1', 'info')" 
-            [users]="userList">
+            [users]="userList"
+            [community]="communitySelected">
         </app-users>
 
     </div>
