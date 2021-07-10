@@ -21,7 +21,6 @@ export class GenericHttpService<T> {
     }
 
     public updateWithParams(item: T, id1: any, id2: any, endpoint: T): Observable<T> {
-        console.log(id1, id2)
         return this.httpClient
             .put<T>(`${this.url}/${endpoint}/${id1}/${id2}`, item)
             .pipe(map(data => data));

@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Endpoint } from '../../../shared/enums/endpoint.enum';
 import { Community } from '../../../shared/models/community.interface';
 import { User } from '../../../shared/models/user.interface';
@@ -9,16 +9,13 @@ import { CommunitiesService } from '../communities.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit, AfterViewChecked {
+export class UsersComponent implements OnInit {
 
   @Input() users: User[] = [];
   @Input() community: Community;
   usersInCommunity: User[] = [];
 
   constructor(private service: CommunitiesService) { }
-  ngAfterViewChecked(): void {
-  }
-
   ngOnInit(): void {
     this.getMembersInCommunity();
   }

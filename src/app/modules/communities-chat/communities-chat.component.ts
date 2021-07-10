@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoaderService } from '../../core/services/loader.service';
 import { Endpoint } from '../../shared/enums/endpoint.enum';
 import { ChatStorage } from '../../shared/enums/storage.enum';
@@ -31,6 +31,10 @@ export class CommunitiesChatComponent implements OnInit {
     this.getUser();
     this.getCommunitiesByUser();
     this.loadSpinner();
+
+    setTimeout(() => {
+      this.setUserOnline();
+    }, 1000)
   }
 
   getUser() {
@@ -72,6 +76,12 @@ export class CommunitiesChatComponent implements OnInit {
     setTimeout(() => {
       this.loader = false;
     }, 2000)
+  }
+
+  setUserOnline() {
+    const communityId = this.communitySelected ? this.communitySelected._id : this.storageService.getStorage(ChatStorage.community)._id;
+    this.communityService.updateWithParams({ status: true }, communityId, this.user._id, Endpoint.userOn).subscribe(data => {})
+
   }
 
   getUserList(user: User[]) {

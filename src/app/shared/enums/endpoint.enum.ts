@@ -5,5 +5,7 @@ export enum Endpoint {
     allMembers = 'allmembers',
     addMember = 'addmember',
     changeStatus = 'changestatus',
-    removeUser = 'removeuser'
+    removeUser = 'removeuser',
+    userOn = 'useron',
+    userOff = 'useroff'
 }

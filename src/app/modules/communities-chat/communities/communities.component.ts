@@ -1,4 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Endpoint } from '../../../shared/enums/endpoint.enum';
 import { ChatStorage } from '../../../shared/enums/storage.enum';
 import { Community } from '../../../shared/models/community.interface';
@@ -18,6 +19,7 @@ export class CommunitiesComponent implements OnInit, AfterViewInit {
   @Input() communities: Community[] = [];
   @Input() user: User;
   @Output() selectCommunity = new EventEmitter();
+  community: Community;
 
   activeModal: any;
   communitiesUtils = new CommunitiesUtils();
@@ -26,13 +28,15 @@ export class CommunitiesComponent implements OnInit, AfterViewInit {
   constructor(
     private communityService: CommunitiesService,
     private cdr: ChangeDetectorRef,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private router: Router
   ) {
     this.menuItems = this.communitiesUtils.getPendingMenuItems();
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
+      this.community = this.storageService.getStorage(ChatStorage.community);
       this.changeCommunity(this.storageService.getStorage(ChatStorage.community));
       this.cdr.detectChanges();
     }, 1000)
@@ -51,13 +55,20 @@ export class CommunitiesComponent implements OnInit, AfterViewInit {
   }
 
   acceptInvitation(community: Community) {
-    this.communityService.updateWithParams({ status: 2 }, community._id, this.user._id, Endpoint.changeStatus).subscribe(res => {});
+    this.communityService.updateWithParams({ status: 2 }, community._id, this.user._id, Endpoint.changeStatus).subscribe(res => { });
   }
 
   getAction(answer: string, community: Community) {
     if (answer === 'accept') {
       this.acceptInvitation(community);
     }
+  }
+
+  setUserOffline() {
+    const communityId = this.community ? this.community._id : this.storageService.getStorage(ChatStorage.community)._id;
+    this.communityService.updateWithParams({ status: false }, communityId, this.user._id, Endpoint.userOff).subscribe(data => {
+      this.router.navigate(['/']);
+    })
   }
 
 }
