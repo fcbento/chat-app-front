@@ -6,24 +6,22 @@
             [inputName]="'Name'"
             [inputIcon]="'fas fa-address-card'"
             [inputIconColor]="'black'"
-            [inputColor]="'black'"
-            (formValues)="getFormValues($event)">
-        </chat-input>
- 
-        <chat-input
-            *ngIf="type !== 'channel'"
-            [inputType]="'text'"
-            [inputName]="'Logo URL'"
-            [inputIcon]="'fas fa-image'"
-            [inputIconColor]="'black'"
+            [inputPlaceholder]="'Community name'"
             [inputColor]="'black'"
             (formValues)="getFormValues($event)">
         </chat-input>
 
+        <chat-file-uploader  
+            *ngIf="type !== 'channel'"
+            [fileTitle]="'Upload logo'"
+            (sendImage)="getImage($event)">
+        </chat-file-uploader>
+ 
         <chat-button 
             [buttonType]="'default'" 
-            [buttonColor]="'blue'" 
+            [buttonColor]="'#5995fd'" 
             [buttonName]="'create'"
+            [buttonFontColor]="'#fff'"
             (click)="createNewCommunity()">
         </chat-button>
     </div>

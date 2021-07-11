@@ -11,6 +11,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderService } from './core/services/loader.service';
 import { LoaderInterceptor } from './core/interceptor/loader.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
     CoreModule,
     ModulesModule,
-    NgbModule
+    NgbModule,
+    RouterModule
   ],
   providers: [
     LoaderService,

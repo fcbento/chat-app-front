@@ -1,0 +1,9 @@
+<chat-image-preview 
+    *ngIf="base64textString"
+    [imageUploaded]="base64textString">
+</chat-image-preview>
+
+<div>
+    <label for="files" class="btn">{{fileTitle}} <i class="fas fa-upload"></i></label>
+    <input id="files" style="visibility:hidden;" type="file" (change)="uploadImage($event)">
+</div>

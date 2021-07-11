@@ -12,8 +12,8 @@ export class NewCommunityComponent implements OnInit {
   @Input() type: any;
   @Input() communities: any;
   @Input() community: any;
-
   newCommunity: any = {};
+  imageUploaded: any;
 
   constructor(public communityService: CommunitiesService) { }
 
@@ -37,7 +37,7 @@ export class NewCommunityComponent implements OnInit {
     const community = {
       owner: this.user,
       name: this.newCommunity.name,
-      logo: this.newCommunity.logo
+      logo: this.imageUploaded
     }
 
     const channel = {
@@ -52,13 +52,17 @@ export class NewCommunityComponent implements OnInit {
 
   }
 
+  getImage(event) {
+    this.imageUploaded = event;
+  }
+
   saveNewCommunity(community) {
     this.communityService.create(community, 'communities').subscribe(data => {
     })
   }
 
   saveNewChannel(channel) {
-    this.communityService.create({community: this.community, name: channel.channel}, 'channels').subscribe(data => {
+    this.communityService.create({ community: this.community, name: channel.channel }, 'channels').subscribe(data => {
       console.log(data)
     })
   }

@@ -18,6 +18,8 @@ import { SearchUserComponent } from './components/modal/content/search-user/sear
 import { MenuComponent } from './components/menu/menu.component';
 import { ContentDeleteComponent } from './components/modal/content/content-delete/content-delete.component';
 import { SettingsComponent } from './components/modal/content/settings/settings.component';
+import { FileUploaderComponent } from './components/file-uploader/file-uploader.component';
+import { ImagePreviewComponent } from './components/image-preview/image-preview.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { SettingsComponent } from './components/modal/content/settings/settings.
     SearchUserComponent,
     MenuComponent,
     ContentDeleteComponent,
-    SettingsComponent
+    SettingsComponent,
+    FileUploaderComponent,
+    ImagePreviewComponent
   ],
   imports: [
     CommonModule,

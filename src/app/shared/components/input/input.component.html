@@ -1,14 +1,14 @@
-<!-- <form class="form" [formGroup]="form"> -->
-    <div class="input-field">
-        <i 
-            *ngIf="inputIcon" 
-            [ngClass]="inputIcon"
-            [ngStyle]="{'color' : inputIconColor}"></i>
-        <input 
-            [ngStyle]="{'color' : inputColor, 'placeholder': inputColor}"
-            [type]="inputType" 
-            [placeholder]="inputPlaceholder" 
-            (change)="sendFormValue($event)">
-    </div>
-    <!-- <small *ngIf="validateErrors()" class="d-flex justify-content-center error-message m-2">{{errorMessage()}}</small> -->
-<!-- </form> -->
+<div class="input-field">
+
+    <i 
+        *ngIf="inputIcon" 
+        [ngClass]="inputIcon" 
+        [ngStyle]="{'color' : inputIconColor}">
+    </i>
+
+    <input 
+        [ngStyle]="{'color' : inputColor, 'placeholder': inputColor}"
+         [type]="inputType"
+        [placeholder]="inputPlaceholder" 
+        (change)="sendFormValue($event)">
+</div>

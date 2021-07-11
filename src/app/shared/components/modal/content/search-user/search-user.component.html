@@ -1,8 +1,15 @@
 <div class="row center-xs">
     <div class="col">
-        <chat-input (ngModelChange)="searchName" [inputType]="'text'" [inputName]="'Name'"
-            [inputIcon]="'fas fa-address-card'" [inputIconColor]="'black'" [inputColor]="'black'"
-            [inputPlaceholder]="'Type and the press enter'" (formValues)="getFormValues($event)">
+        
+        <chat-input 
+            (ngModelChange)="searchName" 
+            [inputType]="'text'" 
+            [inputName]="'Name'"
+            [inputIcon]="'fas fa-address-card'" 
+            [inputIconColor]="'black'" 
+            [inputColor]="'black'"
+            [inputPlaceholder]="'Type and the press enter'" 
+            (formValues)="getFormValues($event)">
         </chat-input>
 
     </div>

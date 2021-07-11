@@ -80,8 +80,7 @@ export class CommunitiesChatComponent implements OnInit {
 
   setUserOnline() {
     const communityId = this.communitySelected ? this.communitySelected._id : this.storageService.getStorage(ChatStorage.community)._id;
-    this.communityService.updateWithParams({ status: true }, communityId, this.user._id, Endpoint.userOn).subscribe(data => {})
-
+    this.communityService.updateWithParams({ status: true }, communityId, this.user._id, Endpoint.userOn).subscribe(data => { })
   }
 
   getUserList(user: User[]) {
