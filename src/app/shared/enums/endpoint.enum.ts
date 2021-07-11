@@ -7,5 +7,6 @@ export enum Endpoint {
     changeStatus = 'changestatus',
     removeUser = 'removeuser',
     userOn = 'useron',
-    userOff = 'useroff'
+    userOff = 'useroff',
+    user= 'user'
 }

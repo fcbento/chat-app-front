@@ -19,6 +19,8 @@ export class CommunitiesComponent implements OnInit, AfterViewInit {
   @Input() communities: Community[] = [];
   @Input() user: User;
   @Output() selectCommunity = new EventEmitter();
+  @Output() editPersonalInfo = new EventEmitter();
+
   community: Community;
 
   activeModal: any;
@@ -71,4 +73,7 @@ export class CommunitiesComponent implements OnInit, AfterViewInit {
     })
   }
 
+  userProfile() {
+    this.editPersonalInfo.emit(true);
+  }
 }

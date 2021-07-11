@@ -9,9 +9,10 @@ import { CommunitiesChatComponent } from './communities-chat/communities-chat.co
 import { CommunitiesComponent } from './communities-chat/communities/communities.component';
 import { ChannelsComponent } from './communities-chat/channels/channels.component';
 import { UsersComponent } from './communities-chat/users/users.component';
+import { UserProfileComponent } from './communities-chat/user-profile/user-profile.component';
 
 @NgModule({
-  declarations: [RoomComponent, CommunitiesChatComponent, CommunitiesComponent,ChatComponent, ChannelsComponent, UsersComponent],
+  declarations: [RoomComponent, CommunitiesChatComponent, CommunitiesComponent,ChatComponent, ChannelsComponent, UsersComponent, UserProfileComponent],
   imports: [
     CommonModule,
     ModulesRoutingModule,

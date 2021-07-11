@@ -1,0 +1,49 @@
+<div class="row center-xs">
+    <div class="col-12">
+
+        <chat-input 
+            [isEdit]="true"
+            [inputType]="'text'" 
+            [inputName]="'name'"
+            [inputPlaceholder]="'Name'"
+            [inputIcon]="'fas fa-user'"
+            [inputIconColor]="'#fff'"
+            [inputColor]="'#fff'"
+            [inputValue]="user.name"
+            (formValues)="getFormValues($event)">
+        </chat-input>
+
+        <chat-input 
+            [isEdit]="true"
+            [inputType]="'email'" 
+            [inputName]="'email'"
+            [inputPlaceholder]="'Email'"
+            [inputIcon]="'fas fa-at'"
+            [inputIconColor]="'#fff'"
+            [inputColor]="'#fff'"
+            [inputValue]="user.email"
+            (formValues)="getFormValues($event)">
+        </chat-input>
+
+        <chat-file-uploader 
+            [fileTitle]="'Profile avatar'"
+            (sendImage)="getImage($event)">
+        </chat-file-uploader>
+
+        <chat-button 
+            [buttonType]="'default'" 
+            [buttonColor]="'#5995fd'" 
+            [buttonName]="'Edit info'"
+            [buttonFontColor]="'#fff'"
+            (click)="editInfo()">
+        </chat-button>
+    </div>
+</div>
+
+<chat-button 
+    [buttonType]="'default'" 
+    [buttonColor]="'#5995fd'" 
+    [buttonName]="'Cancel'"
+    [buttonFontColor]="'#fff'"
+    (click)="cancelEdition()">
+</chat-button>

@@ -13,11 +13,11 @@ export class NotificationService {
   }
 
   userOn(name: string) {
-    this.toastr.success(`${name} is on`)
+    //this.toastr.success(`${name} is on`)
   }
 
   userOff(name: string) {
-    this.toastr.info(`${name} has left`)
+    //this.toastr.info(`${name} has left`)
   }
 
   error(message: string) {
@@ -25,7 +25,7 @@ export class NotificationService {
   }
 
   audio(fileName: string, disable: boolean) {
-    if (disable) {
+    if (!disable) {
       let audio = new Audio()
       audio.src = `../../../assets/mp3/${fileName}.mp3`
       audio.load()

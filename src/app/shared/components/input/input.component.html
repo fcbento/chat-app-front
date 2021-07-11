@@ -7,8 +7,17 @@
     </i>
 
     <input 
+        *ngIf="!isEdit"
         [ngStyle]="{'color' : inputColor, 'placeholder': inputColor}"
-         [type]="inputType"
-        [placeholder]="inputPlaceholder" 
+        [type]="inputType"
+        [placeholder]="inputPlaceholder"
+        (change)="sendFormValue($event)">
+    
+    <input 
+        *ngIf="isEdit"
+        [ngStyle]="{'color' : inputColor, 'placeholder': inputColor}"
+        [type]="inputType"
+        [placeholder]="inputPlaceholder"
+        [value]="inputValue"
         (change)="sendFormValue($event)">
 </div>

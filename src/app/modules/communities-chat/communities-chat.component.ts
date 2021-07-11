@@ -21,6 +21,7 @@ export class CommunitiesChatComponent implements OnInit {
   currentChannel: Channel;
   loader: boolean = false;
   userList: User[] = [];
+  isProfile: boolean = false;
 
   constructor(
     private communityService: CommunitiesService,
@@ -85,6 +86,14 @@ export class CommunitiesChatComponent implements OnInit {
 
   getUserList(user: User[]) {
     this.userList = user;
+  }
+  
+  editUser(e) {
+    this.isProfile = e;
+  }
+
+  editUserCancel(e){
+    this.isProfile = e;
   }
 
 }

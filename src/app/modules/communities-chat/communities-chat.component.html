@@ -2,42 +2,35 @@
     <div class="spinner">
         <div class="spinner-border text-primary" role="status" style="width: 5rem; height: 5rem;">
             <span class="sr-only">Loading...</span>
-          </div>
+        </div>
     </div>
 </div>
 
 <div class="container-fluid">
-    <div class="row start-xs">
+    <div class="row start-xs" *ngIf="!isProfile">
 
-        <app-communities
-            *ngIf="communities"
-            [ngClass]="checkWhenToShowScroll(30, 'col-xs-1', 'communities')"
-            [user]="user"
-            [communities]="communities"
-            (selectCommunity)="selectCommunity($event)">
+        <app-communities *ngIf="communities" [ngClass]="checkWhenToShowScroll(30, 'col-xs-1', 'communities')"
+            [user]="user" [communities]="communities" (selectCommunity)="selectCommunity($event)" (editPersonalInfo)="editUser($event)">
         </app-communities>
 
-        <app-channels 
-            *ngIf="communitySelected"
-            [ngClass]="checkWhenToShowScroll(30, 'col-xs-2', 'channels')" 
-            [community]="communitySelected"
-            (sendCurrentChannel)="getCurrentChannel($event)">
+        <app-channels *ngIf="communitySelected" [ngClass]="checkWhenToShowScroll(30, 'col-xs-2', 'channels')"
+            [community]="communitySelected" (sendCurrentChannel)="getCurrentChannel($event)">
         </app-channels>
 
-        <app-chat 
-            *ngIf="currentChannel && communitySelected"
-            class="col-xs-8 chat"
-            [communities]="communitySelected"
-            [channelSelected]="currentChannel"
-            (sendUserList)="getUserList($event)">
-        </app-chat> 
+        <app-chat *ngIf="currentChannel && communitySelected" class="col-xs-8 chat" [communities]="communitySelected"
+            [channelSelected]="currentChannel" (sendUserList)="getUserList($event)">
+        </app-chat>
 
-        <app-users
-            *ngIf="userList.length > 0 && communitySelected"
-            [ngClass]="checkWhenToShowScroll(30, 'col-xs-1', 'info')" 
-            [users]="userList"
+        <app-users *ngIf="userList.length > 0 && communitySelected"
+            [ngClass]="checkWhenToShowScroll(30, 'col-xs-1', 'info')" [users]="userList"
             [community]="communitySelected">
         </app-users>
 
+    </div>
+
+    <div class="row start-xs" *ngIf="isProfile">
+        <div class="col">
+            <app-user-profile [user]="user" (cancelEditUser)="editUserCancel($event)"></app-user-profile>
+        </div>
     </div>
 </div>

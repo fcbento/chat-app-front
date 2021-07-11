@@ -63,7 +63,9 @@ import { ImagePreviewComponent } from './components/image-preview/image-preview.
     SearchUserComponent,
     MenuComponent,
     ContentDeleteComponent,
-    SettingsComponent
+    SettingsComponent,
+    FileUploaderComponent,
+    ImagePreviewComponent
   ]
 })
 export class SharedModule { }

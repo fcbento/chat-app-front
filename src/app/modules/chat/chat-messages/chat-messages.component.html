@@ -13,14 +13,14 @@
     <div class="row messages">
 
       <div class="col-avatar">
-        <img class="avatar"
-          src="https://cdn.discordapp.com/avatars/231489103428845568/9100a11f4f29b976c525ba3f3b728117.png?size=128"
-          alt="">
+        <img 
+          class="avatar"
+          [src]="!isCurrentUser(message) ? message.from.avatar : user.avatar">
       </div>
 
       <div class="col-xs-11">
         <span class="message-from">
-          {{!isCurrentUser(message) ? message.from + ' ' : user.name }}
+          {{!isCurrentUser(message) ? message.from.name + ' ' : user.name }}
         </span>
 
         <time class="message-time">

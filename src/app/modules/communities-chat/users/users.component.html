@@ -2,7 +2,9 @@
     <div class="col">
         <ul>
             <li *ngFor="let user of usersInCommunity">
-                <span [ngClass]="user.isOnline ? 'online' : 'not-oline'"></span>{{user.name}}
+                <img [src]="user.avatar" width="30%">
+                <!-- <span [ngClass]="user.isOnline ? 'online' : 'not-oline'"></span>{{user.name}} -->
+                <small>{{user.name}} </small>
             </li>
         </ul>
     </div>

@@ -10,6 +10,10 @@
                     [inputType]="'text'" 
                     [inputName]="'email'" 
                     [inputIcon]="'fas fa-at'"
+                    [inputColor]="'#fff'"
+                    [inputIconColor]="'#fff'"
+                    [inputPlaceholder]="'Email'"
+                    [isEdit]="false"
                     (formValues)="getFormValues($event)" >
                 </chat-input>
     
@@ -17,13 +21,18 @@
                     [inputType]="'password'" 
                     [inputName]="'password'"
                     [inputIcon]="'fas fa-lock'"
+                    [inputIconColor]="'#fff'"
+                    [inputColor]="'#fff'"
+                    [inputPlaceholder]="'Password'"
+                    [isEdit]="false"
                     (formValues)="getFormValues($event)" >
                 </chat-input>
     
                 <chat-button 
                     [buttonType]="'default'" 
-                    [buttonColor]="'blue'" 
+                    [buttonColor]="'#5995fd'" 
                     [buttonName]="titleType"
+                    [buttonFontColor]="'#fff'"
                     (click)="onAuth()">
                 </chat-button>
     
@@ -48,29 +57,41 @@
                 <chat-input 
                     [inputType]="'text'" 
                     [inputName]="'name'" 
-                    [inputIcon]="'far fa-id-card'"
+                    [inputIcon]="'fas fa-user'"
+                    [inputColor]="'#fff'"
+                    [inputIconColor]="'#fff'"
+                    [inputPlaceholder]="'Name'"
+                    [isEdit]="false"
                     (formValues)="getFormValues($event)" >
                 </chat-input>
     
                 <chat-input
                     [inputType]="'text'" 
-                    [inputName]="'email'"
-                    [inputIcon]="'fas fa-at'" 
+                    [inputName]="'email'" 
+                    [inputIcon]="'fas fa-at'"
+                    [inputColor]="'#fff'"
+                    [inputIconColor]="'#fff'"
+                    [inputPlaceholder]="'Email'"
+                    [isEdit]="false"
                     (formValues)="getFormValues($event)" >
                 </chat-input>
     
                 <chat-input
                     [inputType]="'password'" 
                     [inputName]="'password'"
-                    [inputIcon]="'fas fa-lock'" 
+                    [inputIcon]="'fas fa-lock'"
+                    [inputIconColor]="'#fff'"
+                    [inputColor]="'#fff'"
+                    [inputPlaceholder]="'Password'"
+                    [isEdit]="false"
                     (formValues)="getFormValues($event)" >
                 </chat-input>
     
                 <chat-button 
-                    class="d-flex justify-content-center" 
                     [buttonType]="'default'" 
-                    [buttonColor]="'blue'" 
+                    [buttonColor]="'#5995fd'" 
                     [buttonName]="titleType"
+                    [buttonFontColor]="'#fff'"
                     (click)="onAuth()">
                 </chat-button>
     

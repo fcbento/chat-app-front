@@ -14,6 +14,8 @@ export class InputComponent implements OnInit {
   @Input() inputIconColor: string;
   @Input() inputColor: string;
   @Input() inputPlaceholder: string;
+  @Input() inputValue;
+  @Input() isEdit;
   @Output() formValues = new EventEmitter();
 
   value: any;
@@ -38,4 +40,5 @@ export class InputComponent implements OnInit {
   sendFormValue(value) {
     this.formValues.emit({ type: this.formName(), content: value.target.value })
   }
+
 }
