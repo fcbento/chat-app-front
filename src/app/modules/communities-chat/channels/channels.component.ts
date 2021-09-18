@@ -28,7 +28,7 @@ export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
 
   menuItems: Menu[] = [];
   channelMenuItems: Menu[] = [];
-  
+
   type: string;
   activeModal: any;
   modalContent: any;
@@ -61,13 +61,18 @@ export class ChannelsComponent implements OnInit, AfterViewInit, OnChanges {
 
     setTimeout(() => {
 
-      if (this.community._id === currentChannel.community._id) {
-        this.getCurrentChannel(currentChannel);
+      if (currentChannel) {
+        if (this.community._id === currentChannel.community._id) {
+          this.getCurrentChannel(currentChannel);
+        }
+        else {
+          this.getCurrentChannel(this.channels[0])
+          this.cdr.detectChanges();
+        }
       } else {
         this.getCurrentChannel(this.channels[0])
         this.cdr.detectChanges();
       }
-
     }, 1000);
 
   }
