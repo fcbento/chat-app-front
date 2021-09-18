@@ -1,6 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { timingSafeEqual } from 'crypto';
-import { LoaderService } from '../../core/services/loader.service';
 import { Endpoint } from '../../shared/enums/endpoint.enum';
 import { ChatStorage } from '../../shared/enums/storage.enum';
 import { Channel } from '../../shared/models/channel.interface';
